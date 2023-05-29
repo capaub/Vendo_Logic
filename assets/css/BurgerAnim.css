@@ -1,0 +1,82 @@
+/*!*    html    *!*/
+
+/*!*<svg x="0" y="0" width="54px" height="54px" viewBox="0 0 54 54">*!*/
+/*!*<path d="M16.500,27.000 C16.500,27.000 24.939,27.000 38.500,27.000 C52.061,27.000 49.945,15.648 46.510,11.367 C41.928,5.656 34.891,2.000 27.000,2.000 C13.193,2.000 2.000,13.193 2.000,27.000 C2.000,40.807 13.193,52.000 27.000,52.000 C40.807,52.000 52.000,40.807 52.000,27.000 C52.000,13.000 40.837,2.000 27.000,2.000 "></path>*!*/
+/*!*</svg>*!*/
+
+/*!* CSS *!*/
+
+/*.Icon {*/
+/*  position: relative;*/
+/*  width: 54px;*/
+/*  height: 54px;*/
+/*  border-radius: 50%;*/
+/*    & span {*/
+/*  position: absolute;*/
+/*  top: 50%;*/
+/*  left: 50%;*/
+/*  display: block;*/
+/*  width: 22px;*/
+/*  height: 2px;*/
+/*  background-color: #000000;*/
+/*  transform: translateX(-50%) translateY(-50%);*/
+/*    }*/
+/*}*/
+/*.Icon span::before, .Icon span::after {*/
+/*  content: '';*/
+/*  position: absolute;*/
+/*  top: 0;*/
+/*  left: 0;*/
+/*  display: block;*/
+/*  width: 22px;*/
+/*  height: 2px;*/
+/*  background-color: #000000;*/
+/*  transform: translateY(-6px);*/
+/*  transition: transform 0.5s; }*/
+/*.Icon span::after {*/
+/*  transform: translateY(6px); }*/
+/*.Icon:hover span::before {*/
+/*  transform: translateY(-8px); }*/
+/*.Icon:hover span::after {*/
+/*  transform: translateY(8px); }*/
+
+/*.Header_burgerIcon span::before {*/
+/*  transition: background 0.5s steps(1, end);*/
+/*}*/
+
+/*.Header_burgerIcon span::before, .Header_burgerIcon span::after {*/
+/*  transform-origin: 100% 50%;*/
+/*}*/
+
+/*.Header_burgerIcon svg {*/
+/*  opacity: 0;*/
+/*  fill: transparent;*/
+/*  stroke-width: 2px;*/
+/*  stroke: #000000;*/
+/*  stroke-dasharray: 22 230;*/
+/*  transition: stroke-dasharray 0.5s, stroke-dashoffset 0.5s, opacity 0.5s steps(1, end);*/
+/*}*/
+
+/*.Header_burgerIcon.isOpened span {*/
+/*  transition: background 0.5s steps(1, start);*/
+/*  background-color: transparent;*/
+/*}*/
+
+/*.Header_burgerIcon.isOpened span::before {*/
+/*  transform: translateX(-3px) translateY(-8px) rotate(-45deg);*/
+/*}*/
+
+/*.Header_burgerIcon.isOpened span::after {*/
+/*  transform: translateX(-3px) translateY(8px) rotate(45deg);*/
+/*}*/
+
+/*.Header_burgerIcon.isOpened svg {*/
+/*  opacity: 1;*/
+/*  transition: opacity 0.5s steps(1, start);*/
+/*  animation: pathAnimation 0.5s linear;*/
+/*  animation-fill-mode: forwards;*/
+/*}*/
+
+/*.Header_burgerIcon.isClosed svg {*/
+/*  animation: pathAnimation-out 0.5s linear;*/
+/*}*/

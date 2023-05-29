@@ -1,0 +1,76 @@
+
+$sidebarColor : #363A42;
+$sidebarHoverColor : #4b505b;
+$sidebarActiveColor : #202226;
+$mainBackgroundColor : #D9D9D9;
+$rupture : #FF9900;
+$dlc : #9E0000;
+$listBackgroundColor : rgba(189, 189, 189, 0.65);
+$scaleFactor780px : 0.8;
+
+$borderRadius: 3px;
+$gap: 5px;
+
+$vendingLocationWidth : 40px;
+$vendingLocationHeight : 80px;
+$spiralWidth : 30px;
+$spiralHeight : 30px;
+$spiralSize : 2px;
+
+@keyframes burgerAnim {
+  0% {
+    opacity: 0;
+    transform: translateX(250px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes displayCustomerInfoAnim {
+  0% {
+    opacity: 0;
+    transform: translateY(-250px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pathAnimation {
+  40% {
+    stroke-dasharray: 22 230; }
+
+  60% {
+    stroke-dashoffset: -65; }
+
+  100% {
+    stroke-dashoffset: -65;
+    stroke-dasharray: 160; }
+}
+
+
+@keyframes pathAnimation-out {
+  100% {
+    stroke-dashoffset: 0; }
+
+  60% {
+    stroke-dasharray: 22 230; }
+
+  40% {
+    stroke-dashoffset: -65; }
+
+  0% {
+    stroke-dashoffset: -65;
+    stroke-dasharray: 160; }
+}
+
+@mixin displayCustomerInfo {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-content: center;
+  align-items: center;
+  justify-items: center;
+  background-color: white;
+}

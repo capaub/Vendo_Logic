@@ -1,0 +1,20 @@
+{
+  "name": "aubry/dabuild",
+  "license": "proprietary",
+  "type": "project",
+  "require": {
+    "ext-pdo": "*",
+    "maximebf/debugbar": "^1.18",
+    "tecnickcom/tcpdf": "^6.6",
+    "endroid/qr-code": "^4.8",
+    "openfoodfacts/openfoodfacts-php": "^0.2.4",
+    "ext-ctype": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "DaBuild\\": "src/"
+    }
+  },
+  "autoload-dev": {
+  }
+}

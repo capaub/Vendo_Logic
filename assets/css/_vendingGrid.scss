@@ -1,0 +1,56 @@
+
+
+.vendingGrid{
+  @media screen and (max-width: 780px) {
+    transform: scale($scaleFactor780px);
+    position: relative;
+    top: calc((1 - 0.8) * 100%);
+  }
+  background-color: white;
+  border-radius: 0.5em;
+  padding: 1em;
+  border: solid;
+  width: max-content;
+  margin: 2em auto;
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.2em;
+  & ul.plateau {
+    display: grid;
+    justify-items: center;
+    vertical-align: bottom;
+    column-gap: 0.2em;
+    & li.spiral {
+      position: relative;
+      width: $vendingLocationWidth;
+      height: $vendingLocationHeight;
+      background-size: auto 100%;
+      background-repeat: no-repeat;
+      background-position: center;
+      text-align: center;
+      cursor: pointer;
+
+      &::after{
+        content: "";
+        position: absolute;
+        width: $spiralWidth;
+        height: $spiralHeight;
+        bottom: 10px;
+        right: calc(($vendingLocationWidth - ($spiralWidth + ($spiralSize * 2))) / 2);
+        border-radius: 15px;
+        border: solid $spiralSize;
+      }
+
+      & .locationIdentifier{
+        position: absolute;
+        width: 100%;
+        padding: 0.1em 0;
+        bottom: 0;
+        background-color: black;
+        color: white;
+        text-align: center;
+        z-index: 2;
+      }
+    }
+  }
+}
