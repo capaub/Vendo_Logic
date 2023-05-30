@@ -114,7 +114,6 @@
 
     </section>
 </main>
-<script type="module" src="../assets/js/newCustomer.js"></script>
 
 <!--        <section class="Main_customers_customer Customer alert">-->
 <!--            <fieldset>-->

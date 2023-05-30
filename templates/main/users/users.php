@@ -20,5 +20,5 @@
 
 </main>
 
-<script type="text/javascript" src="../../../assets/js/UpdateUser.js"></script>
-<script type="module" src="../../../assets/js/newUser.js"></script>
+<script type="module" src="../assets/js/newUser.js"></script>
+<script type="module" src="../assets/js/UpdateUser.js"></script>

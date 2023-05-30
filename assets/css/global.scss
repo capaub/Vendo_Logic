@@ -616,7 +616,6 @@ h4{
   padding: 1em;
   display: flex;
   flex-direction: column;
-  gap: 1em;
   border: solid;
   &.batch{
     gap: 0;
@@ -634,4 +633,9 @@ h4{
 
 .hidden{
   display: none;
+}
+
+.company_name{
+  font-weight: bold;
+  font-size: 2em;
 }

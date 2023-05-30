@@ -168,13 +168,13 @@ class VendingPerCustomerRepository extends AbstractRepository
     }
 
 
-//    public function findByCustomer(int $iCustomerId): array
-//    {
-//        $oPdo = DbManager::getInstance();
-//
-//        $oDbVending = $oPdo->query('SELECT * FROM '.static::TABLE.' WHERE `customer_id` = '.$iCustomerId);
-//
-//        return static::extracted($oDbVending);
-//    }
+    public static function findByCustomer(int $iCustomerId): array
+    {
+        $oPdo = DbManager::getInstance();
+
+        $oDbVending = $oPdo->query('SELECT * FROM '.static::TABLE.' WHERE `customer_id` = '.$iCustomerId);
+
+        return static::extracted($oDbVending);
+    }
 
 }

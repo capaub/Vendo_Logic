@@ -78,6 +78,9 @@ input[type=submit] , button {
   &.update, &.delete {
     padding: 0.5em 0.7em;
   }
+  &.delete {
+      background-color: #a42020;
+  }
 
   &.close{
     background-color: #a42020;
@@ -103,7 +106,8 @@ input[type=submit]:hover, button:hover {
 }
 
 .new_batch_form,
-.new_user_section{
+.new_user_section,
+.add_vending_form{
   position: absolute;
   top: 180px;
   left: 50%;

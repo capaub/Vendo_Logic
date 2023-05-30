@@ -87,8 +87,6 @@ function styleVending() {
 
         });
     });
-
-
 }
 
 function showVending(container)
@@ -108,9 +106,7 @@ vendingListAttachEventListeners(sectionVendingList);
 // let sectionBackButton = sectionVendingList.previousElementSibling;
 // let sectionVending = sectionVendingList.nextElementSibling;
 
-console.log(sectionVendingList)
-console.log(sectionBackButton)
-console.log(sectionVending)
+
 
 attachEventBackActionButton(sectionBackButton, sectionVendingList, sectionVending);
 styleVending();

@@ -1,8 +1,9 @@
-import {buildVendingContainer, vendingListAttachEventListeners} from './showVending.js';
+import {buildVendingContainer} from './showVending.js';
 import {toggleClass} from "./global.js";
 
 const baseUrl = window.location.origin + window.location.pathname.replace('index.php', 'ajax.php');
 const url = new URL('ajax.php', baseUrl);
+
 export function VendingLocationAttachEventListeners(container) {
 
     let vendingLocation = container.querySelectorAll('li.spiral');
@@ -24,20 +25,21 @@ export function VendingLocationAttachEventListeners(container) {
             data.append('vending_id', vendingId);
 
             fetch(url.toString(), {method: 'POST', body: data})
-                .then(response => response.text())
-                .then(data => replaceContainer(formAddBatch, data))
-                .then(() => formAddBatch.setAttribute('data-vending-id', vendingId))
-                .then(() => listenSubmitButton())
+                .then( response => response.text() )
+                .then( data => replaceContainer( formAddBatch, data) )
+                .then( () => formAddBatch.setAttribute('data-vending-id', vendingId) )
+                .then( () => showAddBatchForm() )
         });
     });
 }
 
 function listenCloseButton()
 {
-    let close = document.querySelector('.close');
     let sectionAddBatchToVending = document.querySelector('.addBatchToVending');
 
-    close.addEventListener('click', ()=>{
+    let close = sectionAddBatchToVending.querySelector('.close');
+    close.addEventListener('click', (event)=>{
+        event.preventDefault();
         toggleClass(sectionAddBatchToVending,'hidden')
     })
 }
@@ -64,7 +66,7 @@ function listenSubmitButton()
         data.append('quantity', quantity.value);
         data.append('location', location.value);
 
-        let vendingListContainer = document.querySelector('.vendingListContainer');
+        // let vendingListContainer = document.querySelector('.vendingListContainer');
 
 
         fetch(url.toString(), {method: 'POST', body: data})
@@ -86,10 +88,8 @@ function refreshVendingGrid(id) {
 
 }
 
-// Fonction qui remplace un conteneur avec les données fournies
 function replaceContainer(container, data){
     container.innerHTML = data;
-    showAddBatchForm();
 }
 
 function showAddBatchForm()
@@ -97,6 +97,7 @@ function showAddBatchForm()
     let container = document.querySelector('.addBatchToVending');
     container.classList.remove('hidden');
     listenCloseButton();
+    listenSubmitButton();
 }
 
 function hideAddBatchForm()

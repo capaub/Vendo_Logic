@@ -58,10 +58,34 @@ class VendingPerCustomerController extends AbstractController
 
                VendingRepository::update($aCriterias);
 
-               return $this->render('customers',
+                $aVending = [];
+
+               $bAjax = !empty($_POST['context']);
+
+                $aVendingPerCustomerCriterias =
+                    [
+                        'costumer_id' => $iCleanCustomerId
+                    ];
+
+                $aCriterias = VendingPerCustomerRepository::buildCriterias($aVendingPerCustomerCriterias);
+                $aVendingPerCustomer = VendingPerCustomerRepository::findBy($aCriterias);
+
+                foreach ($aVendingPerCustomer as $oVendingPerCustomer) {
+
+                    $iCustomerId = $oVendingPerCustomer->getCustomerId();
+                    $iVendingId = $oVendingPerCustomer->getVendingId();
+                    $oVending = VendingRepository::find($iVendingId);
+
+
+                    $aVending[$iCustomerId][$iVendingId] = $oVending;
+
+
+                }
+               return $this->render('_customers.php',
                    [
-                       'customer' => [CustomerRepository::find($iCleanCustomerId)]
-                   ],true);
+                       'customer' => [CustomerRepository::find($iCleanCustomerId)],
+                       'vending' => $aVending
+                   ],$bAjax);
 
             }
         }

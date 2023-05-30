@@ -45,6 +45,7 @@
 
     <div>
         <button class="save hidden">enregistrer</button>
+        <button class="cancel hidden">annuler</button>
         <button class="update">
             <span class="material-symbols-outlined">upgrade</span>
         </button>

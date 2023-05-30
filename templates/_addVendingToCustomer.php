@@ -1,34 +1,44 @@
 <?php use DaBuild\Entity\Vending; ?>
-<?php /** @var Vending $availableVending */
-if (empty($availableVending)) : ?>
-    <option>
-        Aucuns D.A. disponible
-    </option>
-<?php else: ?>
+
+
+<form method="POST"
+      class="form_container"
+      data-customer-id="<?= $customerId ?>">
+
+    <div class="elements submit">
+        <button class="close closeAddVendingForm">X</button>
+    </div>
+
     <fieldset class="padding">
-        <legend>Ajouter une machine chez <?= $companyName ?></legend>
-        <form method="POST"
-              class="padding"
-              data-customer-id="<?= $customerId ?>">
+        <legend><span class="company_name"><?= $companyName ?></span></legend>
+
+        <div class="elements">
             <label for="vendings">Les distributeurs</label>
             <select name="field_vending_id" id="vendings">
-                <?php foreach ($availableVending as $oVending) : ?>
-                    <option value="<?= $oVending->getId(); ?>">
-                        <?= '[ ' . $oVending->getBrand() . ' ]' . ' - ' . $oVending->getModel(); ?>
+                <?php /** @var Vending $availableVending */
+                if (empty($availableVending)) : ?>
+                    <option>
+                        Aucuns D.A. disponible
                     </option>
-                <?php endforeach; ?>
+                <?php else: ?>
+                    <?php foreach ($availableVending as $oVending) : ?>
+                        <option value="<?= $oVending->getId(); ?>">
+                            <?= '[ ' . $oVending->getBrand() . ' ]' . ' - ' . $oVending->getModel(); ?>
+                        </option>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </select>
-            <div>
-                <label for="vending_name">Attribuer un nom</label>
-                <input type="text"
-                       class=""
-                       id="vending_name"
-                       name="field_vending_name"
-                       required>
-                <button type="button"
-                        class="addVending">enregistrer
-                </button>
-            </div>
-        </form>
+        </div>
+        <div class="elements">
+            <label for="vending_name">Attribuer un nom</label>
+            <input type="text"
+                   class=""
+                   id="vending_name"
+                   name="field_vending_name"
+                   required>
+        </div>
     </fieldset>
-<?php endif; ?>
+    <div class="elements submit">
+        <input type="submit" class="addVending">
+    </div>
+</form>

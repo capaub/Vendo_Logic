@@ -43,7 +43,7 @@ class DefaultController extends AbstractController
 
         }
 
-        $bAjax = isset($_POST['context']);
+        $bAjax = !empty($_POST['context']);
 
         return $this->render('customers.php',
             [

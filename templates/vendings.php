@@ -47,10 +47,11 @@
         <?php endif; ?>
 
     </section>
-
-    <section class="vendingGrid hidden">
-        <?php include 'vendingId.php'; ?>
-    </section>
+<!--    <div class="containerBackgroundVending">-->
+        <section class="vendingGrid hidden">
+            <?php include 'vendingId.php'; ?>
+        </section>
+<!--    </div>-->
 
     <section class="addBatchToVending hidden">
         <?php include '_addBatchesToVending.php'; ?>

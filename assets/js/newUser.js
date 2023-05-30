@@ -20,12 +20,6 @@ function toggleClass(elements, token)
     elements.classList.toggle(token);
 }
 
-
-addUserButton.addEventListener('click', ()=> {
-
-    toggleClass(sectionFormNewUser,token);
-})
-
 function listenCloseButton() {
     let close = document.querySelector('.closeNewUserForm');
 
@@ -70,12 +64,17 @@ function newUser(formNewUser) {
         .then( response => response.text() )
         .then( data => refreshUserList(data) )
         .then( () => toggleClass(sectionFormNewUser,token) )
-        .then( () => userModifyAttachEventListeners(usersContainer) );
+        // .then( () => userModifyAttachEventListeners(usersContainer) );
 }
 
 function refreshUserList(data){
     sectionUserList.innerHTML = data;
 }
+
+addUserButton.addEventListener('click', ()=> {
+
+    toggleClass(sectionFormNewUser,token);
+})
 
 listenCloseButton();
 formNewUserAttachEventListeners(formNewUser);

@@ -127,6 +127,9 @@ input[type=submit], button {
 input[type=submit].update, input[type=submit].delete, button.update, button.delete {
   padding: 0.5em 0.7em;
 }
+input[type=submit].delete, button.delete {
+  background-color: #a42020;
+}
 input[type=submit].close, button.close {
   background-color: #a42020;
   color: white;
@@ -149,15 +152,28 @@ input[type=submit]:hover.close, button:hover.close {
 }
 
 .new_batch_form,
-.new_user_section {
+.new_user_section,
+.add_vending_form {
   position: absolute;
   top: 180px;
   left: 50%;
   transform: translateX(-50%);
 }
 
+.containerBackgroundVending {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: rgba(255, 255, 255, 0.6509803922);
+  border-radius: 0.5em;
+  padding: 3em 10em 15em 3em;
+  border: solid 5px;
+  width: max-content;
+  margin: 2em auto;
+  position: relative;
+}
+
 .vendingGrid {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.6509803922);
   border-radius: 0.5em;
   padding: 1em;
   border: solid;
@@ -781,7 +797,6 @@ h4 {
   padding: 1em;
   display: flex;
   flex-direction: column;
-  gap: 1em;
   border: solid;
 }
 .list_container.batch {
@@ -798,6 +813,11 @@ h4 {
 
 .hidden {
   display: none;
+}
+
+.company_name {
+  font-weight: bold;
+  font-size: 2em;
 }
 
 /*# sourceMappingURL=global.css.map */
