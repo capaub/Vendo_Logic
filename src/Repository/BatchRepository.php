@@ -296,7 +296,7 @@ class BatchRepository extends AbstractRepository
                 'uniqid'     => $iUniqId,
                 'dlc'        => $sDlc,
                 'quantity'   => $sQuantity,
-                'url'        => 'coucou temporaire'
+                'url'        => $iCompanyId . ' ' . $iGoodsId . ' ' . $sDlc . ' ' . $sQuantity
             ];
 
         return ExternalQrCodeAPIService::generateQrCode($aData);
@@ -316,7 +316,7 @@ class BatchRepository extends AbstractRepository
                 'batch_id'   => $oBatch->getId(),
                 'dlc'        => $oBatch->getDlc()->format('Y-m'),
                 'quantity'   => $oBatch->getQuantity(),
-                'url'        => 'coucou définitif'
+                'url'        => 'https://acdigitalsolutions.fr/Vendo_Logic/public/?page=vending&vending_id='
             ];
 
         return ExternalQrCodeAPIService::generateQrCode($aData);

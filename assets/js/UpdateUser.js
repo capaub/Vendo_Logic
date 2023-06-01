@@ -26,7 +26,7 @@ function listenUpdateButton(container)
         button.addEventListener('click', (event) => {
             event.preventDefault();
             let userElement = event.currentTarget.closest('[data-user-id]');
-            updateUserElement(userElement)
+            updateUserElement(userElement);
         });
     });
 }
@@ -36,6 +36,13 @@ function listenUpdateButton(container)
 // avec les données récupérées
 function listenSaveButton(container)
 {
+    console.log(container)
+    let saveButton = container.querySelector('.save');
+    saveButton.setAttribute("disabled", "disabled");
+    container.addEventListener('change', () => {
+        console.log('cocou')
+        saveButton.removeAttribute("disabled");
+    })
     // Sélectionner tous les boutons de sauvegarde dans le conteneur
     let saveButtons = container.querySelectorAll('.save');
     // Ajouter un écouteur d'événements pour chaque bouton de sauvegarde
@@ -85,7 +92,7 @@ function listenDeleteButton(container)
 
 // fonction qui ajoute ou supprime l'attribut disable sur chaque input d'un formulaire donné
 function toggleDisabledForm(formElement) {
-    let inputItems = formElement.querySelectorAll('form input[disabled],form select[disabled]');
+    let inputItems = formElement.querySelectorAll('form input,form select');
     for (let i = 0; i < inputItems.length; i++) {
         inputItems[i].disabled = !inputItems[i].disabled;
     }
@@ -126,6 +133,17 @@ function replaceContainer(container, data){
 function deleteContainer(container){
     container.parentNode.removeChild(container);
 }
+// let test = document.querySelector('.cancel');
+// test.addEventListener('click', (event)=> {
+//     event.preventDefault();
+//     let formElement = event.currentTarget.closest('[data-user-id]');
+//     toggleDisabledForm(formElement);
+//     toggleBtn(formElement);
+//     let usersContainer = document.querySelector('.list_container');
+//     console.log(usersContainer)
+//
+//     userModifyAttachEventListeners(usersContainer);
+// })
 
 // Attache les écouteurs d'événements initiaux au document
 let usersContainer = document.querySelector('.UsersContainer');

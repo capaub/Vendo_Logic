@@ -4,12 +4,17 @@
 
     <h1 class="Main_title">Vending</h1>
 
-    <div class="elements submit hidden btnBackToVendingList">
+    <div class="elements submit btnAddVending">
+        <button>ajouter une machine</button>
+    </div>
+    <div class="elements submit hidden btnBackAddVendingToVendingList">
+        <button>Retour</button>
+    </div>
+    <div class="elements submit hidden btnBackVendingToVendingList">
         <button>Retour</button>
     </div>
 
     <section class="list_container vendingListContainer">
-
         <ul class="grid_container">
             <li>Marque</li>
             <li>Model</li>
@@ -23,27 +28,9 @@
                 <p>Aucune machine à afficher</p>
             </ul>
         <?php else: ?>
-
-            <?php /** @var Vending $oVending */
-            foreach ($vending as $oVending) : ?>
-                <ul class="grid_container vending" data-vending-id="<?= $oVending->getId(); ?>">
-                    <li data-brand="<?= $oVending->getBrand(); ?>">
-                        <?= $oVending->getBrand(); ?>
-                    </li>
-                    <li data-model="<?= $oVending->getModel(); ?>">
-                        <?= $oVending->getModel(); ?>
-                    </li>
-                    <li data-name="<?= $oVending->getName(); ?>">
-                        <?= $oVending->getName(); ?>
-                    </li>
-                    <li data-tray="<?= $oVending->getNbMaxTray(); ?>">
-                        <?= $oVending->getNbMaxTray(); ?>
-                    </li>
-                    <li data-spiral="<?= $oVending->getNbMaxSpiral(); ?>">
-                        <?= $oVending->getNbMaxSpiral(); ?>
-                    </li>
-                </ul>
-            <?php endforeach; ?>
+            <div class="container_vending_list">
+                <?php include '_vendings.php';?>
+            </div>
         <?php endif; ?>
 
     </section>
@@ -52,12 +39,17 @@
             <?php include 'vendingId.php'; ?>
         </section>
 <!--    </div>-->
+    <section class="new_vending_form hidden">
+        <?php include '_addVending.php'; ?>
+    </section>
 
     <section class="addBatchToVending hidden">
         <?php include '_addBatchesToVending.php'; ?>
     </section>
 
-</main>
 
+<script type="module" src="../assets/js/newVending.js"></script>
 <script type="module" src="../assets/js/showVending.js"></script>
 <script type="module" src="../assets/js/addBatchToVending.js"></script>
+
+</main>

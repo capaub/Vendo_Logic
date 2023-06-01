@@ -73,5 +73,8 @@ if (isset($_POST['context'])){
         case AJAX_BACK_TO_CUSTOMER:
             echo (new DefaultController)->showCustomers();
             break;
+        case AJAX_NEW_VENDING:
+            echo (new VendingController())-> createVending();
+            break;
     }
 }

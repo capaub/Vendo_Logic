@@ -18,6 +18,8 @@ class VendingController extends AbstractController
      */
     public function createVending(): string
     {
+        $bAjax= !empty($_POST['context']) ?? false;
+
         if (!empty($_POST['field_brand'])
             && !empty($_POST['field_model'])
             && !empty($_POST['field_max_tray'])
@@ -42,17 +44,22 @@ class VendingController extends AbstractController
 
                 $_SESSION['flashes'][] = ['SUCCESS' => ' Machine créer avec succés'];
 
-                return $this->render('_addVending.php', [
-                    'seo_title' => 'Création d\'une machine']);
+                return $this->render('_vendings.php',
+                    [
+                        'seo_title' => 'Création d\'une machine',
+                        'vending' => VendingRepository::findAll()
+                    ], $bAjax);
 
 
             } else {
                 $_SESSION['flashes'][] = ['ERREUR' => 'Company inexistant'];
             }
         }
-        return $this->render('home.php', [
-            'seo_title' => 'Création d\'un utilisateur'
-        ]);
+        return $this->render('_vendings.php',
+            [
+                'seo_title' => 'Création d\'un utilisateur',
+                'vending' => VendingRepository::findAll()
+            ], $bAjax);
     }
 
     /**

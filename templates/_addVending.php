@@ -1,8 +1,13 @@
-<main class="Container_main Main">
-    <h1 class="Main_title">Ajouter une machine</h1>
+
+
     <form method="POST"
           action="?page=<?= PAGE_SAVE_VENDING ?>"
-          class="form_container">
+          class="form_container add_vending_form">
+
+        <div class="elements submit">
+            <button class="close closeNewUserForm">X</button>
+        </div>
+
         <fieldset class="fieldset">
             <legend>Informations machine</legend>
 
@@ -29,7 +34,7 @@
         </fieldset>
 
         <div class="elements submit">
-            <button>Enregistrer</button>
+            <button class="new_vending_submit">Enregistrer</button>
         </div>
     </form>
-</main>
+

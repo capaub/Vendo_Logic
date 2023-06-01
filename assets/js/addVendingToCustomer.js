@@ -1,9 +1,9 @@
 import {toggleClass} from "./global.js";
 
+let baseUrl = window.location.origin + window.location.pathname.replace('index.php', 'ajax.php');
+let url = new URL('ajax.php', baseUrl);
 export function attachEventListeners(container) {
 
-    let baseUrl = window.location.origin + window.location.pathname.replace('index.php', 'ajax.php');
-    let url = new URL('ajax.php', baseUrl);
 
     let addVendingContainer = document.querySelector('.addVendingContainer');
     let customers = container.querySelectorAll('section.ajaxCustomer');

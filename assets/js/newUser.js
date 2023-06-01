@@ -32,6 +32,8 @@ function listenCloseButton() {
 
 function formNewUserAttachEventListeners(formNewUser) {
 
+    console.log(formNewUser)
+
     let submitButton = formNewUser.querySelector('.newUserSubmit');
     submitButton.addEventListener('click', (event) => {
         event.preventDefault();
@@ -41,24 +43,8 @@ function formNewUserAttachEventListeners(formNewUser) {
 
 function newUser(formNewUser) {
 
-    let firstnameSibling = formNewUser.querySelector('input[name=field_firstname]');
-    let firstname = firstnameSibling.value;
-
-    let lastnameSibling = formNewUser.querySelector('input[name=field_lastname]');
-    let lastname = lastnameSibling.value;
-
-    let emailSibling = formNewUser.querySelector('input[name=field_email]');
-    let email = emailSibling.value;
-
-    let roleSibling = formNewUser.querySelector('select[name=field_role]');
-    let role = roleSibling.value;
-
-    let formData = new FormData()
+    let formData = new FormData(formNewUser)
     formData.append('context', 'newUser');
-    formData.append('field_firstname', firstname);
-    formData.append('field_lastname', lastname);
-    formData.append('field_email', email);
-    formData.append('field_role', role);
 
     fetch(url.toString(), {method: 'POST', body: formData})
         .then( response => response.text() )

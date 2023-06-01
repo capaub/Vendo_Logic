@@ -1,10 +1,11 @@
 <?php
 
 use DaBuild\Entity\User;
+/** @var User $user */
 
 ?>
 <main class="Container_main Main CustomerContainer customerContainer">
-    <h1 class="Main_title">B</h1>
+    <h1 class="Main_title">Mon compte</h1>
 
     <section class="account_section">
 
@@ -15,8 +16,7 @@ use DaBuild\Entity\User;
 
         <form class="Main_container"
               method="post"
-              data-user-id="<?= /** @var User $user */
-              $user->getId(); ?>">
+              data-user-id="<?= $user->getId(); ?>">
             <input class="input-form"
                    type="text"
                    name="field_firstname"

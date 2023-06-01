@@ -3,6 +3,7 @@
 @import '_vendingGrid.scss';
 
 * {
+  //color: $blackTextColor;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -23,14 +24,17 @@ ul {
 
 
 .Header {
-  margin: 0 0.3em;
+
+  padding: 0.8em 0.4em 0;
+  background-color: $headerBackgroundColor;
+//background-image: url("../../assets/img/panoramic-g2d99292b7_1280.jpg");
   height: 60px;
-  background-color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
 
   &_logo {
+
     width: auto;
     height: 100%;
   }
@@ -112,12 +116,14 @@ ul {
 
 
 .Sidebar {
+  padding-top: 1em;
   min-width: 80px;
-  text-align: center;
-  background-color: $sidebarColor;
+  text-align: start;
+  background-color: #363A42;
 
   &_links {
     display: grid;
+    //row-gap: 1em;
 
     &_link {
       padding: 5px 0;
@@ -125,18 +131,44 @@ ul {
       &:any-link {
         text-decoration: none;
         color: white;
+        padding: 1em;
+        transition: all 0.2s ease-in-out;
+        &.selected {
+          transform: scale(1.1);
+          margin-left: 1em;
+          font-size: 1.1em;
+          background-color: rgb(32 34 38 / 0%);
+          border-radius: 5px;
+          box-shadow: 0 0 80px 1px rgb(242 242 242 / 30%);
+          backdrop-filter: blur(10px);
+        }
       }
 
-      &:active {
-        background-color: $sidebarActiveColor;
-      }
 
       &:hover {
+        transform: scale(1.1);
+        margin-left: 1em;
+        font-size: 1.1em;
         background-color: $sidebarHoverColor;
+        border-radius: 5px;
       }
 
       &_user {
         height: 30px;
+      }
+    }
+    &_link_img {
+      background-image: url("../../assets/img/user.svg");
+      cursor: pointer;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      height: 70px;
+      margin-bottom: 1em;
+      &:hover{
+        position: relative;
+        left: 50%;
+        transform: translate(-50%);
       }
     }
   }
@@ -163,7 +195,7 @@ ul {
 .Main {
   position: relative;
   width: 80%;
-  margin: 1em auto;
+  margin: 2em auto 8em;
   transition: 1s ease;
 
   &.activeBlur {
@@ -171,9 +203,15 @@ ul {
   }
 
   &_title {
-    padding: 1em 0;
-    font-size: 2em;
+    font-weight: 800;
+    color: $primaryTextColor;
+    text-shadow: 4px 4px 3px rgba(0, 0, 0, 0.6);
+    padding: 0 0 1em 0;
+    font-size: 3em;
     text-align: center;
+    //padding: 1em 0;
+    //font-size: 2em;
+    //text-align: center;
   }
 
   &_customers {
@@ -355,7 +393,7 @@ ul {
   bottom: 0;
   padding: 0.5em 0;
   background-color: black;
-  color: white;
+  color: #F2F2F2;
   text-align: center;
 }
 
@@ -580,7 +618,7 @@ h4{
   justify-content: flex-end;
 }
 
-.grid_container, .list_container{
+.grid_container{
   width: 100%;
   display: grid;
   column-gap: 1em;
@@ -593,7 +631,7 @@ h4{
     font-weight: bold;
   }
   &:nth-child(even){
-    background-color: $listBackgroundColor;
+    background: $listChildEvenColor;
   }
   & .stockImg{
     max-height: 50px;
@@ -611,12 +649,13 @@ h4{
 }
 
 .list_container{
-  background-color: white;
+  background-color: $listBackgroundColor;
   border-radius: 0.5em;
   padding: 1em;
   display: flex;
   flex-direction: column;
-  border: solid;
+  border: solid 3px;
+  box-shadow: 0 0 15px -6px #A9A9A9;
   &.batch{
     gap: 0;
   }

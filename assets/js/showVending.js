@@ -9,47 +9,74 @@ let url = new URL('ajax.php', baseUrl);
 let vendingContainer = document.querySelector('.vendingGrid');
 
 
-export function vendingListAttachEventListeners(vendingListContainer) {
+export function vendingListAttachEventListeners() {
 
-    let vendings = vendingListContainer.querySelectorAll('ul.vending');
+    let vendings = document.querySelectorAll('ul.vending');
 
     vendings.forEach(vending => {
-        vending.addEventListener('click', (event) => {
-            let id = event.currentTarget.dataset.vendingId;
-
-            let elementName = event.currentTarget.querySelector('[data-name]');
-            let name = elementName.dataset.name;
-
-            let vendingTags = "Nom : " + name;
-
-            let data = new FormData();
-            data.append('context', 'vendingId');
-            data.append('vending_id', id);
-            data.append('vending_tags', vendingTags);
-
-            fetch(url.toString(), {method: 'POST', body: data})
-                .then( response => response.text())
-                .then( data => buildVendingContainer(data))
-                .then( () => toggleClass(sectionBackButton, token))
-                .then( () => toggleClass(sectionVendingList, token))
-
-        });
+        vending.addEventListener('click', handleClickVendingList);
     })
+}
+export let handleClickVendingList = (event) => {
+    let id = event.currentTarget.dataset.vendingId;
+
+    let btnAddVending = document.querySelector('.btnAddVending');
+    let btnBackVendingToVendingList = document.querySelector('.btnBackVendingToVendingList');
+    let sectionVendingList = document.querySelector('.vendingListContainer');
+    let elementName = event.currentTarget.querySelector('[data-name]');
+    let name = elementName.dataset.name;
+
+    let vendingTags = "Nom : " + name;
+
+    let data = new FormData();
+    data.append('context', 'vendingId');
+    data.append('vending_id', id);
+    data.append('vending_tags', vendingTags);
+
+    fetch(url.toString(), {method: 'POST', body: data})
+        .then( response => response.text())
+        .then( data => buildVendingContainer(data))
+        .then( () => {
+            toggleClass(btnAddVending, token)
+            toggleClass(sectionVendingList, token)
+            toggleClass(btnBackVendingToVendingList, token)
+
+            let vendings = document.querySelectorAll('ul.vending');
+
+            vendings.forEach(vending => {
+                vending.removeEventListener('click', handleClickVendingList);
+            })
+        })
+}
+
+function buildVending() {
+
 }
 
 let token = 'hidden';
-function attachEventBackActionButton(sectionBackButton, sectionVendingList, sectionVending)
+function attachEventBackActionButton()
 {
-    let btnBackToVendingList = document.querySelector('.btnBackToVendingList');
+    let btnBackVendingToVendingList = document.querySelector('.btnBackVendingToVendingList');
 
-    btnBackToVendingList.addEventListener('click', () => {
-        toggleClass(sectionBackButton, token);
-        toggleClass(sectionVendingList, token);
-        toggleClass(sectionVending, token);
-    })
+    btnBackVendingToVendingList.addEventListener('click', backAction);
 }
 
+let backAction = () => {
+    let btnBackVendingToVendingList = document.querySelector('.btnBackVendingToVendingList');
+    let sectionVendingList = document.querySelector('.vendingListContainer');
+    let btnAddVending = document.querySelector('.btnAddVending');
+    let sectionVending = document.querySelector('.vendingGrid');
+    toggleClass(btnBackVendingToVendingList, token);
+    toggleClass(sectionVendingList, token);
+    toggleClass(sectionVending, token);
+    toggleClass(btnAddVending, token);
+    btnBackVendingToVendingList.removeEventListener('click', backAction);
+    let vendings = document.querySelectorAll('ul.vending');
 
+    vendings.forEach(vending => {
+        vending.addEventListener('click', handleClickVendingList);
+    })
+}
 
 
 
@@ -62,7 +89,7 @@ export function buildVendingContainer(data) {
 
     styleVending();
 
-
+    attachEventBackActionButton();
     VendingLocationAttachEventListeners(vendingContainer);
 }
 
@@ -94,19 +121,10 @@ function showVending(container)
     container.classList.remove('hidden');
 }
 
-let sectionVendingList = document.querySelector('.vendingListContainer');
-let sectionBackButton = document.querySelector('.btnBackToVendingList');
-let sectionVending = document.querySelector('.vendingGrid');
-
 // Attache les écouteurs d'événements initiaux au document
-vendingListAttachEventListeners(sectionVendingList);
-
-
-// let sectionVendingList = vendingListContainer.parentNode;
-// let sectionBackButton = sectionVendingList.previousElementSibling;
-// let sectionVending = sectionVendingList.nextElementSibling;
+vendingListAttachEventListeners();
 
 
 
-attachEventBackActionButton(sectionBackButton, sectionVendingList, sectionVending);
+attachEventBackActionButton();
 styleVending();

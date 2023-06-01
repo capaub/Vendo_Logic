@@ -51,6 +51,16 @@
     justify-items: center;
     vertical-align: bottom;
     column-gap: 0.2em;
+    transition: 0.6s ;
+    border-radius: 5px;
+    &:hover{
+      transform: scale(130%);
+      box-shadow: 0 4px 8px -1px #00000075;
+      position: relative;
+      z-index:2;
+      opacity: 1.1;
+      border-radius: 5px;
+    }
     & li.spiral {
       position: relative;
       width: $vendingLocationWidth;
@@ -60,6 +70,19 @@
       background-position: center;
       text-align: center;
       cursor: pointer;
+      transition: 0.4s ;
+      border-radius: 5px;
+      &:hover{
+        transform: scale(130%);
+        position: relative;
+        z-index: 3;
+        box-shadow: 0 4px 8px -1px #00000075;
+        border-radius: 5px;
+      }
+
+      & .batchPicture, .batchPicture:hover{
+        border-radius: 5px;
+      }
 
       &::after{
         content: "";

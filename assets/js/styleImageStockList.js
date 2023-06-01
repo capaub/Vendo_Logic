@@ -13,6 +13,7 @@ export function StyleImageStockList() {
 
         batchInfo.forEach(info => {
             let imgContainer = info.querySelector('.batchPicture')
+
             if (imgContainer !== null) {
                 const id = info.dataset.productBarcode;
                 const prefix = 'VENLO_';

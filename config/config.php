@@ -83,9 +83,9 @@ const AJAX_ADD_VENDING_TO_CUSTOMER = 'addVendingToCustomer';
 
 
 const AJAX_NEW_BATCH ='newBatch';
-
 const AJAX_CHANGE_BATCH = 'changeBatch';
 
+const AJAX_NEW_VENDING = 'newVending';
 
 const AJAX_SHOW_VENDING = 'vendingId';
 const AJAX_SHOW_BATCH_FOR_VENDING = 'getBatch';
@@ -119,7 +119,7 @@ const ROUTING = [
     PAGE_LOGOUT         => '\DaBuild\Controller\UserController::logout',
 
     PAGE_ADD_VENDING    => '\DaBuild\Controller\DefaultController::vending',
-    PAGE_SAVE_VENDING   => '\DaBuild\Controller\VendingController::createVending',
+//    PAGE_SAVE_VENDING   => '\DaBuild\Controller\VendingController::createVending',
 
     PAGE_ACCOUNT        =>  '\DaBuild\Controller\DefaultController::pageAccount'
 ];

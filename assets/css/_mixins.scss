@@ -1,21 +1,46 @@
+$sidebarColor: #363A42;
+$sidebarHoverColor: #4b505b;
+$sidebarActiveColor: #202226;
+//$mainBackgroundColor : #D9D9D9;
+$mainBackgroundColor: #24476B;
+$rupture: #FF9900;
+$dlc: #9E0000;
+//$listBackgroundColor : rgba(189, 189, 189, 0.65);
+$listBackgroundColor: #7588A5;
+//$listChildEvenColor: linear-gradient(to right, transparent 0%, #A9A9A9 5%, #A9A9A9 95%, transparent 100%);
+$listChildEvenColor: #A9A9A9;
+$primaryTextColor: #F2F2F2;
+$blackTextColor: #131212;
+$headerBackgroundColor: #A9A9A9;
 
-$sidebarColor : #363A42;
-$sidebarHoverColor : #4b505b;
-$sidebarActiveColor : #202226;
-$mainBackgroundColor : #D9D9D9;
-$rupture : #FF9900;
-$dlc : #9E0000;
-$listBackgroundColor : rgba(189, 189, 189, 0.65);
-$scaleFactor780px : 0.8;
+$scaleFactor780px: 0.8;
 
 $borderRadius: 3px;
 $gap: 5px;
 
-$vendingLocationWidth : 40px;
-$vendingLocationHeight : 80px;
-$spiralWidth : 30px;
-$spiralHeight : 30px;
-$spiralSize : 2px;
+$vendingLocationWidth: 40px;
+$vendingLocationHeight: 80px;
+$spiralWidth: 30px;
+$spiralHeight: 30px;
+$spiralSize: 2px;
+
+@keyframes vibration {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
 
 @keyframes burgerAnim {
   0% {
@@ -27,6 +52,7 @@ $spiralSize : 2px;
     transform: translateX(0);
   }
 }
+
 @keyframes displayCustomerInfoAnim {
   0% {
     opacity: 0;
@@ -40,30 +66,37 @@ $spiralSize : 2px;
 
 @keyframes pathAnimation {
   40% {
-    stroke-dasharray: 22 230; }
+    stroke-dasharray: 22 230;
+  }
 
   60% {
-    stroke-dashoffset: -65; }
+    stroke-dashoffset: -65;
+  }
 
   100% {
     stroke-dashoffset: -65;
-    stroke-dasharray: 160; }
+    stroke-dasharray: 160;
+  }
 }
 
 
 @keyframes pathAnimation-out {
   100% {
-    stroke-dashoffset: 0; }
+    stroke-dashoffset: 0;
+  }
 
   60% {
-    stroke-dasharray: 22 230; }
+    stroke-dasharray: 22 230;
+  }
 
   40% {
-    stroke-dashoffset: -65; }
+    stroke-dashoffset: -65;
+  }
 
   0% {
     stroke-dashoffset: -65;
-    stroke-dasharray: 160; }
+    stroke-dasharray: 160;
+  }
 }
 
 @mixin displayCustomerInfo {

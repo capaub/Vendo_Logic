@@ -39,16 +39,26 @@ class VendingStockRepository extends AbstractRepository
     {
         $oPdo = DbManager::getInstance();
 
-        $sQuery = 'INSERT INTO ' . static::TABLE . ' (
-                                                `quantity`,
-                                                `batch_id`,
-                                                `updated_at`,
-                                                `vending_location_id`)
-        VALUES (
-        :quantity,
-        :batch_id,
-        :updated_at,
-        :vending_location_id)';
+        $sQuery = ' 
+
+        START TRANSACTION;
+        
+
+        INSERT INTO ' . static::TABLE . ' (`quantity`,
+                                           `batch_id`,
+                                           `updated_at`,
+                                           `vending_location_id`)
+        VALUES (:quantity,
+                :batch_id,
+                :updated_at,
+                :vending_location_id);
+        
+        UPDATE ' . BatchRepository::TABLE . '
+        JOIN (SELECT * FROM ' . BatchRepository::TABLE . ' WHERE `id` = :batch_id) AS subquery
+        SET ' . BatchRepository::TABLE . '.`quantity` = subquery.`quantity` - :quantity
+        WHERE ' . BatchRepository::TABLE . '.`id` = :batch_id;
+        
+        COMMIT;';
 
         $oPdoVendingStock = $oPdo->prepare($sQuery);
 
@@ -131,8 +141,11 @@ class VendingStockRepository extends AbstractRepository
             $aDBVendingStock['batch_id'],
             $aDBVendingStock['vending_location_id']);
 
+
         $oVendingStock->setId($aDBVendingStock['id']);
-        $oVendingStock->setUpdatedAt(new \DateTime($aDBVendingStock['updated_at']));
+        if ($aDBVendingStock['updated_at'] !== null){
+            $oVendingStock->setUpdatedAt(new \DateTime($aDBVendingStock['updated_at']));
+        }
 
         return $oVendingStock;
     }

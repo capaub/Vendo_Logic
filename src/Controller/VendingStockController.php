@@ -28,6 +28,8 @@ class VendingStockController extends AbstractController
             $oVendingStock = new VendingStock($sCleanQuantity,$sCleanBatchId,$oVendingLocation->getId());
 
             VendingStockRepository::save($oVendingStock);
+
+
         }
     }
 }
