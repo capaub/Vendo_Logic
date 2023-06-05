@@ -1,22 +1,26 @@
 <main class="Container_main Main">
-    <form method="POST" class="form_container">
+
+    <div class="container_login_form">
+    <form method="POST" class="form_container Login">
 
         <fieldset class="fieldset">
             <legend>Connexion</legend>
 
             <div class="elements">
-                <label for="email">Adresse email</label>
                 <input type="email" id="email" name="field_email">
+                <label for="email">Adresse email</label>
             </div>
+
             <div class="elements">
-                <label for="password">Mot de passe</label>
                 <input type="password" id="password" name="field_password">
+                <label for="password">Mot de passe</label>
             </div>
 
         </fieldset>
 
-        <div class="elements submit">
-            <button name="form_login" value="login_submit">Connexion</button>
-        </div>
+        <input type="submit" name="form_login" value="Connexion">
+        <a href="?page=<?= PAGE_REGISTER ?>">Inscription</a>
+
     </form>
+    </div>
 </main>

@@ -1,17 +1,19 @@
 // import {toggleClass} from "./global.js";
 
-let baseUrl = window.location.origin + window.location.pathname.replace('index.php', 'ajax.php');
-let url = new URL('ajax.php', baseUrl);
+import {buildGridTemplateColumns} from "./global.js";
 
-let usersContainer = document.querySelector('.UsersContainer');
+const baseUrl = window.location.origin + window.location.pathname.replace('index.php', 'ajax.php');
+const url = new URL('ajax.php', baseUrl);
 
-let token = 'hidden';
-let sectionFormNewUser = document.querySelector('.new_user_section');
+const usersContainer = document.querySelector('.UsersContainer');
 
-let sectionUserList = document.querySelector('.list_container.user');
-let formNewUser = sectionFormNewUser.querySelector('.new_user_form');
+const token = 'hidden';
+const containerFormNewUser = document.querySelector('.container_new_user_form');
 
-let addUserButton = document.querySelector('.btnAddUser')
+const sectionUserList = document.querySelector('.list_container.user');
+const formNewUser = containerFormNewUser.querySelector('.new_user_form');
+
+const addUserButton = document.querySelector('.btnAddUser')
 
 
 
@@ -26,13 +28,11 @@ function listenCloseButton() {
     close.addEventListener('click', (event) => {
         event.preventDefault();
 
-        toggleClass(sectionFormNewUser, token);
+        toggleClass(containerFormNewUser, token);
     });
 }
 
 function formNewUserAttachEventListeners(formNewUser) {
-
-    console.log(formNewUser)
 
     let submitButton = formNewUser.querySelector('.newUserSubmit');
     submitButton.addEventListener('click', (event) => {
@@ -50,6 +50,12 @@ function newUser(formNewUser) {
         .then( response => response.text() )
         .then( data => refreshUserList(data) )
         .then( () => toggleClass(sectionFormNewUser,token) )
+        .then( () => {
+            console.log('coucou')
+            const gridContainer = document.querySelectorAll('.grid_container');
+            console.log(gridContainer)
+            buildGridTemplateColumns(gridContainer)
+        })
         // .then( () => userModifyAttachEventListeners(usersContainer) );
 }
 
@@ -59,7 +65,7 @@ function refreshUserList(data){
 
 addUserButton.addEventListener('click', ()=> {
 
-    toggleClass(sectionFormNewUser,token);
+    toggleClass(containerFormNewUser,token);
 })
 
 listenCloseButton();

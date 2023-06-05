@@ -1,10 +1,9 @@
 <?php use DaBuild\Entity\User; ?>
 
 
-<form class="Main_container grid_container"
+<form class="grid_container_form grid_container"
       method="post"
-      data-user-id="<?= /** @var User $oUser */
-      $oUser->getId(); ?>">
+      data-user-id="<?= $oUser->getId(); ?>">
     <input class="input-form"
            type="text"
            name="field_firstname"
@@ -36,14 +35,14 @@
         <?php endforeach; ?>
     </select>
 
-    <div class="input-form">
+    <div>
         <?php if (!is_null($oUser->getConnectedAt())) : ?>
         <p class="text"><?= $oUser->getConnectedAt()->format('Y-m-d'); ?></p>
         <p class="text"><?= $oUser->getConnectedAt()->format('H:i:s'); ?></p>
         <?php endif; ?>
     </div>
 
-    <div>
+    <div class="buttons_actions_container">
         <button class="save hidden">
             <span class="material-symbols-outlined">save_as</span>
         </button>

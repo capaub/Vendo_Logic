@@ -5,22 +5,23 @@
       class="form_container"
       data-customer-id="<?= $customerId ?>">
 
-    <div class="elements submit">
         <button class="close closeAddVendingForm">X</button>
-    </div>
 
-    <fieldset class="padding">
+    <fieldset class="fieldset">
         <legend><span class="company_name"><?= $companyName ?></span></legend>
 
         <div class="elements">
             <label for="vendings">Les distributeurs</label>
-            <select name="field_vending_id" id="vendings">
+            <select name="field_vending_id" id="vendings" required="required">
                 <?php /** @var Vending $availableVending */
                 if (empty($availableVending)) : ?>
                     <option>
                         Aucuns D.A. disponible
                     </option>
                 <?php else: ?>
+                    <option value="">
+                        Choisissez une machine
+                    </option>
                     <?php foreach ($availableVending as $oVending) : ?>
                         <option value="<?= $oVending->getId(); ?>">
                             <?= '[ ' . $oVending->getBrand() . ' ]' . ' - ' . $oVending->getModel(); ?>
@@ -35,10 +36,10 @@
                    class=""
                    id="vending_name"
                    name="field_vending_name"
-                   required>
+                   required="required">
         </div>
     </fieldset>
-    <div class="elements submit">
+
         <input type="submit" class="addVending">
-    </div>
+
 </form>

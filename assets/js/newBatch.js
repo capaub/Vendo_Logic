@@ -6,13 +6,12 @@ let baseUrl = window.location.origin + window.location.pathname.replace('index.p
 let url = new URL('ajax.php', baseUrl);
 
 let token = 'hidden';
-let containerFormAddBatch = document.querySelector('.new_batch_form');
+let containerFormAddBatch = document.querySelector('.container_new_batch_form');
 
 let formAddBatch = containerFormAddBatch.querySelector('.search_form');
 let addBatchButton = document.querySelector('.btnAddBatch');
 
 function addBatchButtonAttacheEventListener(addBatchButton) {
-    let containerFormAddBatch = document.querySelector('.new_batch_form');
 
     addBatchButton.addEventListener('click', () => {
 
@@ -71,8 +70,6 @@ function refreshStockList(data){
 
 function listenCloseButton() {
     let close = document.querySelector('.closeNewBatchForm');
-
-    let containerFormAddBatch = document.querySelector('.new_batch_form');
 
     close.addEventListener('click', (event) => {
         event.preventDefault();

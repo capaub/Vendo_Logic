@@ -41,15 +41,24 @@ export function attachEventListeners(container) {
             let formData = new FormData(formElement);
             formData.append('context', 'addVendingToCustomer');
             formData.append('customer_id', id);
+            if (formElement.checkValidity()) {
+                fetch(url.toString(), {method: 'POST', body: formData})
+                    .then(response => response.text())
+                    .then(data => {
+                        let targetCustomerContainer = document.querySelector(`section[data-customer-id='${id}']`)
+                        refreshCustomer(targetCustomerContainer, data)
+                    })
+                    .then(() => toggleClass(addVendingContainer, 'hidden'))
+            } else {
+                const elementsInvalides = Array.from(formElement.elements).filter(element => !element.validity.valid);
 
+                // Parcours des éléments non valides
+                elementsInvalides.forEach(element => {
+                    element.setAttribute('placeholder', 'champs requis');
+                    console.log('Champ non valide :', element);
+                });
+            }
 
-            fetch(url.toString(), {method: 'POST', body: formData})
-                .then(response => response.text())
-                .then(data => {
-                    let targetCustomerContainer = document.querySelector(`section[data-customer-id='${id}']`)
-                    refreshCustomer(targetCustomerContainer, data)
-                })
-                .then(() => toggleClass(addVendingContainer, 'hidden'))
         });
     }
 
@@ -66,11 +75,11 @@ function replaceContainer(container, data){
 }
 function listenCloseButton() {
     let close = document.querySelector('.closeAddVendingForm');
-    let addVendingContainer = document.querySelector('.addVendingContainer');
+    let container = document.querySelector('.container_add_batch_form');
     close.addEventListener('click', (event) => {
         event.preventDefault();
 
-        toggleClass(addVendingContainer, 'hidden');
+        toggleClass(container, 'hidden');
     });
 }
 function showCustomerContainer(container)

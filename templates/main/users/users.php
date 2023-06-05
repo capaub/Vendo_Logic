@@ -3,10 +3,10 @@
 <main class="Main UsersContainer">
 
     <div class="containerBlur">
-        <h1 class="Main_title">Tous les utilisateurs</h1>
+        <h1 class="Main_title">Mes utilisateurs</h1>
 
         <div class="elements submit">
-            <button class="btnAddUser">Ajouter un utilisateur</button>
+            <button class="btnAddUser" data-text="Ajouter un utilisateur"></button>
         </div>
 
         <section class="list_container user">
@@ -14,9 +14,9 @@
         </section>
     </div>
 
-    <section class="new_user_section hidden">
+    <div class="container_new_user_form hidden">
         <?php include '_createUser.php' ?>
-    </section>
+    </div>
 
 </main>
 

@@ -1,118 +1,119 @@
 <main class="Container_main Main CustomerContainer customerContainer">
     <h1 class="Main_title">Création d'un client</h1>
 
-    <section class="new_customer_section">
+    <button class="btnBackToCustomers" data-text="Annuler"></button>
 
-    <div class="element submit">
-        <button class="btnBackToCustomers">Retour</button>
-    </div>
-
+    <div class="container_new_customer_form">
 
         <form method="POST"
-
               class="form_container new_customer_form">
             <fieldset class="fieldset">
-                <legend>Infos Pro.</legend>
+                <legend>Renseignements cLient</legend>
                 <div class="elements">
-                    <label for="company_siret">n° de siret</label>
                     <input type="text"
                            class=""
                            id="company_siret"
                            name="field_company_siret"
                            maxlength="14"
-                           placeholder="ex: 123456789"
-                           required>
+                           data-placeholder="ex: 123456789"
+                           required="required">
+                    <label for="company_siret">n° de siret</label>
                 </div>
                 <div class="elements">
-                    <label for="company_name">Nom de la société</label>
                     <input type="text"
                            class=""
                            id="company_name"
                            name="field_company_name"
-                           placeholder="ex: Mon entreprise"
-                           required>
+                           data-placeholder="ex: Mon entreprise"
+                           required="required">
+                    <label for="company_name">Nom de la société</label>
                 </div>
             </fieldset>
             <fieldset class="fieldset">
-                <legend>Contact</legend>
+<!--                <legend>Contact</legend>-->
 
                 <div class="elements">
-                    <label for="country">Pays</label>
-                    <input required
-                           type="text"
+                    <input type="text"
                            id="country"
-                           name="field_country">
+                           name="field_country"
+                           data-placeholder="ex: France"
+                           required="required">
+                    <label for="country">Pays</label>
                 </div>
 
                 <div class="elements">
-                    <label for="city">Ville</label>
-                    <input required
-                           type="text"
+                    <input type="text"
                            id="city"
-                           name="field_city">
+                           name="field_city"
+                           data-placeholder="ex: Marseille"
+                           required="required">
+                    <label for="city">Ville</label>
                 </div>
 
                 <div class="elements">
-                    <label for="postal_code">Code postal</label>
-                    <input required
-                           type="number"
+                    <input type="number"
                            id="postal_code"
                            maxlength="5"
-                           name="field_postal_code">
+                           name="field_postal_code"
+                           data-placeholder="ex: 83640"
+                           required="required">
+                    <label for="postal_code">Code postal</label>
                 </div>
 
                 <div class="elements">
-                    <label for="street_name">Rue</label>
-                    <input required
-                           type="text"
+                    <input type="text"
+                           class=""
                            id="street_name"
-                           name="field_street_name">
+                           name="field_street_name"
+                           data-placeholder="ex: Avenue Julien Jourdan"
+                           required="required">
+                    <label for="street_name">Rue</label>
                 </div>
                 <div class="elements">
-                    <label for="email">Email</label>
                     <input type="text"
                            class=""
                            id="email"
                            name="field_email"
-                           placeholder="ex: a.dupont@mail.com"
-                           required>
+                           data-placeholder="ex: a.dupont@mail.com"
+                           required="required">
+                    <label for="email">Email</label>
                 </div>
                 <div class="elements">
-                    <label for="phone">Téléphone</label>
                     <input type="text"
                            class=""
                            id="phone"
                            name="field_phone"
                            maxlength="10"
-                           placeholder="ex: 04 10 10 10 10"
-                           required>
+                           data-placeholder="ex: 04 10 10 10 10"
+                           required="required">
+                    <label for="phone">Téléphone</label>
                 </div>
                 <div class="elements">
-                    <label for="firstname">Prénom</label>
                     <input type="text"
                            class=""
                            id="firstname"
                            name="field_firstname"
-                           placeholder="ex: Alfred"
-                           required>
+                           data-placeholder="ex: Alfred"
+                           required="required">
+                    <label for="firstname">Prénom</label>
                 </div>
                 <div class="elements">
-                    <label for="lastname">Nom</label>
                     <input type="text"
                            class=""
                            id="lastname"
                            name="field_lastname"
-                           placeholder="ex: Dupont"
-                           required>
+                           data-placeholder="ex: Dupont"
+                           required="required">
+                    <label for="lastname">Nom</label>
                 </div>
 
             </fieldset>
-            <div class="elements submit">
-                <input type="submit">
-            </div>
+
+                <input type="submit" class="new_customer_submit">
+
         </form>
 
-    </section>
+    </div>
 </main>
 
 <!--        <section class="Main_customers_customer Customer alert">-->

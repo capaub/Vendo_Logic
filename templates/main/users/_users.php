@@ -1,18 +1,18 @@
 <?php use DaBuild\Entity\User
     /**@param User $oUser */ ; ?>
 
-<ul class="Main_container Main_container grid_container">
+<ul class="grid_container">
     <li>Prénom</li>
     <li>Nom</li>
     <li>Mail</li>
-    <li>Role</li>
-    <li>Connecté le</li>
-    <li>Modifier / supprimer</li>
+    <li>Rôle</li>
+    <li>Connexion</li>
+    <li>Modifier</li>
 </ul>
 <?php if (empty($user)) : ?>
-    <ul>
-        <li>Aucuns utilisateurs à afficher</li>
-    </ul>
+    <div class="grid_container">
+        <li>Aucuns utilisateurs enregistré</li>
+    </div>
 <?php endif ; ?>
 
 <?php foreach ($user as $oUser) : ?>

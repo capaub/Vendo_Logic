@@ -37,12 +37,12 @@
     position: relative;
     top: calc((1 - 0.8) * 100%);
   }
-  background-color: #ffffffa6;
+  background-color: rgba(255, 255, 255, 0.6509803922);
   border-radius: 0.5em;
   padding: 1em;
   border: solid;
   width: max-content;
-  margin: 2em auto;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   row-gap: 0.2em;

@@ -29,15 +29,56 @@ burgerAnim.addEventListener('click',function () {
     }
 })
 
-const grid = document.querySelectorAll('.grid_container, .list_container');
-grid.forEach(row => {
-    const fields = row.querySelectorAll('li');
-    const numberOfColumns = fields.length;
-    row.style.gridTemplateColumns = `repeat(${numberOfColumns}, 1fr)`;
-})
-
+export function buildGridTemplateColumns(gridContainer) {
+    gridContainer.forEach( row => {
+        const fields = row.children;
+        const numberOfColumns = fields.length;
+        row.style.gridTemplateColumns = `repeat(${numberOfColumns}, 1fr)`;
+    })
+}
 
 export function toggleClass(elements, token)
 {
     elements.classList.toggle(token);
 }
+export function moveLabel() {
+
+    const inputsText = document.querySelectorAll(
+        "input[type=text], input[type=number], input[type=email], input[type=password]");
+
+    inputsText.forEach(input => {
+        input.addEventListener('focus', styleInput);
+    })
+}
+function styleInput(event)
+{
+    const input = event.currentTarget;
+    const label = input.nextElementSibling;
+
+    label.classList.add("onFocus")
+    let characterTyped = false;
+    let characterFocus = true;
+
+    input.addEventListener('input', () => {
+        characterTyped = true;
+        input.removeEventListener('focus', styleInput);
+        input.classList.remove("field_empty")
+    });
+
+    input.addEventListener('blur', () => {
+        characterFocus = false;
+        if (characterTyped === false)
+        {
+            console.log("couocu")
+            label.classList.remove("onFocus")
+        }
+
+    });
+
+    input.removeEventListener('blur', styleInput);
+}
+
+
+document.addEventListener('DOMContentLoaded',moveLabel);
+const gridContainer = document.querySelectorAll('.grid_container');
+buildGridTemplateColumns(gridContainer);

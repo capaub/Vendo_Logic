@@ -1,11 +1,11 @@
 <?php use DaBuild\Entity\Customer; ?>
 
 <main class="Container_main Main CustomerContainer customerContainer">
-    <h1 class="Main_title">Tous les clients</h1>
+    <h1 class="Main_title">Clients</h1>
 
-    <div class="element submit">
-        <button class="btnAddCustomer">Enregistrer un client</button>
-    </div>
+
+        <button class="btnAddCustomer" data-text="Nouveau client"></button>
+
 
     <?php if (empty($customer)) : ?>
 

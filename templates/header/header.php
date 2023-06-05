@@ -21,15 +21,16 @@ use DaBuild\Entity\User;
     </div>
     <nav class="Header_topNav">
         <?php if(isset($_SESSION['user']) && $_SESSION['user'] instanceof User) : ?>
-            <a href="?page=<?= PAGE_ACCOUNT;?>" class="Header_topNav_account">
+            <div class="Header_topNav_account">
                 <div class="Header_topNav_user">
                     <p class="Header_topNav_user_name"><?= $_SESSION['user']->getFirstname().$_SESSION['user']->getLastname()?? '' ;?></p>
                     <p class="Header_topNav_user_role"><?= User::ROLE_CONF[$_SESSION['user']->getRole()]['label'] ?? '' ;?></p>
                 </div>
-            </a>
-            <a href="?page=<?= PAGE_LOGOUT;?>" class="Header_topNav_logout">Déconnexion</a>
-        <?php else : ?>
-            <a href="?page=<?= PAGE_LOGIN;?>" class="Header_topNav_logout">Connexion</a>
+            </div>
+            <div class="Sidebar_links_link_img"></div>
+
         <?php endif; ?>
     </nav>
+
+    <?php include '_sidebar.php' ?>
 </header>

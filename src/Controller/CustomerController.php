@@ -64,7 +64,7 @@ class CustomerController extends AbstractController
 
                 CustomerRepository::save($oCustomer);
 
-                $_SESSION['flashes'][] = ['SUCCESS' => ' Client créer avec succés'];
+                $_SESSION['flashes'][] = ['SUCCESS' => 'Client créer avec succés'];
 
                 return (new DefaultController)->showCustomers();
 

@@ -1,9 +1,9 @@
 <main class="Container_main Main">
-    <h1 class="Main_title">Formulaire d'inscription</h1>
+<!--    <h1 class="Main_title">Formulaire d'inscription</h1>-->
+    <div class="container_register_form">
     <form method="POST" class="form_container">
-        <fieldset class="fieldset">
-            <legend>SOCIETE</legend>
-
+        <div class="fieldset">
+            <legend>FORMULAIRE D'INSCRIPTION</legend>
             <div class="elements">
                 <label for="company_name">Nom de l'entreprise</label>
                 <input required type="text" id="company_name" name="field_company_name">
@@ -14,9 +14,8 @@
                 <input required type="text" id="siret" name="field_siret" maxlength="14">
             </div>
 
-        </fieldset>
-        <fieldset class="fieldset">
-            <legend>ADMIN</legend>
+        </div>
+        <div class="fieldset">
 
             <div class="elements">
                 <label for="firstname">Prénom</label>
@@ -48,25 +47,32 @@
                 <input required type="text" id="street_name" name="field_street_name">
             </div>
 
-            <div class="elements">
-                <label for="email">Email</label>
-                <input required type="email" id="email" name="field_email">
+            <div class="fieldset">
+
+                <div class="elements">
+                    <label for="email">Email</label>
+                    <input required type="email" id="email" name="field_email">
+                </div>
+    
+                <div class="elements">
+                    <label for="password">Mot de passe</label>
+                    <input required type="password" id="password" name="field_password">
+                </div>
+    
+                <div class="elements">
+                    <label for="password_confirm">Confirmer mot de passe</label>
+                    <input required type="password" id="password_confirm" name="field_password_confirm">
+                </div>
+
             </div>
 
-            <div class="elements">
-                <label for="password">Mot de passe</label>
-                <input required type="password" id="password" name="field_password">
-            </div>
-
-            <div class="elements">
-                <label for="password_confirm">Confirmer mot de passe</label>
-                <input required type="password" id="password_confirm" name="field_password_confirm">
-            </div>
-        </fieldset>
-
-        <div class="elements submit">
-            <button type="submit" name="form_register" value="register_submit">Inscription</button>
         </div>
 
+
+        <input type="submit" name="form_register" value="Inscription">
+        <a href="?page=<?= PAGE_LOGIN ?>">Connexion</a>
+
+
     </form>
+    </div>
 </main>

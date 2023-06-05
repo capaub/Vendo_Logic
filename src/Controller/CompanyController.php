@@ -28,8 +28,7 @@ class CompanyController extends AbstractController
                 $_POST['field_country'],
                 $_POST['field_city'],
                 $_POST['field_postal_code'],
-                $_POST['field_street_name'])
-            && $_POST['form_register'] === 'register_submit') {
+                $_POST['field_street_name'])) {
 
 
             $sCleanCompanyName = strip_tags($_POST['field_company_name']);
@@ -74,13 +73,15 @@ class CompanyController extends AbstractController
 
                     UserRepository::save($oUser);
 
-                    $_SESSION['user'] = $oUser;
+//                    $_SESSION['user'] = $oUser;
 
                     $_SESSION['flashes'][] = [
-                        'SUCCESS' => 'Bienvenue ' . $_SESSION['user']->getFirstname() . ', uitilisateur créer avec succés'
+                        'SUCCESS' => 'Utilisateur créer avec succés'
                     ];
 
-                    $this->redirectAndDie('?page=' . PAGE_HOME);
+                    return $this->render('_login.php', [
+                        'seo_title' => 'Connexion'
+                    ]);
 
                 } else {
                     $_SESSION['flashes'][] = ['ERREUR' => 'Mots de passe différents'];

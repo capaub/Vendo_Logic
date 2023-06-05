@@ -1,51 +1,52 @@
 <?php use DaBuild\Repository\GoodsRepository; ?>
 
+
 <form method="POST"
-      class="batch_form form_container"
+      class="add_batch_form form_container"
       data-vending-id="<?= $_POST['vending_id'] ?? ''?>">
 
-    <div class="elements submit">
-        <button class="close">X</button>
-    </div>
+    <button class="close closeAddVendingForm">X</button>
+
 
     <fieldset data-vending-tags="<?= $_POST['vending_tags'] ?? ''?>" class="fieldset">
-        <legend>
-            <?= $_POST['vending_tags'] ?? ''?>
-        </legend>
+<!--        <legend>-->
+<!--            --><?php //= $_POST['vending_tags'] ?? ''?>
+<!--        </legend>-->
         <?php if (isset($batch)) : ?>
             <div class="elements">
-                <label for="batch">Produits</label>
-                <select name="field_batch" id="batch">
-                    <?php foreach ($batch as $oBatch) : ?>
-                        <option value="<?= $oBatch->getId() ?>">
+                <select name="field_batch" id="batch" required="required">
+                    <?php foreach ($batch as $key => $oBatch) : ?>
+                        <option value="<?= $oBatch->getId() ?>"  <?= ($batch[$key] === 1) ? "selected" : ""  ?>>
                             <?= (GoodsRepository::find($oBatch->getGoodsId()))->getBrand(); ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
+                <label for="batch">Produits</label>
             </div>
         <?php endif; ?>
 
         <div class="elements">
-            <label for="quantity">Quantité</label>
             <input type="number"
                    name="field_quantity"
-                   id="quantity">
+                   id="quantity"
+                   required="required">
+            <label for="quantity">Quantité</label>
         </div>
 
         <div class="elements">
-            <label for="location">Emplacement</label>
             <input type="text"
                    name="field_location"
                    id="location"
                 <?php if (isset($_POST['location'])) : ?>
                     value="<?= $_POST['location']; ?>"
-                <?php endif; ?>>
+                <?php endif; ?> readonly>
+            <label for="location">Emplacement</label>
         </div>
 
     </fieldset>
 
-    <div class="elements submit">
+
         <input type="submit" class="addBatchSubmit">
-    </div>
+
 
 </form>

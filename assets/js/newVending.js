@@ -1,14 +1,14 @@
-import { toggleClass } from "./global.js";
+import {buildGridTemplateColumns, moveLabel, toggleClass} from "./global.js";
 import { handleClickVendingList } from "./showVending.js";
 
-let baseUrl = window.location.origin + window.location.pathname.replace('index.php', 'ajax.php');
-let url = new URL('ajax.php', baseUrl);
+const baseUrl = window.location.origin + window.location.pathname.replace('index.php', 'ajax.php');
+const url = new URL('ajax.php', baseUrl);
 
 function handleClickBtnBackToVendingList() {
 
-    let newVendingForm = document.querySelector('.new_vending_form');
-    let btnAddVending = document.querySelector('.btnAddVending');
-    let btnBackAddVendingToVendingList = document.querySelector('.btnBackAddVendingToVendingList');
+    const newVendingForm = document.querySelector('.new_vending_form');
+    const btnAddVending = document.querySelector('.btnAddVending');
+    const btnBackAddVendingToVendingList = document.querySelector('.btnBackAddVendingToVendingList');
 
     toggleClass(btnAddVending, 'hidden');
     toggleClass(btnBackAddVendingToVendingList, 'hidden');
@@ -17,7 +17,7 @@ function handleClickBtnBackToVendingList() {
 
     btnAddVending.addEventListener('click', handleClickBtnAddVending);
 
-    let vendings = document.querySelectorAll('ul.vending');
+    const vendings = document.querySelectorAll('ul.vending');
 
     vendings.forEach(vending => {
         vending.addEventListener('click', handleClickVendingList);
@@ -26,60 +26,101 @@ function handleClickBtnBackToVendingList() {
     btnBackAddVendingToVendingList.removeEventListener('click', handleClickBtnBackToVendingList);
 
 }
+const handleClickCloseButton = (event) => {
+    event.preventDefault();
+
+    const containerNewVendingForm = document.querySelector('.container_new_vending_form');
+    const btnAddVending = document.querySelector('.btnAddVending');
+    const btnBackAddVendingToVendingList = document.querySelector('.btnBackAddVendingToVendingList');
+
+    toggleClass(containerNewVendingForm, 'hidden');
+    toggleClass(btnAddVending, 'hidden');
+    toggleClass(btnBackAddVendingToVendingList, 'hidden');
+
+    btnAddVending.addEventListener('click', handleClickBtnAddVending);
+    btnBackAddVendingToVendingList.removeEventListener('click', handleClickBtnBackToVendingList);
+
+    const close = document.querySelector('.close_new_vending_form');
+    close.removeEventListener('click', handleClickCloseButton);
+
+    const vendings = document.querySelectorAll('ul.vending');
+    vendings.forEach(vending => {
+        vending.addEventListener('click', handleClickVendingList);
+    })
+}
 
 function handleClickBtnAddVending() {
+    moveLabel();
 
-    let newVendingForm = document.querySelector('.new_vending_form');
-    let btnAddVending = document.querySelector('.btnAddVending');
-    let btnBackAddVendingToVendingList = document.querySelector('.btnBackAddVendingToVendingList');
+    const containerNewVendingForm = document.querySelector('.container_new_vending_form');
+    const btnAddVending = document.querySelector('.btnAddVending');
+    const btnBackAddVendingToVendingList = document.querySelector('.btnBackAddVendingToVendingList');
 
+    const close = document.querySelector('.close_new_vending_form');
+    close.addEventListener('click', handleClickCloseButton);
 
     toggleClass(btnAddVending, 'hidden');
     toggleClass(btnBackAddVendingToVendingList, 'hidden');
-    toggleClass(newVendingForm, 'hidden');
-
+    toggleClass(containerNewVendingForm, 'hidden');
 
     btnAddVending.removeEventListener('click', handleClickBtnAddVending);
-
     btnBackAddVendingToVendingList.addEventListener('click', handleClickBtnBackToVendingList);
 
-    let vendings = document.querySelectorAll('ul.vending');
+    const vendings = document.querySelectorAll('ul.vending');
 
     vendings.forEach(vending => {
         vending.removeEventListener('click', handleClickVendingList);
     })
+
+    const btnSubmitNewVending = document.querySelector('.new_vending_submit');
+    btnSubmitNewVending.addEventListener('click', handleClickSubmitNewVending);
 }
-let btnSubmitNewVending = document.querySelector('.new_vending_submit');
-btnSubmitNewVending.addEventListener('click', (event)=> {
+
+let handleClickSubmitNewVending = (event)=> {
     event.preventDefault();
-    let newVendingForm = document.querySelector('.add_vending_form');
+    const newVendingForm = document.querySelector('.new_vending_form');
     let data = new FormData(newVendingForm);
     data.append('context', 'newVending');
 
+    if (newVendingForm.checkValidity()) {
     fetch(url.toString(), {method: 'POST', body: data})
         .then( response => response.text())
         .then( data => {
-            let containerVendingList = document.querySelector('.container_vending_list');
-            containerVendingList.innerHTML = data
+            const containerVendingList = document.querySelector('.vendingListContainer');
+            containerVendingList.innerHTML = data;
+            const gridContainer = document.querySelectorAll('.grid_container');
+            buildGridTemplateColumns(gridContainer);
         })
         .then( () => {
-            let vendings = document.querySelectorAll('ul.vending');
+            const btnSubmitNewVending = document.querySelector('.new_vending_submit');
+            btnSubmitNewVending.removeEventListener('click', handleClickSubmitNewVending);
 
+            const vendings = document.querySelectorAll('ul.vending');
             vendings.forEach(vending => {
                 vending.addEventListener('click', handleClickVendingList);
             })
-            let btnAddVending = document.querySelector('.btnAddVending');
-            btnAddVending.addEventListener('click', handleClickBtnAddVending);
-            let newVendingForm = document.querySelector('.new_vending_form');
-            let btnBackAddVendingToVendingList = document.querySelector('.btnBackAddVendingToVendingList');
 
+
+            const containerNewVendingForm = document.querySelector('.container_new_vending_form');
+            const btnBackAddVendingToVendingList = document.querySelector('.btnBackAddVendingToVendingList');
 
             toggleClass(btnAddVending, 'hidden');
-            toggleClass(btnBackAddVendingToVendingList, 'hidden');
-            toggleClass(newVendingForm, 'hidden');
-        })
-})
+            btnAddVending.addEventListener('click', handleClickBtnAddVending);
 
+            toggleClass(btnBackAddVendingToVendingList, 'hidden');
+            toggleClass(containerNewVendingForm, 'hidden');
+        })
+    } else {
+        const elementsInvalides = Array.from(newVendingForm.elements).filter(element => !element.validity.valid);
+
+
+        console.log("on est là pas bon ")
+        // Parcours des éléments non valides
+        elementsInvalides.forEach( element => {
+            element.classList.add("field_empty");
+        });
+    }
+}
 
 let btnAddVending = document.querySelector('.btnAddVending');
 btnAddVending.addEventListener('click', handleClickBtnAddVending);

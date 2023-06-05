@@ -1,116 +1,26 @@
+import {buildGridTemplateColumns, toggleClass} from "./global.js";
 
 let baseUrl = window.location.origin + window.location.pathname.replace('index.php', 'ajax.php');
 let url = new URL('ajax.php', baseUrl);
 
-// Fonction qui attache les écouteurs d'événements à un conteneur donné
-function userModifyAttachEventListeners(container) {
 
-    listenUpdateButton(container);
-
-    listenSaveButton(container);
-
-    listenDeleteButton(container);
-
-}
-
-// Attache l'écouteur d'événement aux elements .update d'un conteneur donné
-// AJAX pour mettre a jours les données en bdd et retirer l'élément du DOM
-function listenUpdateButton(container)
-{
-    // Sélectionner tous les boutons de mise à jour dans le conteneur
+function listenUpdateButton(container) {
     let updateButtons = container.querySelectorAll('.update');
-    // Pour chaque bouton de mise à jour
     updateButtons.forEach(button => {
-
-        // Ajouter un écouteur d'événements
-        button.addEventListener('click', (event) => {
-            event.preventDefault();
-            let userElement = event.currentTarget.closest('[data-user-id]');
-            updateUserElement(userElement);
-        });
+        button.addEventListener('click', updateUser);
     });
 }
-
-// Attache l'écouteur d'événement aux elements .save d'un conteneur donné
-// AJAX pour sauvegarder les données en bdd et mettre à jour l'élément du DOM
-// avec les données récupérées
-function listenSaveButton(container)
-{
-    console.log(container)
-    let saveButton = container.querySelector('.save');
-    saveButton.setAttribute("disabled", "disabled");
-    container.addEventListener('change', () => {
-        console.log('cocou')
-        saveButton.removeAttribute("disabled");
-    })
-    // Sélectionner tous les boutons de sauvegarde dans le conteneur
-    let saveButtons = container.querySelectorAll('.save');
-    // Ajouter un écouteur d'événements pour chaque bouton de sauvegarde
-    saveButtons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            event.preventDefault();
-            let userElement = event.currentTarget.closest('[data-user-id]');
-
-
-            // Créer un objet FormData pour envoyer une requête AJAX au serveur
-            let formData = new FormData(userElement);
-
-            formData.append('context', 'usersRefresh');
-            formData.append('user_id', userElement.dataset.userId);
-
-            // Envoyer la requête AJAX et remplacer le conteneur avec la réponse
-            fetch(url.toString(), { method: 'POST', body: formData })
-                .then(response => response.text())
-                .then(data => replaceContainer(userElement, data));
-        });
-    });
+function updateUser(event) {
+    event.preventDefault();
+    let userElement = event.currentTarget.closest('[data-user-id]');
+    DisableOtherButton(userElement);
+    listenCancelButton(userElement)
 }
-
-// Attache l'écouteur d'événement aux elements .delete d'un conteneur donné
-// AJAX pour supprimer les données en bdd et retirer l'élément du DOM
-function listenDeleteButton(container)
-{
-    // Sélectionner tous les boutons de suppression dans le conteneur
-    let deleteButtons = container.querySelectorAll('.delete');
-    // Ajouter un écouteur d'événements pour chaque bouton de suppression
-    deleteButtons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            event.preventDefault();
-            let userElement = event.currentTarget.closest('[data-user-id]');
-
-            // Créer un objet FormData pour envoyer une requête AJAX au serveur
-            let formData = new FormData();
-            formData.append('context', 'usersDelete');
-            formData.append('user_id', userElement.dataset.userId);
-
-            // Envoyer la requête AJAX et supprime le conteneur en cas de succes
-            fetch(url.toString(), { method: 'POST', body: formData })
-                .then(() => deleteContainer(userElement));
-        });
-    });
-}
-
-// fonction qui ajoute ou supprime l'attribut disable sur chaque input d'un formulaire donné
-function toggleDisabledForm(formElement) {
-    let inputItems = formElement.querySelectorAll('form input,form select');
-    for (let i = 0; i < inputItems.length; i++) {
-        inputItems[i].disabled = !inputItems[i].disabled;
-    }
-}
-
-// fonction qui utilise toggle pour la classe hidden sur tous les boutons d'un formulaire donné
-function toggleBtn(formElement) {
-    let buttons = formElement.querySelectorAll('button');
-    buttons.forEach(function (button) {
-        button.classList.toggle("hidden")
-    });
-}
-
-// Fonction qui met à jour un élément avec les données fournies
-function updateUserElement(userElement){
+function DisableOtherButton(userElement) {
     toggleDisabledForm(userElement);
-    toggleBtn(userElement);
-    userModifyAttachEventListeners(userElement);
+
+    listenSaveButton(userElement);
+    listenDeleteButton(userElement);
 
     let allUserElements = document.querySelectorAll('[data-user-id]');
     allUserElements.forEach((element) => {
@@ -121,30 +31,123 @@ function updateUserElement(userElement){
             })
         }
     });
+    toggleBtns(userElement);
 }
 
-// Fonction qui remplace un conteneur avec les données fournies
-function replaceContainer(container, data){
+function listenDeleteButton(container) {
+    let deleteButtons = container.querySelectorAll('.delete');
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', deleteUser);
+    });
+}
+function deleteUser(event) {
+    event.preventDefault();
+    if (window.confirm('souhaitez-vous vraiment supprimer cet utilisateur ?')) {
+        let userElement = event.currentTarget.closest('[data-user-id]');
+
+        let formData = new FormData();
+        formData.append('context', 'usersDelete');
+        formData.append('user_id', userElement.dataset.userId);
+
+        fetch(url.toString(), {method: 'POST', body: formData})
+            .then(() => deleteContainer(userElement));
+    }
+}
+
+function listenSaveButton(container) {
+    let saveButton = container.querySelector('.save');
+    saveButton.setAttribute("disabled", "disabled");
+    container.addEventListener('change', removeDisabledOnSaveButton);
+
+    saveButton.addEventListener('click', userSaveChange);
+}
+function userSaveChange(event) {
+    event.preventDefault();
+    let userElement = event.currentTarget.closest('[data-user-id]');
+
+    let formData = new FormData(userElement);
+    formData.append('context', 'usersRefresh');
+    formData.append('user_id', userElement.dataset.userId);
+
+    fetch(url.toString(), {method: 'POST', body: formData})
+        .then(response => response.text())
+        .then(data => replaceContainer(userElement, data))
+        .then( () => {
+            let container = document.querySelector('.UsersContainer')
+            removeDisabled(container)
+        } )
+}
+
+function listenCancelButton(container) {
+
+    let cancelButton = container.querySelector('.cancel');
+    cancelButton.addEventListener('click', cancelModify);
+}
+function cancelModify(event) {
+    event.preventDefault();
+    let userForm = event.currentTarget.closest('[data-user-id]');
+    toggleBtns(userForm);
+    toggleDisabledForm(userForm);
+
+    let container = document.querySelector('.UsersContainer');
+    removeDisabled(container);
+}
+
+
+function removeDisabledOnSaveButton(event) {
+    let saveButton = event.currentTarget.querySelector('.save');
+    saveButton.removeAttribute("disabled");
+}
+
+function toggleDisabledForm(formElement) {
+    let inputItems = formElement.querySelectorAll('form input,form select');
+    for (let i = 0; i < inputItems.length; i++) {
+        inputItems[i].disabled = !inputItems[i].disabled;
+    }
+}
+
+function toggleBtns(formElement) {
+
+    let buttons = formElement.querySelectorAll('button');
+    buttons.forEach(button => {
+        toggleClass(button, "hidden")
+    });
+}
+
+function removeDisabled(container)
+{
+    let userButton = container.querySelectorAll('.update, .delete');
+    userButton.forEach(button => {
+        button.disabled = false;
+    })
+}
+function replaceContainer(container, data) {
     container.innerHTML = data;
-    userModifyAttachEventListeners(container);
+    listenUpdateButton(container);
+    listenDeleteButton(container);
 }
 
-// Fonction qui supprime un conteneur
-function deleteContainer(container){
+function deleteContainer(container) {
     container.parentNode.removeChild(container);
 }
-// let test = document.querySelector('.cancel');
-// test.addEventListener('click', (event)=> {
-//     event.preventDefault();
-//     let formElement = event.currentTarget.closest('[data-user-id]');
-//     toggleDisabledForm(formElement);
-//     toggleBtn(formElement);
-//     let usersContainer = document.querySelector('.list_container');
-//     console.log(usersContainer)
-//
-//     userModifyAttachEventListeners(usersContainer);
-// })
 
-// Attache les écouteurs d'événements initiaux au document
+const gridContainerForm = document.querySelectorAll('.grid_container_form');
+buildGridTemplateColumns(gridContainerForm);
+
 let usersContainer = document.querySelector('.UsersContainer');
-userModifyAttachEventListeners(usersContainer);
+listenUpdateButton(usersContainer);
+listenDeleteButton(usersContainer);
+
+
+// TODO Bibliothèque sweetAlert2 pour gérer le confirm
+// npm install sweetalert2
+// <script type="module" src="../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+// import Swal from "../../node_modules/sweetalert2/src/sweetalert2.js";
+// Swal.fire({
+//            title: 'Warning',
+//            text: 'Vous êtes sur le point de suprimer un utilisateur !',
+//            icon: 'warning',
+//            confirmButtonText: 'Je suis sur',
+//            showCancelButton: 'true',
+//            cancelButtonText: 'Annuler'
+//        }).then( () => console.log('coucou'))

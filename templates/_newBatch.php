@@ -1,46 +1,40 @@
 
     <form method="post" class="search_form form_container">
 
-        <div class="elements submit">
             <button class="close closeNewBatchForm">X</button>
-        </div>
 
         <fieldset class="fieldset">
             <legend>Ajouter un lot</legend>
 
             <div class="elements">
-                <label for="barcode">Code barre</label>
                 <input type="number"
-                       value="5000159461122"
                        minlength="8"
                        maxlength="13"
                        name="field_barcode"
-                       id="barcode">
+                       id="barcode"
+                       required="required">
+                <label for="barcode">Code barre</label>
             </div>
 
-
             <div class="elements">
-                <label for="quantity">Quantité</label>
                 <input type="text"
-                       value="50"
                        name="field_quantity"
-                       id="quantity">
+                       id="quantity"
+                       required="required">
+                <label for="quantity">Quantité</label>
             </div>
 
-
             <div class="elements">
-                <label for="dlc">DLC</label>
                 <input type="date"
                        name="field_dlc"
-                       id="dlc">
+                       id="dlc"
+                       required="required">
+                <label for="dlc">DLC</label>
             </div>
-
 
         </fieldset>
 
-        <div class="elements submit">
-            <input type="submit">
-        </div>
+            <input type="submit" class="new_batch_submit">
 
     </form>
 

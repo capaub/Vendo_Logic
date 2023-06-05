@@ -1,9 +1,7 @@
 <main class="Container_main Main Main_stock">
     <h1 class="Main_title">Stock principal</h1>
 
-    <div class="elements submit ">
-        <button class="btnAddBatch">Ajouter un lot</button>
-    </div>
+        <button class="btnAddBatch" data-text="Ajouter un lot"></button>
 
     <section class="list_container batch">
 
@@ -31,7 +29,7 @@
 
     </section>
 
-    <div class="new_batch_form hidden">
+    <div class="container_new_batch_form hidden">
         <?php include '_newBatch.php' ?>
     </div>
 

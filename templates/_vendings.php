@@ -1,10 +1,23 @@
 
 <?php /** @var Vending $oVending */
 
-use DaBuild\Entity\Vending;
+use DaBuild\Entity\Vending; ?>
 
-foreach ($vending as $oVending) : ?>
+    <ul class="grid_container">
+        <li>Marque</li>
+        <li>Model</li>
+        <li>Nom</li>
+        <li>Plateau max</li>
+        <li>Spirale max</li>
+    </ul>
 
+    <?php if (empty($vending)) : ?>
+        <ul class="grid_container">
+            <p>Aucune machine à afficher</p>
+        </ul>
+    <?php else: ?>
+<!--        <div class="container_vending_list">-->
+        <?php foreach ($vending as $oVending) : ?>
         <ul class="grid_container vending" data-vending-id="<?= $oVending->getId(); ?>">
             <li data-brand="<?= $oVending->getBrand(); ?>">
                 <?= $oVending->getBrand(); ?>
@@ -24,3 +37,5 @@ foreach ($vending as $oVending) : ?>
         </ul>
 
 <?php endforeach; ?>
+<!--        </div>-->
+    <?php endif; ?>
