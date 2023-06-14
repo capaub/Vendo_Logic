@@ -15,6 +15,7 @@ class VendingController extends AbstractController
 {
     /**
      * @return string
+     * @throws \Exception
      */
     public function createVending(): string
     {
@@ -68,13 +69,14 @@ class VendingController extends AbstractController
     public function buildVending(): string
     {
         $bAjax = !empty($_POST['context']) ?? false;
-        if (!empty($_GET['vending_id'])) {
+
+        if (!empty($_GET['vending_id']) && VendingRepository::isExist($_GET['vending_id'])) {
 
             $iCleanVendingId = intval(strip_tags($_GET['vending_id']));
 
             $oVending = VendingRepository::find($iCleanVendingId);
 
-            $aVendingLocation = VendingLocationRepository::findAll();
+            $aVendingLocation = VendingLocationRepository::findAllForOne($oVending->getId());
 
             $aDataVendingLocation = [];
 
@@ -92,18 +94,18 @@ class VendingController extends AbstractController
 
                 foreach ($aVendingStock as $oVendingStock) {
 
-                    $oBatch = BatchRepository::find($oVendingStock->getBatchesId());
+                    $oBatch = BatchRepository::find($oVendingStock->getBatchId());
                     $oGoods = GoodsRepository::find($oBatch->getGoodsId());
 
                     $aLocationInfo = [
-                        'batch_id' => $oBatch->getId(),
-                        'dlc' => $oBatch->getDlc(),
-                        'quantity' => $oVendingStock->getQuantity(),
-                        'qr_code' => $oBatch->getQrCode(),
-                        'barcode' => $oGoods->getBarcode(),
-                        'brand' => $oGoods->getBrand(),
-                        'img' => $oGoods->getImg(),
-                        'nutri-score' => $oGoods->getNutriScore()
+                        'batch_id'      => $oBatch->getId(),
+                        'dlc'           => $oBatch->getDlc(),
+                        'qr_code'       => $oBatch->getQrCode(),
+                        'quantity'      => $oVendingStock->getQuantity(),
+                        'barcode'       => $oGoods->getBarcode(),
+                        'brand'         => $oGoods->getBrand(),
+                        'img'           => $oGoods->getImg(),
+                        'nutri-score'   => $oGoods->getNutriScore()
                     ];
 
                     $aDataVendingStock[$sLocation] =  $aLocationInfo;
@@ -131,7 +133,7 @@ class VendingController extends AbstractController
 
             $oVending = VendingRepository::find($iCleanVendingId);
 
-            $aVendingLocation = VendingLocationRepository::findAll();
+            $aVendingLocation = VendingLocationRepository::findAllForOne($oVending->getId());
 
             $aDataVendingLocation = [];
 
@@ -149,7 +151,7 @@ class VendingController extends AbstractController
 
                 foreach ($aVendingStock as $oVendingStock) {
 
-                    $oBatch = BatchRepository::find($oVendingStock->getBatchesId());
+                    $oBatch = BatchRepository::find($oVendingStock->getBatchId());
                     $oGoods = GoodsRepository::find($oBatch->getGoodsId());
 
                     $aLocationInfo = [
@@ -180,7 +182,7 @@ class VendingController extends AbstractController
                 ], $bAjax);
         }
 
-        return $_SESSION['ERREUR'] = 'machine introuvable';
+        return $this->render('home');
 
     }
 

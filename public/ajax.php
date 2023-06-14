@@ -15,7 +15,7 @@ session_start();
 require_once '../config/config.php';
 
 //if (isset($_POST['context'])) {
-//    return match ($_POST['context']) {
+//    echo match ($_POST['context']) {
 //        AJAX_NEW_USER                   => (new CompanyController)->createUser(),
 //        AJAX_USER_UPDATE                => (new UserController)->updateUser(),
 //        AJAX_USER_REFRESH               => (new UserController)->refreshUser(),
@@ -23,12 +23,14 @@ require_once '../config/config.php';
 //        AJAX_SHOW_VENDING               => (new VendingController)->buildVending(),
 //        AJAX_SHOW_CONTAINER_ADD_VENDING => (new VendingController)->showAvailableVending(),
 //        AJAX_ADD_VENDING_TO_CUSTOMER    => (new VendingPerCustomerController)->addVendingToCustomer(),
-////        AJAX_ADD_STOCK_TO_VENDING       => (new VendingStockController)->addStockToVending(),
-//        AJAX_SHOW_BATCH                 => (new BatchController)->getBatch(),
+//        AJAX_ADD_STOCK_TO_VENDING       => (new VendingStockController)->addStockToVending(),
+//        AJAX_SHOW_BATCH_FOR_VENDING     => (new BatchController)->getAllBatch(),
 //        AJAX_NEW_BATCH                  => (new BatchController)->createBatch(),
+//        AJAX_CHANGE_BATCH               => (new BatchController)->getBatchDataChangeAjax(),
 //        AJAX_NEW_CUSTOMER               => (new CustomerController)->addCustomer(),
 //        AJAX_BACK_TO_CUSTOMER           => (new DefaultController)->showCustomers(),
-//        default => "Context inconnu"
+//        AJAX_NEW_VENDING                => (new VendingController())->createVending(),
+//        default                         => 'default',
 //    };
 //}
 
@@ -76,5 +78,7 @@ if (isset($_POST['context'])){
         case AJAX_NEW_VENDING:
             echo (new VendingController())-> createVending();
             break;
+        default :
+            echo 'default';
     }
 }

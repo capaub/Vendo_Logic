@@ -24,7 +24,7 @@ function styleImageLandscape(element,imageUrl) {
     element.style.height= '40px';
     element.style.width= '80px';
     element.style.backgroundImage= `url(${imageUrl})`;
-    element.style.backgroundSize= '100%'; /* Ajustez la propriété de dimension du fond selon vos besoins */
+    element.style.backgroundSize= '100%';
     element.style.backgroundRepeat= 'no-repeat';
     element.style.backgroundPosition= 'center';
     element.style.transform= 'translate(-20px, 20px) rotate(270deg)';

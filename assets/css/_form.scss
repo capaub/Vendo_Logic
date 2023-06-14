@@ -6,7 +6,7 @@
   border-left: solid 1px $firstColorForm;
   border-top: solid 1px $firstColorForm;
   box-shadow: $boxShadowContainerForm;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(15px);
   border-radius: 1em;
   gap: 1em;
   padding: 5em 3em 3em;
@@ -17,13 +17,11 @@
     flex-direction: column;
     align-items: center;
   }
-  &.Login{
-    max-width: 350px;
-  }
+
   & .fieldset {
-      //display: grid;
-      //grid-template-columns: minmax(auto, 200px) minmax(70%, auto);
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(auto, 200px) minmax(70%, auto);
+    //display: flex;
     flex-wrap: wrap;
     width: 100%;
     border: none;
@@ -35,13 +33,14 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    width: min-content;
   }
 
   & legend {
     position: absolute;
     pointer-events: none;
     transition: all 0.3s ease-in-out;
-    color: white;
+    color: $mainBackgroundColor;
     font-weight: 500;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, .2);
     top: 2em;
@@ -63,7 +62,7 @@
     border: none;
     border-left: solid 1px $firstColorForm;
     border-top: solid 1px $firstColorForm;
-    color: white;
+    color: $mainBackgroundColor;
     font-size: 0.8em;
 
     &.field_empty{
@@ -79,15 +78,17 @@
     }
 
     &.date {
-      width: auto;
+      //width: auto;
     }
   }
 
 }
+
 select:focus{
   border: none;
   background-color: rgba(0, 0, 0, 0.08);
 }
+
 .submit {
   width: 100%;
   text-align: end;
@@ -95,15 +96,17 @@ select:focus{
 }
 
 input[type=submit] {
-  color: white;
+  color: $mainBackgroundColor;
   backdrop-filter: blur(5px);
   width: 150px;
   box-shadow: $boxShadow;
   border-radius: 3em;
   padding: 1em ;
   &:hover {
-    box-shadow: none;
     cursor: pointer;
+  }
+  &:active{
+    box-shadow: none;
   }
 }
 
@@ -116,6 +119,9 @@ button {
   border: 1px solid rgb(54 58 66 / 50%);
   cursor: pointer;
 
+  &:active{
+    box-shadow: none;
+  }
   &.close {
     border-radius: 0.9em;
     width: 30px;
@@ -125,19 +131,19 @@ button {
     top: 1em;
     right: 1em;
   }
-
-  &:hover {
-    box-shadow: none;
-  }
+  //&:hover {
+  //  box-shadow: $boxShadow;
+  //}
 }
 
 .btnAddBatch,
 .btnAddUser,
 .btnAddCustomer,
-.btnAddVending,
+.btn_add_vending,
 .btnBackToCustomers,
 .btnBackToVendingList,
-.btnBackAddVendingToVendingList {
+.btn_back_add_batch_vending_to_vendingList,
+.btn_back_new_vending_to_vendingList {
   display: flex;
   flex-direction: row-reverse;
   height: 31px;
@@ -147,16 +153,16 @@ button {
   border-radius: 5px;
   font-weight: bold;
   z-index: 2;
-  right: 30px;
+  right: 10%;
   position: fixed;
-  top: 90px;
+  top: 15%;
   background-color: #4E7EAC;
   font-size: 1em;
   text-transform: uppercase;
   transition: display 1s;
 
   &:hover {
-    box-shadow: $boxShadow;
+    //box-shadow: $boxShadow;
     &::after {
       content: attr(data-text);
       background-color: #4E7EAC;
@@ -174,15 +180,18 @@ button {
   &:hover::before {
     display: none;
   }
-  &:active{
-    box-shadow: none;
-  }
+  //&:active{
+  //  box-shadow: none;
+  //}
 }
 
-.btnBackToCustomers {
+.btnBackToCustomers,
+.btnBackToVendingList,
+.btn_back_add_batch_vending_to_vendingList,
+.btn_back_new_vending_to_vendingList {
   background-color: #E53935;
   &:hover {
-    box-shadow: $boxShadow;
+    //box-shadow: $boxShadow;
     &::after {
       content: attr(data-text);
       background-color: #E53935;
@@ -202,8 +211,8 @@ label {
   top: 1.8em;
   left: 1em;
   pointer-events: none;
-  transition: all 0.3s ease;
-  color: white;
+  transition: all 0.3s ease-in-out;
+  color: $mainBackgroundColor;
   font-weight: 500;
   opacity: 0.7;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
@@ -221,7 +230,8 @@ select + label, input[type=date] + label, #location + label{
 .container_new_vending_form,
 .container_add_vending_form,
 .container_new_batch_form,
-.container_add_batch_form {
+.container_add_batch_form,
+.container_add_vending_form {
   position: fixed;
   z-index: 2;
   top: 25%;
@@ -231,8 +241,8 @@ select + label, input[type=date] + label, #location + label{
 }
 .container_new_customer_form .form_container,
 .container_register_form .form_container,
-.container_login_form .form_container {
-  width: 80%;
+.container_login_form .form_container,{
+  width: min-content;
   margin: 0 auto;
 }
 
@@ -273,7 +283,7 @@ select + label, input[type=date] + label, #location + label{
   }
 
   input[type=submit], button {
-    color: white;
+    color: $mainBackgroundColor;
     padding: 12px 20px;
     cursor: pointer;
     width: auto;
@@ -295,6 +305,7 @@ select + label, input[type=date] + label, #location + label{
         cursor: default;
         &:hover{
           transform: none;
+          box-shadow: $boxShadow;
         }
       }
     }

@@ -53,8 +53,8 @@
                 <div class="elements">
                     <input type="number"
                            id="postal_code"
-                           maxlength="5"
                            name="field_postal_code"
+                           data-max-length="5"
                            data-placeholder="ex: 83640"
                            required="required">
                     <label for="postal_code">Code postal</label>

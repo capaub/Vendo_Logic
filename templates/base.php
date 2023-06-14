@@ -15,8 +15,8 @@ $oDebugbar["messages"]->addMessage('hello world!');
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title><?= $seo_title ?? '' ?> - VB</title>
-    <meta name="description" content="super blog">
+    <title><?= $seo_title ?? '' ?> - VendoLogic</title>
+    <meta name="description" content="Site d'aide à la gestion d'un parc de distributeur automatique">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= $oDebugbarRenderer->renderHead() ?>
     <link rel="preconnect" href="https://fonts.googleapis.com">

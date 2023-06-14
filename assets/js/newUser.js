@@ -46,10 +46,11 @@ function newUser(formNewUser) {
     let formData = new FormData(formNewUser)
     formData.append('context', 'newUser');
 
+    if (formNewUser.checkValidity()) {
     fetch(url.toString(), {method: 'POST', body: formData})
         .then( response => response.text() )
         .then( data => refreshUserList(data) )
-        .then( () => toggleClass(sectionFormNewUser,token) )
+        .then( () => toggleClass(containerFormNewUser,token) )
         .then( () => {
             console.log('coucou')
             const gridContainer = document.querySelectorAll('.grid_container');
@@ -57,6 +58,14 @@ function newUser(formNewUser) {
             buildGridTemplateColumns(gridContainer)
         })
         // .then( () => userModifyAttachEventListeners(usersContainer) );
+
+    } else {
+        const invalidFields = Array.from(formNewUser.elements).filter(element => !element.validity.valid);
+
+        invalidFields.forEach( field => {
+            field.classList.add("field_empty");
+        });
+    }
 }
 
 function refreshUserList(data){

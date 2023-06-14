@@ -4,7 +4,7 @@
 
     <li class="batch_info">
         <?php if ($aGoods['selectBatch']) : ?>
-            <select name="Batch" id="Batch" class="date">
+            <select name="Batch" id="Batch" class="date select_dlc_batch">
                 <?php foreach ($aGoods['batchOptions'] as $iBatchId => $sDlc) : ?>
                     <option value="<?= $iBatchId; ?>"><?= $aGoods['batchOptions'][$iBatchId]; ?></option>
                 <?php endforeach; ?>

@@ -28,7 +28,6 @@ class BatchController extends AbstractController
      */
     public function getBatchDataChangeAjax(): string
     {
-
         $iCleanBatchId = intval(strip_tags($_POST['batch_id']));
 
         $oBatch = BatchRepository::find($iCleanBatchId);
@@ -54,8 +53,8 @@ class BatchController extends AbstractController
 
         $aBatch = BatchRepository::findAll();
 
-        $aBatchInfo = [];
 
+        $aBatchInfo = [];
         // je récupère tout les lots dans un tableau associatif
         // [ Id => [ data ], Id => [ data ], [...] ]
         foreach ($aBatch as $oBatch){
@@ -77,8 +76,8 @@ class BatchController extends AbstractController
                 ];
         }
 
-        $aPooledDataForBatch = [] ;
 
+        $aPooledDataForBatch = [] ;
         // je rassemble les lots pour chaque produit
         // [ codebarre => [ lotId => [ data ], lotId => [ data ], [...] ] ]
         foreach ($aBatchInfo as $iBatchId => $aData) {
@@ -91,9 +90,9 @@ class BatchController extends AbstractController
 
         }
 
-        $dataToRender = $aPooledDataForBatch; // Initialise $dataToRender avec $aPooledDataForBatch
+        $aDataToRender = $aPooledDataForBatch; // Initialise $aDataToRender avec $aPooledDataForBatch
 
-        foreach ($dataToRender as &$aGoods) {
+        foreach ($aDataToRender as &$aGoods) {
             $aGoods['selectBatch'] = (count($aGoods) > 1);
             $aGoods['batchOptions'] = [];
 
@@ -112,7 +111,7 @@ class BatchController extends AbstractController
 
         return $this->render('stock.php', [
             'seo_title'             => PAGE_STOCK,
-            'pooledDataForBatch'    => $dataToRender
+            'pooledDataForBatch'    => $aDataToRender
         ],$bAjax);
     }
 

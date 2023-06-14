@@ -2,7 +2,7 @@
 
 
 <form method="POST"
-      class="form_container"
+      class="form_container add_vending_form"
       data-customer-id="<?= $customerId ?>">
 
         <button class="close closeAddVendingForm">X</button>
@@ -11,7 +11,6 @@
         <legend><span class="company_name"><?= $companyName ?></span></legend>
 
         <div class="elements">
-            <label for="vendings">Les distributeurs</label>
             <select name="field_vending_id" id="vendings" required="required">
                 <?php /** @var Vending $availableVending */
                 if (empty($availableVending)) : ?>
@@ -29,14 +28,15 @@
                     <?php endforeach; ?>
                 <?php endif; ?>
             </select>
+            <label for="vendings">Les distributeurs</label>
         </div>
         <div class="elements">
-            <label for="vending_name">Attribuer un nom</label>
             <input type="text"
                    class=""
                    id="vending_name"
                    name="field_vending_name"
                    required="required">
+            <label for="vending_name">Attribuer un nom</label>
         </div>
     </fieldset>
 

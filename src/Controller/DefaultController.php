@@ -2,10 +2,14 @@
 
 namespace DaBuild\Controller;
 
+use DaBuild\Repository\BatchRepository;
 use DaBuild\Repository\CustomerRepository;
+use DaBuild\Repository\GoodsRepository;
+use DaBuild\Repository\VendingLocationRepository;
 use DaBuild\Repository\VendingPerCustomerRepository;
 use DaBuild\Repository\VendingRepository;
 use DaBuild\Repository\UserRepository;
+use DaBuild\Repository\VendingStockRepository;
 
 class DefaultController extends AbstractController
 {
@@ -16,6 +20,7 @@ class DefaultController extends AbstractController
     public function showCustomers(): string
     {
         $aVending = [];
+        $aVendingAlert = [];
 
         $aCustomer = CustomerRepository::findAll();
 
@@ -31,13 +36,35 @@ class DefaultController extends AbstractController
 
             foreach ($aVendingPerCustomer as $oVendingPerCustomer) {
 
-                $iCustomerId = $oVendingPerCustomer->getCustomerId();
-                $iVendingId = $oVendingPerCustomer->getVendingId();
-                $oVending = VendingRepository::find($iVendingId);
+                $iCustomerId        = $oVendingPerCustomer->getCustomerId();
+                $iVendingId         = $oVendingPerCustomer->getVendingId();
+                $oVending           = VendingRepository::find($iVendingId);
 
+                $aVending[$iCustomerId][$iVendingId] = $oVending;
 
-                    $aVending[$iCustomerId][$iVendingId] = $oVending;
+                $aVendingLocation   = VendingLocationRepository::findAllForOne($iVendingId);
+                foreach ($aVendingLocation as $oVendingLocation) {
+                    $aVendingStock = VendingStockRepository::findBy(['vending_location_id' => $oVendingLocation->getId()]);
 
+                    $iBatchId = $aVendingStock != null ? $aVendingStock[0]->getBatchId() : '';
+                    $oBatch = BatchRepository::find(intval($iBatchId));
+
+                    if ($oBatch !== NULL && ($oBatch->getDlc() < (new \DateTime('+3 weeks')))){
+                        if (empty($aVendingAlert[$iVendingId])) {
+                            $aVendingAlert[$iVendingId] = 'dlc';
+                        } elseif ($aVendingAlert[$iVendingId] === 'rupture') {
+                            $aVendingAlert[$iVendingId] .= ' dlc';
+                        }
+                    }
+                    if ($aVendingStock == null || ($aVendingStock[0]->getQuantity() < 5) ){
+                        if (empty($aVendingAlert[$iVendingId])) {
+                            $aVendingAlert[$iVendingId] = 'rupture';
+                        } elseif ($aVendingAlert[$iVendingId] === 'dlc') {
+                            $aVendingAlert[$iVendingId] .= ' rupture';
+                        }
+                    }
+
+                }
 
             }
 
@@ -48,8 +75,9 @@ class DefaultController extends AbstractController
         return $this->render('customers.php',
             [
                 'seo_title' => PAGE_CUSTOMERS,
-                'customer' => $aCustomer,
-                'vending' => $aVending
+                'customer'  => $aCustomer,
+                'vending'   => $aVending,
+                'status'    => $aVendingAlert
             ],$bAjax);
     }
 
@@ -120,15 +148,15 @@ class DefaultController extends AbstractController
         );
     }
 
-    /**
-     * @return string
-     */
-    public function vendingBuilder(): string
-    {
-        return $this->render(
-            'vendingBuilder.php',
-            ['seo_title' => PAGE_SAVE_VENDING]
-        );
-    }
+//    /**
+//     * @return string
+//     */
+//    public function vendingBuilder(): string
+//    {
+//        return $this->render(
+//            'vendingBuilder.php',
+//            ['seo_title' => PAGE_SAVE_VENDING]
+//        );
+//    }
 
 }

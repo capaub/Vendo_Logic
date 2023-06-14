@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @keyframes sidebarLinkHover {
   0% {
     transform: translateX(0);
@@ -88,7 +89,7 @@
   border-left: solid 1px rgba(255, 255, 255, 0.3);
   border-top: solid 1px rgba(255, 255, 255, 0.3);
   box-shadow: 20px 20px 40px -6px rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(15px);
   border-radius: 1em;
   gap: 1em;
   padding: 5em 3em 3em;
@@ -102,11 +103,9 @@
     align-items: center;
   }
 }
-.form_container.Login {
-  max-width: 350px;
-}
 .form_container .fieldset {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(auto, 200px) minmax(70%, auto);
   flex-wrap: wrap;
   width: 100%;
   border: none;
@@ -117,12 +116,13 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  width: min-content;
 }
 .form_container legend {
   position: absolute;
   pointer-events: none;
   transition: all 0.3s ease-in-out;
-  color: white;
+  color: #24476B;
   font-weight: 500;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   top: 2em;
@@ -141,7 +141,7 @@
   border: none;
   border-left: solid 1px rgba(255, 255, 255, 0.3);
   border-top: solid 1px rgba(255, 255, 255, 0.3);
-  color: white;
+  color: #24476B;
   font-size: 0.8em;
 }
 .form_container input.field_empty, .form_container textarea.field_empty, .form_container select.field_empty {
@@ -154,10 +154,6 @@
   outline-color: white;
   outline-width: medium;
 }
-.form_container input.date, .form_container textarea.date, .form_container select.date {
-  width: auto;
-}
-
 select:focus {
   border: none;
   background-color: rgba(0, 0, 0, 0.08);
@@ -170,7 +166,7 @@ select:focus {
 }
 
 input[type=submit] {
-  color: white;
+  color: #24476B;
   backdrop-filter: blur(5px);
   width: 150px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4), 0 16px 32px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -178,8 +174,10 @@ input[type=submit] {
   padding: 1em;
 }
 input[type=submit]:hover {
-  box-shadow: none;
   cursor: pointer;
+}
+input[type=submit]:active {
+  box-shadow: none;
 }
 
 button {
@@ -191,6 +189,9 @@ button {
   border: 1px solid rgba(54, 58, 66, 0.5);
   cursor: pointer;
 }
+button:active {
+  box-shadow: none;
+}
 button.close {
   border-radius: 0.9em;
   width: 30px;
@@ -200,17 +201,15 @@ button.close {
   top: 1em;
   right: 1em;
 }
-button:hover {
-  box-shadow: none;
-}
 
 .btnAddBatch,
 .btnAddUser,
 .btnAddCustomer,
-.btnAddVending,
+.btn_add_vending,
 .btnBackToCustomers,
 .btnBackToVendingList,
-.btnBackAddVendingToVendingList {
+.btn_back_add_batch_vending_to_vendingList,
+.btn_back_new_vending_to_vendingList {
   display: flex;
   flex-direction: row-reverse;
   height: 31px;
@@ -220,30 +219,22 @@ button:hover {
   border-radius: 5px;
   font-weight: bold;
   z-index: 2;
-  right: 30px;
+  right: 10%;
   position: fixed;
-  top: 90px;
+  top: 15%;
   background-color: #4E7EAC;
   font-size: 1em;
   text-transform: uppercase;
   transition: display 1s;
 }
-.btnAddBatch:hover,
-.btnAddUser:hover,
-.btnAddCustomer:hover,
-.btnAddVending:hover,
-.btnBackToCustomers:hover,
-.btnBackToVendingList:hover,
-.btnBackAddVendingToVendingList:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4), 0 16px 32px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.2);
-}
 .btnAddBatch:hover::after,
 .btnAddUser:hover::after,
 .btnAddCustomer:hover::after,
-.btnAddVending:hover::after,
+.btn_add_vending:hover::after,
 .btnBackToCustomers:hover::after,
 .btnBackToVendingList:hover::after,
-.btnBackAddVendingToVendingList:hover::after {
+.btn_back_add_batch_vending_to_vendingList:hover::after,
+.btn_back_new_vending_to_vendingList:hover::after {
   content: attr(data-text);
   background-color: #4E7EAC;
   padding: 5px;
@@ -254,39 +245,35 @@ button:hover {
 .btnAddBatch::before,
 .btnAddUser::before,
 .btnAddCustomer::before,
-.btnAddVending::before,
+.btn_add_vending::before,
 .btnBackToCustomers::before,
 .btnBackToVendingList::before,
-.btnBackAddVendingToVendingList::before {
+.btn_back_add_batch_vending_to_vendingList::before,
+.btn_back_new_vending_to_vendingList::before {
   content: "+";
   color: white;
 }
 .btnAddBatch:hover::before,
 .btnAddUser:hover::before,
 .btnAddCustomer:hover::before,
-.btnAddVending:hover::before,
+.btn_add_vending:hover::before,
 .btnBackToCustomers:hover::before,
 .btnBackToVendingList:hover::before,
-.btnBackAddVendingToVendingList:hover::before {
+.btn_back_add_batch_vending_to_vendingList:hover::before,
+.btn_back_new_vending_to_vendingList:hover::before {
   display: none;
 }
-.btnAddBatch:active,
-.btnAddUser:active,
-.btnAddCustomer:active,
-.btnAddVending:active,
-.btnBackToCustomers:active,
-.btnBackToVendingList:active,
-.btnBackAddVendingToVendingList:active {
-  box-shadow: none;
-}
 
-.btnBackToCustomers {
+.btnBackToCustomers,
+.btnBackToVendingList,
+.btn_back_add_batch_vending_to_vendingList,
+.btn_back_new_vending_to_vendingList {
   background-color: #E53935;
 }
-.btnBackToCustomers:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4), 0 16px 32px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-.btnBackToCustomers:hover::after {
+.btnBackToCustomers:hover::after,
+.btnBackToVendingList:hover::after,
+.btn_back_add_batch_vending_to_vendingList:hover::after,
+.btn_back_new_vending_to_vendingList:hover::after {
   content: attr(data-text);
   background-color: #E53935;
   padding: 5px;
@@ -294,7 +281,10 @@ button:hover {
   color: white;
   font-size: 0.6em;
 }
-.btnBackToCustomers::before {
+.btnBackToCustomers::before,
+.btnBackToVendingList::before,
+.btn_back_add_batch_vending_to_vendingList::before,
+.btn_back_new_vending_to_vendingList::before {
   content: "x";
 }
 
@@ -303,8 +293,8 @@ label {
   top: 1.8em;
   left: 1em;
   pointer-events: none;
-  transition: all 0.3s ease;
-  color: white;
+  transition: all 0.3s ease-in-out;
+  color: #24476B;
   font-weight: 500;
   opacity: 0.7;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
@@ -323,7 +313,8 @@ select + label, input[type=date] + label, #location + label {
 .container_new_vending_form,
 .container_add_vending_form,
 .container_new_batch_form,
-.container_add_batch_form {
+.container_add_batch_form,
+.container_add_vending_form {
   position: fixed;
   z-index: 2;
   top: 25%;
@@ -335,7 +326,7 @@ select + label, input[type=date] + label, #location + label {
 .container_new_customer_form .form_container,
 .container_register_form .form_container,
 .container_login_form .form_container {
-  width: 80%;
+  width: min-content;
   margin: 0 auto;
 }
 
@@ -372,7 +363,7 @@ select + label, input[type=date] + label, #location + label {
   text-align: center;
 }
 .grid_container_form input[type=submit], .grid_container_form button {
-  color: white;
+  color: #24476B;
   padding: 12px 20px;
   cursor: pointer;
   width: auto;
@@ -396,6 +387,7 @@ select + label, input[type=date] + label, #location + label {
 }
 .grid_container_form input[type=submit].update:disabled:hover, .grid_container_form input[type=submit].delete:disabled:hover, .grid_container_form input[type=submit].save:disabled:hover, .grid_container_form input[type=submit].cancel:disabled:hover, .grid_container_form button.update:disabled:hover, .grid_container_form button.delete:disabled:hover, .grid_container_form button.save:disabled:hover, .grid_container_form button.cancel:disabled:hover {
   transform: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4), 0 16px 32px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 .grid_container_form input[type=submit].update, .grid_container_form button.update {
   background-color: #7588A5;
@@ -512,7 +504,7 @@ select + label, input[type=date] + label, #location + label {
   box-shadow: 0 4px 8px -1px rgba(0, 0, 0, 0.4588235294);
   border-radius: 5px;
 }
-.vendingGrid ul.plateau li.spiral .batchPicture, .vendingGrid ul.plateau li.spiral .batchPicture:hover {
+.vendingGrid ul.plateau li.spiral .batch_picture, .vendingGrid ul.plateau li.spiral .batch_picture:hover {
   border-radius: 5px;
 }
 .vendingGrid ul.plateau li.spiral::after {
@@ -521,11 +513,13 @@ select + label, input[type=date] + label, #location + label {
   width: 30px;
   height: 30px;
   bottom: 10px;
-  right: 3px;
-  border-radius: 15px;
-  border: solid 2px;
+  right: 2px;
+  border-radius: 50%;
+  border: solid 3px;
+  border-color: black black black transparent;
+  transform: rotate(316deg);
 }
-.vendingGrid ul.plateau li.spiral .locationIdentifier {
+.vendingGrid ul.plateau li.spiral .location_identifier {
   position: absolute;
   width: 100%;
   padding: 0.1em 0;
@@ -667,12 +661,16 @@ ul {
   padding: 1em;
   text-transform: uppercase;
   border-radius: 0 0 1em 1em;
+  position: relative;
+  bottom: 35px;
 }
 .Sidebar_links_link:any-link.selected {
   text-decoration: underline;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4), 0 16px 32px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.2);
   font-size: 1.1em;
   backdrop-filter: blur(3px);
+  position: relative;
+  bottom: 0;
 }
 .Sidebar_links_link:any-link:active {
   box-shadow: none;
@@ -681,6 +679,8 @@ ul {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4), 0 16px 32px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.2);
   font-size: 1.1em;
   backdrop-filter: blur(3px);
+  position: relative;
+  bottom: 0;
 }
 .Sidebar_links_link_user {
   height: 30px;
@@ -756,6 +756,18 @@ ul {
 
 .Customer.alert .Customer_name {
   position: relative;
+}
+.Customer.alert .Customer_name::after {
+  content: attr(data-text);
+  opacity: 0;
+  cursor: pointer;
+  color: white;
+  position: relative;
+  left: 2em;
+  transition: opacity 0.4s;
+}
+.Customer.alert .Customer_name:hover::after {
+  opacity: 1;
 }
 .Customer.alert .Customer_name span {
   font-size: 0.4rem;
@@ -925,17 +937,6 @@ ul {
   width: 55px;
   object-fit: cover;
 }
-.Vending_tagsAlert {
-  display: none;
-  border-radius: 2px 0 0 2px;
-  width: max-content;
-  position: absolute;
-  top: 25%;
-  right: 0;
-  padding: 3px;
-  font-size: 0.5em;
-  color: white;
-}
 .Vending_footer {
   font-size: 1em;
   width: 100%;
@@ -959,8 +960,17 @@ ul {
 .Vending.rupture {
   border-color: #FF9900;
 }
-.Vending.rupture .Vending_tagsAlert {
-  display: block;
+.Vending.rupture::before {
+  content: "RUPTURE";
+  border-radius: 0 2px 2px 0;
+  width: max-content;
+  position: absolute;
+  top: 25%;
+  left: -2px;
+  padding: 3px;
+  font-size: 0.5em;
+  color: white;
+  text-align: center;
   background-color: #FF9900;
 }
 .Vending.rupture .Vending_footer {
@@ -969,12 +979,57 @@ ul {
 .Vending.dlc {
   border-color: #9E0000;
 }
-.Vending.dlc .Vending_tagsAlert {
-  display: block;
+.Vending.dlc::after {
+  content: "DLC";
+  border-radius: 2px 0 0 2px;
+  width: max-content;
+  position: absolute;
+  top: 25%;
+  right: -2px;
+  padding: 3px;
+  font-size: 0.5em;
+  color: white;
+  text-align: center;
   background-color: #9E0000;
 }
 .Vending.dlc .Vending_footer {
   background-color: #9E0000;
+}
+.Vending.dlc.rupture {
+  border-top: solid #FF9900 2px;
+  border-right: solid #9E0000 2px;
+  border-bottom: solid #9E0000 2px;
+  border-left: solid #FF9900 2px;
+}
+.Vending.dlc.rupture::before {
+  content: "RUPTURE";
+  border-radius: 0 2px 2px 0;
+  width: max-content;
+  position: absolute;
+  top: 5%;
+  left: -2px;
+  padding: 3px;
+  font-size: 0.5em;
+  color: white;
+  text-align: center;
+  background-color: #FF9900;
+}
+.Vending.dlc.rupture::after {
+  content: "DLC";
+  border-radius: 2px 0 0 2px;
+  width: max-content;
+  position: absolute;
+  top: 25%;
+  right: -2px;
+  padding: 3px;
+  font-size: 0.5em;
+  color: white;
+  text-align: center;
+  background-color: #9E0000;
+}
+.Vending.dlc.rupture .Vending_footer {
+  background: #9E0000;
+  background-clip: border-box;
 }
 
 .Icon {
@@ -1140,6 +1195,32 @@ h4 {
 .grid_container:first-child {
   font-size: 1.2em;
   font-weight: bold;
+}
+.grid_container:first-child li::before {
+  content: "▶";
+  position: relative;
+  height: 23px;
+  width: 23px;
+  background-color: rgba(255, 255, 255, 0.5);
+  left: 100%;
+  display: block;
+  top: 50%;
+  border-radius: 5px;
+  transform: scale(0.55) translateY(110%) rotate(-90deg);
+  border: solid;
+}
+.grid_container:first-child li::after {
+  content: "▶";
+  position: relative;
+  height: 23px;
+  width: 23px;
+  background-color: rgba(255, 255, 255, 0.5);
+  left: 100%;
+  display: block;
+  top: 50%;
+  border-radius: 5px;
+  transform: scale(0.55) translateY(-110%) rotate(90deg);
+  border: solid;
 }
 .grid_container:nth-child(even) {
   background: #A7B2BD;

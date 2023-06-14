@@ -88,12 +88,9 @@ const AJAX_CHANGE_BATCH = 'changeBatch';
 const AJAX_NEW_VENDING = 'newVending';
 
 const AJAX_SHOW_VENDING = 'vendingId';
+const AJAX_GENERATE_CUSTOMER_VENDING = 'generateCustomerVending';
 const AJAX_SHOW_BATCH_FOR_VENDING = 'getBatch';
 const AJAX_ADD_STOCK_TO_VENDING = 'addStockToVending';
-
-
-
-
 
 
 const PAGE_VENDING = 'vending';
@@ -105,21 +102,18 @@ const ROUTING = [
 
     PAGE_HOME           => '\DaBuild\Controller\DefaultController::home',
 
+    PAGE_USERS          => '\DaBuild\Controller\DefaultController::showUsers',
     PAGE_CUSTOMERS      => '\DaBuild\Controller\DefaultController::showCustomers',
     PAGE_VENDINGS       => '\DaBuild\Controller\DefaultController::showVending',
 
-
-    PAGE_VENDING       => '\DaBuild\Controller\VendingController::buildVending',
+    PAGE_VENDING        => '\DaBuild\Controller\VendingController::buildVending',
 
     PAGE_STOCK          => '\DaBuild\Controller\BatchController::getStockInfo',
-
-    PAGE_USERS          => '\DaBuild\Controller\DefaultController::showUsers',
 
     PAGE_LOGIN          => '\DaBuild\Controller\UserController::login',
     PAGE_LOGOUT         => '\DaBuild\Controller\UserController::logout',
 
-    PAGE_ADD_VENDING    => '\DaBuild\Controller\DefaultController::vending',
-//    PAGE_SAVE_VENDING   => '\DaBuild\Controller\VendingController::createVending',
+//    PAGE_ADD_VENDING    => '\DaBuild\Controller\DefaultController::vending',
 
     PAGE_ACCOUNT        =>  '\DaBuild\Controller\DefaultController::pageAccount'
 ];

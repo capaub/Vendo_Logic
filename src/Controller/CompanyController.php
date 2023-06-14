@@ -28,9 +28,8 @@ class CompanyController extends AbstractController
                 $_POST['field_country'],
                 $_POST['field_city'],
                 $_POST['field_postal_code'],
-                $_POST['field_street_name'])) {
-
-
+                $_POST['field_street_name'])
+        ) {
             $sCleanCompanyName = strip_tags($_POST['field_company_name']);
             $sCleanSiret = strip_tags($_POST['field_siret']);
             $sCleanFirstname = strip_tags($_POST['field_firstname']);
@@ -75,9 +74,7 @@ class CompanyController extends AbstractController
 
 //                    $_SESSION['user'] = $oUser;
 
-                    $_SESSION['flashes'][] = [
-                        'SUCCESS' => 'Utilisateur créer avec succés'
-                    ];
+                    $_SESSION['flashes'][] = ['SUCCESS' => 'Utilisateur créer avec succés'];
 
                     return $this->render('_login.php', [
                         'seo_title' => 'Connexion'
@@ -132,7 +129,11 @@ class CompanyController extends AbstractController
 
                     UserRepository::save($oUser);
 
-                    $_SESSION['flashes'][] = ['SUCCESS' => $oUser->getFirstname() . ', utilisateur créer avec succés'];
+                    $sMessage = $oUser->getFirstname() . ', utilisateur créer avec succés';
+                    $_SESSION['flashes'][] = ['SUCCESS' => $sMessage];
+
+                        // Affichage du message dans une pop-up
+                        echo '<script>alert("' . $sMessage . '");</script>';
 
                     mail(
                         'capitone.aubry@gmail.com',

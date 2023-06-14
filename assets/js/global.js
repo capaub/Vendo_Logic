@@ -50,6 +50,7 @@ export function moveLabel() {
         input.addEventListener('focus', styleInput);
     })
 }
+
 function styleInput(event)
 {
     const input = event.currentTarget;
@@ -69,7 +70,6 @@ function styleInput(event)
         characterFocus = false;
         if (characterTyped === false)
         {
-            console.log("couocu")
             label.classList.remove("onFocus")
         }
 
@@ -78,7 +78,23 @@ function styleInput(event)
     input.removeEventListener('blur', styleInput);
 }
 
+function limitDigits(event) {
+    const input = event.currentTarget;
+    const maxLength = input.dataset.maxLength;
+    if (input.value.length > maxLength) {
+        input.value = input.value.slice(0, maxLength);
+    }
+}
 
+export function listenInputNumber() {
+    const inputNumber = document.querySelectorAll('input[type=number], input#postal_code');
+
+    inputNumber.forEach(input => {
+        input.addEventListener('input',limitDigits)
+    })
+}
+
+document.addEventListener('DOMContentLoaded',listenInputNumber);
 document.addEventListener('DOMContentLoaded',moveLabel);
 const gridContainer = document.querySelectorAll('.grid_container');
 buildGridTemplateColumns(gridContainer);

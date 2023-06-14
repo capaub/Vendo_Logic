@@ -32,7 +32,7 @@
         </fieldset>
 
 
-            <input type="submit" class="new_vending_submit"></input>
+            <input type="submit" class="new_vending_submit">
 
     </form>
 

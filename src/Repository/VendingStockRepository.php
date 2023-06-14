@@ -63,7 +63,7 @@ class VendingStockRepository extends AbstractRepository
         $oPdoVendingStock = $oPdo->prepare($sQuery);
 
         $oPdoVendingStock->bindValue(':quantity', $oVendingStock->getQuantity());
-        $oPdoVendingStock->bindValue(':batch_id', $oVendingStock->getBatchesId());
+        $oPdoVendingStock->bindValue(':batch_id', $oVendingStock->getBatchId());
         $oPdoVendingStock->bindValue(':updated_at', $oVendingStock->getUpdatedAt()->format('Y-m-d'));
         $oPdoVendingStock->bindValue(':vending_location_id', $oVendingStock->getVendingLocationId());
 
@@ -194,7 +194,7 @@ class VendingStockRepository extends AbstractRepository
 //        foreach ($aVendingStocks as $aVendingStock) {
 //            foreach ($aVendingStock as $oVendingStock) {
 //                if ($oVendingStock->getVendingLocationId() === $oVendingLocation->getId()) {
-//                    $iBatchId = $oVendingStock->getBatchesId();
+//                    $iBatchId = $oVendingStock->getBatchId();
 //                    if ($oBatch->getId() === $iBatchId) {
 //                        return (new BatchRepository())->buildBatchInfos($oBatch, $oVendingStock);
 //                    }

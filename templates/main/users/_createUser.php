@@ -28,7 +28,7 @@
         <div class="elements">
             <select name="field_role" id="role">
                 <?php foreach (User::ROLE_CONF as $key => $value) : ?>
-                    <option value="<?= $key ?>" <?= ($value['label'] == "user") ? "selected" : ""  ?>><?= $value['label'] ?></option>
+                    <option value="<?= $key ?>" <?= ($key == User::ROLE_USER) ? "selected" : ""  ?>><?= $value['label'] ?></option>
                 <?php endforeach; ?>
             </select>
             <label for="role">Role</label>

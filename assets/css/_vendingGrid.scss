@@ -80,7 +80,7 @@
         border-radius: 5px;
       }
 
-      & .batchPicture, .batchPicture:hover{
+      & .batch_picture, .batch_picture:hover{
         border-radius: 5px;
       }
 
@@ -91,11 +91,13 @@
         height: $spiralHeight;
         bottom: 10px;
         right: calc(($vendingLocationWidth - ($spiralWidth + ($spiralSize * 2))) / 2);
-        border-radius: 15px;
+        border-radius: 50%;
         border: solid $spiralSize;
+        border-color: black black black transparent;
+        transform: rotate(316deg);
       }
 
-      & .locationIdentifier{
+      & .location_identifier{
         position: absolute;
         width: 100%;
         padding: 0.1em 0;

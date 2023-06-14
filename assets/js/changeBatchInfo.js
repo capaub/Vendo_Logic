@@ -1,33 +1,32 @@
 let baseUrl = window.location.origin + window.location.pathname.replace('index.php', 'ajax.php');
 let url = new URL('ajax.php', baseUrl);
 
-let batchSelect = document.querySelectorAll('select');
+let batchSelect = document.querySelectorAll('.select_dlc_batch');
 
 
 export function goodsOptionAttachEventListener(select) {
     select.forEach(select => {
         select.addEventListener('change', () => {
-        let selectedOption = select.options[select.selectedIndex];
-        let selectedValue = selectedOption.value;
-        let targetGoodsUl = selectedOption.closest('ul');
+            let selectedOption = select.options[select.selectedIndex];
+            let selectedValue = selectedOption.value;
+            let targetGoodsUl = selectedOption.closest('ul');
 
+            let dataUpdate = new FormData();
+            dataUpdate.append('context','changeBatch')
+            dataUpdate.append('batch_id', selectedValue)
 
-        let dataUpdate = new FormData();
-        dataUpdate.append('context','changeBatch')
-        dataUpdate.append('batch_id', selectedValue)
+            fetch(url.toString(), {method: 'POST', body: dataUpdate})
+                .then(response => response.json())
+                .then(data => {
 
-        fetch(url.toString(), {method: 'POST', body: dataUpdate})
-            .then(response => response.json())
-            .then(data => {
+                    let quantity = data.quantity;
+                    let updatedAtDate = data.updated_at_date;
+                    let updatedAtTime = data.updated_at_time;
 
-                let quantity = data.quantity;
-                let updatedAtDate = data.updated_at_date;
-                let updatedAtTime = data.updated_at_time;
+                    changeBatchInfos(targetGoodsUl, quantity, updatedAtDate, updatedAtTime)
 
-                changeBatchInfos(targetGoodsUl, quantity, updatedAtDate, updatedAtTime)
-
-            })
-            })
+                })
+        })
     })
 }
 

@@ -1,4 +1,4 @@
-import {toggleClass} from "./global.js";
+import {listenInputNumber, toggleClass} from "./global.js";
 import {StyleImageStockList} from "./styleImageStockList.js";
 import {goodsOptionAttachEventListener} from "./changeBatchInfo.js";
 
@@ -21,8 +21,8 @@ function addBatchButtonAttacheEventListener(addBatchButton) {
 }
 
 function addBatchFormAttachEventListeners(formAddBatch) {
+    listenInputNumber();
     let submitButton = formAddBatch.querySelector('input[type=submit]')
-
 
     submitButton.addEventListener('click', (event) => {
         event.preventDefault();
@@ -48,19 +48,27 @@ function newBatch(formAddBatch) {
     formData.append('quantity', quantity);
     formData.append('dlc', dlc);
 
-    fetch(url.toString(), {method: 'POST', body: formData})
-        .then( response => response.text() )
-        .then( data => refreshStockList( data ) )
-        .then( () => StyleImageStockList() )
-        .then( () => {
-            let addBatchButton = document.querySelector('.btnAddBatch');
-            let batchSelect = document.querySelectorAll('select');
-            let formAddBatch = document.querySelector('.search_form');
-            goodsOptionAttachEventListener(batchSelect);
-            addBatchButtonAttacheEventListener(addBatchButton);
-            addBatchFormAttachEventListeners(formAddBatch);
-            listenCloseButton();
-        })
+    if (formAddBatch.checkValidity()) {
+        fetch(url.toString(), {method: 'POST', body: formData})
+            .then( response => response.text() )
+            .then( data => refreshStockList( data ) )
+            .then( () => StyleImageStockList() )
+            .then( () => {
+                let addBatchButton = document.querySelector('.btnAddBatch');
+                let batchSelect = document.querySelectorAll('.select_dlc_batch');
+                let formAddBatch = document.querySelector('.search_form');
+                goodsOptionAttachEventListener(batchSelect);
+                addBatchButtonAttacheEventListener(addBatchButton);
+                addBatchFormAttachEventListeners(formAddBatch);
+                listenCloseButton();
+            })
+    } else {
+        const invalidFields = Array.from(formAddBatch.elements).filter(element => !element.validity.valid);
+
+        invalidFields.forEach( field => {
+            field.classList.add("field_empty");
+        });
+    }
 }
 
 function refreshStockList(data){

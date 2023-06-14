@@ -6,14 +6,17 @@ foreach ($customer as $oCustomer) : ?>
     <section class="Main_customers_customer Customer alert ajaxCustomer"
              data-customer-id="<?= $oCustomer->getId(); ?>"
              data-company-name="<?= $oCustomer->getCompanyName(); ?>">
-        <h3 class="Customer_name"><?= $oCustomer->getCompanyName(); ?><span>infos</span></h3>
+        <h3 class="Customer_name" data-text="Attribuer une machine"><?= strtoupper($oCustomer->getCompanyName()); ?>
+            <span>infos</span>
+        </h3>
         <div class="Customer_container">
             <div class="Customer_container_vendings">
                 <?php if (isset($vending[$oCustomer->getId()])) : ?>
                     <?php foreach ($vending[$oCustomer->getId()] as $oVending) : ?>
-                        <div class="Customer_vendings_vending Vending">
-                            <img class="Vending_img" src="../assets/img/vending/vending.svg" alt="">
-                            <p class="Vending_tagsAlert">OK</p>
+                        <div class="Customer_vendings_vending Vending
+                        <?= $status[$oVending->getId()] ?? ""; ?>" data-vending-id="<?= $oVending->getId() ?>">
+                            <img class="Vending_img" src="../assets/img/vending/vending.svg" alt="illustratoin d'un distributeur automatique">
+<!--                            <p class="Vending_tagsAlert">OK</p>-->
                             <div class="Vending_footer">
                                 <p class="Vending_footer_name"><?= $oVending->getName() ?? ''; ?></p>
                             </div>

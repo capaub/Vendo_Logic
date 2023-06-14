@@ -1,93 +1,101 @@
-import {toggleClass} from "./global.js";
+import {toggleClass, moveLabel} from "./global.js";
 
-let baseUrl = window.location.origin + window.location.pathname.replace('index.php', 'ajax.php');
-let url = new URL('ajax.php', baseUrl);
+const baseUrl = window.location.origin + window.location.pathname.replace('index.php', 'ajax.php');
+const url = new URL('ajax.php', baseUrl);
+
+const containerAddVending = document.querySelector('.container_add_vending_form');
+
 export function attachEventListeners(container) {
-
-
-    let addVendingContainer = document.querySelector('.addVendingContainer');
-    let customers = container.querySelectorAll('section.ajaxCustomer');
+    const customers = container.querySelectorAll('section .Customer_name');
 
     customers.forEach(customer => {
-        customer.addEventListener('click', (event) => {
-            let id = event.currentTarget.dataset.customerId;
-            let companyName = event.currentTarget.dataset.companyName;
-
-
-
-            let data = new FormData();
-            data.append('context', 'showContainerAddVending');
-            data.append('customer_id', id);
-            data.append('customer_company_name', companyName);
-
-            fetch(url.toString(), {method: 'POST', body: data})
-                .then(response => response.text())
-                .then(data => replaceContainer(addVendingContainer,data))
-                .then(() => listenCloseButton())
-        });
+        customer.addEventListener('click', showContainerAddVending);
     });
 
-    let addVendingSubmit = container.querySelector('.addVending');
+    const addVendingSubmit = container.querySelector('.addVending');
 
     if (addVendingSubmit !== null) {
+        addVendingSubmit.addEventListener('click', addVendingToCustomer);
+    }
 
-        addVendingSubmit.addEventListener('click', (event) => {
-            event.preventDefault();
+}
 
-            let formElement = event.currentTarget.closest('[data-customer-id]');
+function addVendingToCustomer(event)
+{
+    event.preventDefault();
 
-            let id = formElement.dataset.customerId;
+    const formElement = event.currentTarget.closest('[data-customer-id]');
+    const id = formElement.dataset.customerId;
 
-            let formData = new FormData(formElement);
-            formData.append('context', 'addVendingToCustomer');
-            formData.append('customer_id', id);
-            if (formElement.checkValidity()) {
-                fetch(url.toString(), {method: 'POST', body: formData})
-                    .then(response => response.text())
-                    .then(data => {
-                        let targetCustomerContainer = document.querySelector(`section[data-customer-id='${id}']`)
-                        refreshCustomer(targetCustomerContainer, data)
-                    })
-                    .then(() => toggleClass(addVendingContainer, 'hidden'))
-            } else {
-                const elementsInvalides = Array.from(formElement.elements).filter(element => !element.validity.valid);
+    let formData = new FormData(formElement);
+    formData.append('context', 'addVendingToCustomer');
+    formData.append('customer_id', id);
 
-                // Parcours des éléments non valides
-                elementsInvalides.forEach(element => {
-                    element.setAttribute('placeholder', 'champs requis');
-                    console.log('Champ non valide :', element);
-                });
-            }
+    if (formElement.checkValidity()) {
+        fetch(url.toString(), {method: 'POST', body: formData})
+            .then(response => response.text())
+            .then(data => {
+                const targetCustomerContainer = document.querySelector(`section[data-customer-id='${id}']`)
+                refreshCustomer(targetCustomerContainer, data)
+            })
+            .then(() => toggleClass(containerAddVending, 'hidden'))
+    } else {
+        const invalidFields = Array.from(formElement.elements).filter(element => !element.validity.valid);
 
+        invalidFields.forEach(field => {
+            field.classList.add("field_empty");
         });
     }
 
 }
-function refreshCustomer(container, data){
+
+function showContainerAddVending(event)
+{
+    event.preventDefault();
+    console.log('coucou')
+
+    const targetCustomer = event.currentTarget.closest('[data-customer-id]');
+    const id = targetCustomer.dataset.customerId;
+    const companyName = targetCustomer.dataset.companyName;
+
+
+    let data = new FormData();
+    data.append('context', 'showContainerAddVending');
+    data.append('customer_id', id);
+    data.append('customer_company_name', companyName);
+
+    fetch(url.toString(), {method: 'POST', body: data})
+        .then(response => response.text())
+        .then(data => replaceContainer(containerAddVending, data))
+        .then(() => {
+            moveLabel();
+            listenCloseButton();
+        })
+}
+
+function refreshCustomer(container, data) {
     container.outerHTML = data;
     attachEventListeners(container);
 }
-// Fonction qui remplace un conteneur avec les données fournies
-function replaceContainer(container, data){
+
+function replaceContainer(container, data) {
     container.innerHTML = data;
     showCustomerContainer(container);
     attachEventListeners(container);
 }
+
 function listenCloseButton() {
-    let close = document.querySelector('.closeAddVendingForm');
-    let container = document.querySelector('.container_add_batch_form');
+    const close = document.querySelector('.closeAddVendingForm');
+    const container = document.querySelector('.container_add_vending_form');
     close.addEventListener('click', (event) => {
         event.preventDefault();
-
         toggleClass(container, 'hidden');
     });
 }
-function showCustomerContainer(container)
-{
+
+function showCustomerContainer(container) {
     container.classList.remove('hidden');
 }
 
-let customerContainer = document.querySelector('.CustomerContainer');
-
-// Attache les écouteurs d'événements initiaux au document
+const customerContainer = document.querySelector('.CustomerContainer');
 attachEventListeners(customerContainer);

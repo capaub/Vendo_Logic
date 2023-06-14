@@ -14,21 +14,21 @@ class VendingStock
     /** @var int  */
     private int $quantity;
     /** @var int  */
-    private int $batchesId;
+    private int $batchId;
     /** @var int  */
     private int $vendingLocationId;
 
     /**
      * @param int $iQuantity
-     * @param int $iBatchesId
+     * @param int $iBatchId
      * @param int $iVendingLocationId
      */
     public function __construct(int $iQuantity,
-                                int $iBatchesId,
+                                int $iBatchId,
                                 int $iVendingLocationId)
     {
         $this->quantity             = $iQuantity;
-        $this->batchesId            = $iBatchesId;
+        $this->batchId              = $iBatchId;
         $this->vendingLocationId    = $iVendingLocationId;
         $this->updatedAt            = new DateTime('now');
     }
@@ -72,18 +72,18 @@ class VendingStock
     /**
      * @return int
      */
-    public function getBatchesId(): int
+    public function getBatchId(): int
     {
-        return $this->batchesId;
+        return $this->batchId;
     }
 
     /**
-     * @param int $batchesId
+     * @param int $batchId
      * @return VendingStock
      */
-    public function setBatchesId(int $batchesId): VendingStock
+    public function setBatchId(int $batchId): VendingStock
     {
-        $this->batchesId = $batchesId;
+        $this->batchId = $batchId;
         return $this;
     }
 

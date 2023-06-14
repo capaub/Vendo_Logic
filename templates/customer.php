@@ -1,7 +1,6 @@
 <main class="Container_main Main">
     <h1 class="Main_title">Marcel Pagnol</h1>
     <div class="Main_customers">
-
         <section class="Main_customers_customer Customer alert">
             <h3 class="Customer_name">Machine</h3>
             <div class="Customer_container">

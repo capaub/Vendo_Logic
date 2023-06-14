@@ -1,3 +1,3 @@
 <footer>
-    <p class="Footer">© D.ABuild, Inc. 2022 - <?= Date('Y'); ?>. We love our partner!</p>
+    <p class="Footer">© Vendo-Logic, Inc. 2022 - <?= Date('Y'); ?>. Unleash Your Potential with Us ! // Unlock a Rewarding Partnership !</p>
 </footer>

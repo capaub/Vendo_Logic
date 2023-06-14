@@ -46,7 +46,7 @@
     </fieldset>
 
 
-        <input type="submit" class="addBatchSubmit">
+        <input type="submit" class="add_batch_submit">
 
 
 </form>

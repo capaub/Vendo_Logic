@@ -4,17 +4,11 @@
 
     <h1 class="Main_title">Machines</h1>
 
-<!--    <div class="elements submit">-->
-        <button class="btnAddVending" data-text="Ajouter une machine"></button>
-<!--    </div>-->
-<!--    <div class="elements submit hidden">-->
-        <button class="btnBackAddVendingToVendingList hidden" data-text="Retour"></button>
-<!--    </div>-->
-<!--    <div class="elements submit hidden">-->
-        <button class="btnBackVendingToVendingList hidden" data-text="Retour"></button>
-<!--    </div>-->
+        <button class="btn_add_vending" data-text="Ajouter une machine"></button>
+        <button class="btn_back_add_batch_vending_to_vendingList hidden" data-text="Retour"></button>
+        <button class="btn_back_new_vending_to_vendingList hidden" data-text="Retour"></button>
 
-    <section class="list_container vendingListContainer">
+    <section class="list_container vending_list_container">
 
                 <?php include '_vendings.php';?>
 

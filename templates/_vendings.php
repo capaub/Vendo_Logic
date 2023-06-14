@@ -20,10 +20,10 @@ use DaBuild\Entity\Vending; ?>
         <?php foreach ($vending as $oVending) : ?>
         <ul class="grid_container vending" data-vending-id="<?= $oVending->getId(); ?>">
             <li data-brand="<?= $oVending->getBrand(); ?>">
-                <?= $oVending->getBrand(); ?>
+                <?= strtoupper($oVending->getBrand()); ?>
             </li>
             <li data-model="<?= $oVending->getModel(); ?>">
-                <?= $oVending->getModel(); ?>
+                <?= strtoupper($oVending->getModel()); ?>
             </li>
             <li data-name="<?= $oVending->getName(); ?>">
                 <?= $oVending->getName(); ?>

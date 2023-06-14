@@ -13,8 +13,8 @@
                         echo '';
                     }
                     ; ?>">
-                    <div class="batchPicture"></div>
-                    <p class="locationIdentifier"
+                    <div class="batch_picture"></div>
+                    <p class="location_identifier"
                        data-vending="<?= $_POST['vending_tags'] ?? ' ' ?>"
                        data-vending-id="<?= $vendingId ; ?>"><?= $targetLocation ?></p>
                 </li>

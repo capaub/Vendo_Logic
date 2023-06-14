@@ -143,6 +143,27 @@ class VendingLocationRepository extends AbstractRepository
     }
 
     /**
+     * @param $iVendingId
+     * @return array
+     * @throws \Exception
+     */
+    public static function findAllForOne($iVendingId): array
+    {
+
+        $oPdo = DbManager::getInstance();
+
+        $sQuery = 'SELECT * FROM ' . static::TABLE . '
+            WHERE `vending_id` = :vending_id
+            ORDER BY ' . static::ORDERED_BY . ' DESC ' ;
+
+        $oPdoVendingLocation = $oPdo->prepare($sQuery);
+        $oPdoVendingLocation->execute([':vending_id' => $iVendingId]);
+
+        return static::extracted($oPdoVendingLocation);
+
+    }
+
+    /**
      * @param int $iId
      * @return Object|null
      * @throws \Exception

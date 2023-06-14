@@ -17,7 +17,7 @@ class UserController extends AbstractController
     public function logout(): void
     {
         session_destroy();
-        $this->redirectAndDie('?page=' . PAGE_HOME);
+        $this->redirectAndDie('?page=' . PAGE_LOGIN);
     }
 
     /**
@@ -53,12 +53,13 @@ class UserController extends AbstractController
                 UserRepository::update($aUpdateData);
 
                 $_SESSION['user'] = $oUser;
+
                 $_SESSION['flashes'][] = ['SUCCESS' => 'Connexion'];
 
                 return $this->render('home.php', [
                     'seo_title' => 'Bonjour' . $oUser->getFirstname()]);
             } else {
-                $_SESSION['flashes'][] = ['DANGER' => 'identifiants invalide'];
+                $_SESSION['flashes'][] = ['ERREUR' => 'identifiants invalide'];
             }
 
 
@@ -91,9 +92,11 @@ class UserController extends AbstractController
      */
     public function updateUser(): string|null
     {
-//     if (empty($_SESSION['user']))   {
-//         $this->redirectAndDie('?page='.PAGE_LOGIN);
-//     }
+        $bAjax = !empty($_POST['context']) ?? false;
+
+        if (empty($_SESSION['user']))   {
+         $this->redirectAndDie('?page='.PAGE_LOGIN);
+        }
 
         if (!empty($_POST['field_password']) && !empty($_POST['field_password_confirm'])) {
 
@@ -107,7 +110,7 @@ class UserController extends AbstractController
 
             $aUpdateData = UserRepository::buildCriterias($aUserCriterias);
             UserRepository::update($aUpdateData);
-            return $this->render('_login.php',bAjax: true);
+            return $this->render('_login.php', ['seo_title' => 'Connexion'], $bAjax);
         }
 
         $id = '';
@@ -130,10 +133,10 @@ class UserController extends AbstractController
         $aUserCriterias = [];
 
         foreach ($_POST as $key => $value) {
-            $newKey = str_replace('field_', '', $key);
+            $sNewKey = str_replace('field_', '', $key);
             $sCleanValue = strip_tags($value);
 
-            $aUserCriterias[$newKey] = $sCleanValue;
+            $aUserCriterias[$sNewKey] = $sCleanValue;
         }
 
         $aUserCriterias['id'] = $id;
@@ -158,11 +161,7 @@ class UserController extends AbstractController
 
         $iCleanId = intval((strip_tags($_POST['user_id'])));
 
-        return $this->render('main/users/user.php',
-            [
-                'seo_title' => 'coucou',
-                'oUser' => UserRepository::find($iCleanId)
-            ], true);
+        return $this->render('main/users/user.php', ['oUser' => UserRepository::find($iCleanId)], true);
     }
 
     /**

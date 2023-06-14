@@ -8,11 +8,10 @@
 
             <div class="elements">
                 <input type="number"
-                       minlength="8"
-                       maxlength="13"
                        name="field_barcode"
                        id="barcode"
-                       required="required">
+                       required="required"
+                       data-max-length="13">
                 <label for="barcode">Code barre</label>
             </div>
 

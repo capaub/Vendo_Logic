@@ -3,30 +3,31 @@ import {handleImageSize} from "./handleImageSize.js";
 
 import {toggleClass} from "./global.js";
 
-let baseUrl = window.location.origin + window.location.pathname.replace('index.php', 'ajax.php');
-let url = new URL('ajax.php', baseUrl);
+const baseUrl = window.location.origin + window.location.pathname.replace('index.php', 'ajax.php');
+const url = new URL('ajax.php', baseUrl);
 
-let vendingContainer = document.querySelector('.vendingGrid');
+const vendingContainer = document.querySelector('.vendingGrid');
 
 
 export function vendingListAttachEventListeners() {
 
-    let vendings = document.querySelectorAll('ul.vending');
+    const vendings = document.querySelectorAll('ul.vending');
 
     vendings.forEach(vending => {
         vending.addEventListener('click', handleClickVendingList);
     })
 }
-export let handleClickVendingList = (event) => {
-    let id = event.currentTarget.dataset.vendingId;
+export function handleClickVendingList(event)
+{
+    const id = event.currentTarget.dataset.vendingId;
 
-    let btnAddVending = document.querySelector('.btnAddVending');
-    let btnBackVendingToVendingList = document.querySelector('.btnBackVendingToVendingList');
-    let sectionVendingList = document.querySelector('.vendingListContainer');
-    let elementName = event.currentTarget.querySelector('[data-name]');
-    let name = elementName.dataset.name;
+    const btnAddVending = document.querySelector('.btn_add_vending');
+    const btnBackVendingToVendingList = document.querySelector('.btn_back_new_vending_to_vendingList');
+    const sectionVendingList = document.querySelector('.vending_list_container');
+    const elementName = event.currentTarget.querySelector('[data-name]');
+    const name = elementName.dataset.name;
 
-    let vendingTags = "Nom : " + name;
+    const vendingTags = "Nom : " + name;
 
     let data = new FormData();
     data.append('context', 'vendingId');
@@ -35,13 +36,15 @@ export let handleClickVendingList = (event) => {
 
     fetch(url.toString(), {method: 'POST', body: data})
         .then( response => response.text())
-        .then( data => buildVendingContainer(data))
+        .then( data => {
+            buildVendingContainer(data)
+        })
         .then( () => {
             toggleClass(btnAddVending, token)
             toggleClass(sectionVendingList, token)
             toggleClass(btnBackVendingToVendingList, token)
 
-            let vendings = document.querySelectorAll('ul.vending');
+            const vendings = document.querySelectorAll('ul.vending');
 
             vendings.forEach(vending => {
                 vending.removeEventListener('click', handleClickVendingList);
@@ -53,25 +56,26 @@ function buildVending() {
 
 }
 
-let token = 'hidden';
+const token = 'hidden';
 function attachEventBackActionButton()
 {
-    let btnBackVendingToVendingList = document.querySelector('.btnBackVendingToVendingList');
+    const btnBackVendingToVendingList = document.querySelector('.btn_back_new_vending_to_vendingList');
 
     btnBackVendingToVendingList.addEventListener('click', backAction);
 }
 
-let backAction = () => {
-    let btnBackVendingToVendingList = document.querySelector('.btnBackVendingToVendingList');
-    let sectionVendingList = document.querySelector('.vendingListContainer');
-    let btnAddVending = document.querySelector('.btnAddVending');
-    let sectionVending = document.querySelector('.vendingGrid');
+function backAction()
+{
+    const btnBackVendingToVendingList = document.querySelector('.btn_back_new_vending_to_vendingList');
+    const sectionVendingList = document.querySelector('.vending_list_container');
+    const btnAddVending = document.querySelector('.btn_add_vending');
+    const sectionVending = document.querySelector('.vendingGrid');
     toggleClass(btnBackVendingToVendingList, token);
     toggleClass(sectionVendingList, token);
-    toggleClass(sectionVending, token);
     toggleClass(btnAddVending, token);
+    toggleClass(sectionVending, token);
     btnBackVendingToVendingList.removeEventListener('click', backAction);
-    let vendings = document.querySelectorAll('ul.vending');
+    const vendings = document.querySelectorAll('ul.vending');
 
     vendings.forEach(vending => {
         vending.addEventListener('click', handleClickVendingList);
@@ -83,18 +87,16 @@ let backAction = () => {
 // Fonction qui remplace un conteneur avec les données fournies
 export function buildVendingContainer(data) {
 
-
     showVending(vendingContainer);
     vendingContainer.innerHTML = data;
 
     styleVending();
 
-    attachEventBackActionButton();
-    VendingLocationAttachEventListeners(vendingContainer);
+    attachEventBackActionButton();;
 }
 
 function styleVending() {
-    const trays = vendingContainer.querySelectorAll('ul.plateau');
+    const trays = document.querySelectorAll('ul.plateau');
     trays.forEach( tray => {
 
         const spirals = tray.querySelectorAll('li.spiral');
@@ -108,12 +110,14 @@ function styleVending() {
             const id = spiral.dataset.productBarcode;
             const prefix = 'VENLO_';
             const imageUrl = imgDir + prefix + id + '.jpg' ;
-            const selector = '.batchPicture';
+            const selector = '.batch_picture';
 
             handleImageSize(spiral, imageUrl, selector);
 
         });
     });
+
+    // VendingLocationAttachEventListeners(vendingContainer)
 }
 
 function showVending(container)
@@ -121,10 +125,6 @@ function showVending(container)
     container.classList.remove('hidden');
 }
 
-// Attache les écouteurs d'événements initiaux au document
+
 vendingListAttachEventListeners();
-
-
-
-attachEventBackActionButton();
 styleVending();
