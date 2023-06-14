@@ -9,11 +9,11 @@ export function VendingLocationAttachEventListeners(container) {
     const vendingLocation = container.querySelectorAll('li.spiral');
 
     vendingLocation.forEach(spiral => {
-        spiral.addEventListener('click', hendleClickVendingLocation);
+        spiral.addEventListener('click', handleClickVendingLocation);
     });
 }
 
-function hendleClickVendingLocation(event)
+function handleClickVendingLocation(event)
 {
     const target = event.currentTarget.querySelector('.location_identifier');
     const locationIdentifier = target.innerHTML;

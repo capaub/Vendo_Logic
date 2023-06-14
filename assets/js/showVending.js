@@ -117,7 +117,7 @@ function styleVending() {
         });
     });
 
-    // VendingLocationAttachEventListeners(vendingContainer)
+    VendingLocationAttachEventListeners(vendingContainer)
 }
 
 function showVending(container)

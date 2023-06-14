@@ -52,7 +52,6 @@ function addVendingToCustomer(event)
 function showContainerAddVending(event)
 {
     event.preventDefault();
-    console.log('coucou')
 
     const targetCustomer = event.currentTarget.closest('[data-customer-id]');
     const id = targetCustomer.dataset.customerId;
