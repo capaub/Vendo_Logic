@@ -27,7 +27,7 @@ use DaBuild\Entity\User;
                     <p class="Header_topNav_user_role"><?= User::ROLE_CONF[$_SESSION['user']->getRole()]['label'] ?? '' ;?></p>
                 </div>
             </div>
-            <div class="Sidebar_links_link_img"></div>
+            <div class="Header_topNav_img"></div>
 
         <?php endif; ?>
     </nav>

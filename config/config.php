@@ -22,6 +22,8 @@ const PREFIX_BATCH_IMG = 'VENLO_';
 const PREFIX_VENDING_QRCODE = 'VENDING_';
 const PREFIX_BATCH_QRCODE = 'BATCH_';
 
+const DLC_TIMEOUT_ALERT = '+3 weeks';
+const QUANTITY_LIMIT_ALERT = '+3 weeks';
 
 const NUM_TO_ALPHA = [
     1   => 'A',

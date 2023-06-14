@@ -30,13 +30,11 @@ class User
 
 
     public const ROLE_ADMIN = '1'; /** voir enum */
-    public const ROLE_MANAGER = '2';
-    public const ROLE_USER = '3';
+    public const ROLE_SUPPLIER = '2';
     public const ROLE_CONF =
         [
-            self::ROLE_ADMIN    => ['label' => 'Admin'],
-            self::ROLE_MANAGER  => ['label' => 'Manager'],
-            self::ROLE_USER     => ['label' => 'User'],
+            self::ROLE_ADMIN     => ['label' => 'Admin'],
+            self::ROLE_SUPPLIER  => ['label' => 'Approvisionneur']
         ];
 
 
@@ -55,7 +53,7 @@ class User
                                 int $iCompanyId,
                                 int $iAddressId = NULL,
                                 string $sPassword = NULL,
-                                string $sRole = self::ROLE_USER)
+                                string $sRole = self::ROLE_SUPPLIER)
     {
         $this->firstname    = $sFirstname;
         $this->lastname     = $sLastname;

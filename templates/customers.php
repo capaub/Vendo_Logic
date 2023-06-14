@@ -24,3 +24,4 @@
 <script type="module" src="../assets/js/showNewCustomerForm.js"></script>
 <script type="module" src="../assets/js/newCustomer.js"></script>
 <script type="module" src="../assets/js/generateCustomerVending.js"></script>
+<script type="module" src="../assets/js/sortCustomer.js"></script>

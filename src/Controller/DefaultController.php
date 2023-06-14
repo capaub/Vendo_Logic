@@ -21,6 +21,7 @@ class DefaultController extends AbstractController
     {
         $aVending = [];
         $aVendingAlert = [];
+        $aCustomerAlert = [];
 
         $aCustomer = CustomerRepository::findAll();
 
@@ -49,23 +50,25 @@ class DefaultController extends AbstractController
                     $iBatchId = $aVendingStock != null ? $aVendingStock[0]->getBatchId() : '';
                     $oBatch = BatchRepository::find(intval($iBatchId));
 
-                    if ($oBatch !== NULL && ($oBatch->getDlc() < (new \DateTime('+3 weeks')))){
+                    if ($oBatch !== NULL && ($oBatch->getDlc() < (new \DateTime(DLC_TIMEOUT_ALERT)))){
                         if (empty($aVendingAlert[$iVendingId])) {
                             $aVendingAlert[$iVendingId] = 'dlc';
                         } elseif ($aVendingAlert[$iVendingId] === 'rupture') {
                             $aVendingAlert[$iVendingId] .= ' dlc';
                         }
                     }
-                    if ($aVendingStock == null || ($aVendingStock[0]->getQuantity() < 5) ){
+
+                    if ($aVendingStock == null || ($aVendingStock[0]->getQuantity() < QUANTITY_LIMIT_ALERT) ){
                         if (empty($aVendingAlert[$iVendingId])) {
                             $aVendingAlert[$iVendingId] = 'rupture';
                         } elseif ($aVendingAlert[$iVendingId] === 'dlc') {
                             $aVendingAlert[$iVendingId] .= ' rupture';
                         }
                     }
-
                 }
-
+                if (!empty($aVendingAlert[$iVendingId])) {
+                    $aCustomerAlert[$iCustomerId] = 'alert';
+                }
             }
 
         }
@@ -74,10 +77,11 @@ class DefaultController extends AbstractController
 
         return $this->render('customers.php',
             [
-                'seo_title' => PAGE_CUSTOMERS,
-                'customer'  => $aCustomer,
-                'vending'   => $aVending,
-                'status'    => $aVendingAlert
+                'seo_title'         => PAGE_CUSTOMERS,
+                'customer'          => $aCustomer,
+                'vending'           => $aVending,
+                'status'            => $aVendingAlert,
+                'customerStatus'    => $aCustomerAlert,
             ],$bAjax);
     }
 
