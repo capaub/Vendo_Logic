@@ -16,9 +16,7 @@ const formNewUser = containerFormNewUser.querySelector('.new_user_form');
 const addUserButton = document.querySelector('.btnAddUser')
 
 
-
-function toggleClass(elements, token)
-{
+function toggleClass(elements, token) {
     elements.classList.toggle(token);
 }
 
@@ -41,40 +39,38 @@ function formNewUserAttachEventListeners(formNewUser) {
     })
 }
 
+
 function newUser(formNewUser) {
 
     let formData = new FormData(formNewUser)
     formData.append('context', 'newUser');
 
     if (formNewUser.checkValidity()) {
-    fetch(url.toString(), {method: 'POST', body: formData})
-        .then( response => response.text() )
-        .then( data => refreshUserList(data) )
-        .then( () => toggleClass(containerFormNewUser,token) )
-        .then( () => {
-            console.log('coucou')
-            const gridContainer = document.querySelectorAll('.grid_container');
-            console.log(gridContainer)
-            buildGridTemplateColumns(gridContainer)
-        })
-        // .then( () => userModifyAttachEventListeners(usersContainer) );
-
+        fetch(url.toString(), {method: 'POST', body: formData})
+            .then(response => response.text())
+            .then(data => refreshUserList(data))
+            .then(() => toggleClass(containerFormNewUser, token))
+            .then(() => {
+                const gridContainer = document.querySelectorAll('.grid_container');
+                buildGridTemplateColumns(gridContainer)
+            })
     } else {
         const invalidFields = Array.from(formNewUser.elements).filter(element => !element.validity.valid);
 
-        invalidFields.forEach( field => {
+        invalidFields.forEach(field => {
             field.classList.add("field_empty");
         });
     }
 }
 
-function refreshUserList(data){
+
+function refreshUserList(data) {
     sectionUserList.innerHTML = data;
 }
 
-addUserButton.addEventListener('click', ()=> {
+addUserButton.addEventListener('click', () => {
 
-    toggleClass(containerFormNewUser,token);
+    toggleClass(containerFormNewUser, token);
 })
 
 listenCloseButton();

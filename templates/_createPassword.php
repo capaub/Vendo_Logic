@@ -6,17 +6,25 @@
         <fieldset class="fieldset">
             <legend>Création du mots de passe</legend>
             <input type="hidden" name="data-user-id" value="<?= $user->getId() ?>">
+
             <div class="elements">
-                <label for="password">Mot de passe</label>
                 <input class="input-form" type="password" id="password" name="field_password">
+                <label for="password">Mot de passe</label>
             </div>
+
             <div class="elements">
-                <label for="password_confirm">Confirmer le mot de passe</label>
                 <input class="input-form" type="password" id="password_confirm" name="field_password_confirm">
+                <label for="password_confirm">Confirmer le mot de passe</label>
+            </div>
+
         </fieldset>
-        <div class="elements submit">
-            <button class="savePassword">soumettre</button>
-        </div>
+
+        <input class="savePassword" type="submit" name="form_login" value="Soumettre">
+<!--        <a href="?page=--><?php //= PAGE_REGISTER ?><!--">Inscription</a>-->
+
+<!--        <div class="elements submit">-->
+<!--            <button class="savePassword">Soumettre</button>-->
+<!--        </div>-->
     </form>
 </main>
 

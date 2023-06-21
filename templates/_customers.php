@@ -13,8 +13,8 @@ foreach ($customer as $oCustomer) : ?>
             <?php if (isset($vending[$oCustomer->getId()])) : ?>
                 <div class="Customer_container_vendings <?= $customerStatus[$oCustomer->getId()] ?? 'hidden' ?>">
                     <?php foreach ($vending[$oCustomer->getId()] as $oVending) : ?>
-                        <div class="Customer_vendings_vending Vending
-                        <?= $status[$oVending->getId()] ?? ''; ?>" data-vending-id="<?= $oVending->getId() ?>">
+                        <div class="Customer_vendings_vending Vending <?= $status[$oVending->getId()] ?? 'hidden'; ?>" data-vending-id="<?= $oVending->getId() ?>">
+<!--                            --><?php //var_dump($status); ?>
                             <img class="Vending_img" src="../assets/img/vending/vending.svg"
                                  alt="illustratoin d'un distributeur automatique">
                             <div class="Vending_footer">

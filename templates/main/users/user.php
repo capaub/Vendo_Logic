@@ -10,24 +10,23 @@
            id="firstname"
            disabled
            value="<?= $oUser->getFirstname(); ?>">
-    <input  class="input-form"
-            type="text"
-            name="field_lastname"
-            id="lastname"
-            disabled
-            value="<?= $oUser->getLastname(); ?>">
-    <input  class="input-form"
-            type="text"
-            name="field_email"
-            id="mail"
-            disabled
-            value="<?= $oUser->getEmail(); ?>">
+    <input class="input-form"
+           type="text"
+           name="field_lastname"
+           id="lastname"
+           disabled
+           value="<?= $oUser->getLastname(); ?>">
+    <input class="input-form"
+           type="text"
+           name="field_email"
+           id="mail"
+           disabled
+           value="<?= $oUser->getEmail(); ?>">
     <select class="input-form select"
             name="field_role"
             disabled
             id="role">
         <?php foreach (User::ROLE_CONF as $iRole => $aRole) : ?>
-
             <option <?= $iRole == $oUser->getRole() ? 'selected="selected"' : '' ?>
                 value="<?= $iRole; ?>">
                 <?= $aRole['label']; ?>
@@ -37,8 +36,8 @@
 
     <div>
         <?php if (!is_null($oUser->getConnectedAt())) : ?>
-        <p class="text"><?= $oUser->getConnectedAt()->format('Y-m-d'); ?></p>
-        <p class="text"><?= $oUser->getConnectedAt()->format('H:i:s'); ?></p>
+            <p class="text"><?= $oUser->getConnectedAt()->format('Y-m-d'); ?></p>
+            <p class="text"><?= $oUser->getConnectedAt()->format('H:i:s'); ?></p>
         <?php endif; ?>
     </div>
 
@@ -50,10 +49,10 @@
             <span class="material-symbols-outlined">cancel</span>
         </button>
         <button class="update">
-            <span class="material-symbols-outlined">upgrade</span>
+            <span class="material-symbols-outlined">edit</span>
         </button>
         <button class="delete">
-            <span class="material-symbols-outlined">delete_sweep</span>
+            <span class="material-symbols-outlined">delete_forever</span>
         </button>
     </div>
 </form>

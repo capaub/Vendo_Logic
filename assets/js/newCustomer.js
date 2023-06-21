@@ -1,6 +1,8 @@
 import {btnAddCustomerAttachEvent} from "./showNewCustomerForm.js";
-import {attachEventListeners} from "./addVendingToCustomer.js";
+import {addVendingToCustomerAttachEventListeners} from "./addVendingToCustomer.js";
 import {moveLabel} from "./global.js";
+import {sortCustomers} from "./sortCustomer.js";
+import {attachEventListenerCustomerVending} from "./generateCustomerVending.js";
 
 const baseUrl = window.location.origin + window.location.pathname.replace('index.php', 'ajax.php');
 const url = new URL('ajax.php', baseUrl);
@@ -21,7 +23,10 @@ function refreshMainBackToCustomers() {
 
             const btnAddCustomer = customerContainer.querySelector('.btnAddCustomer');
             btnAddCustomerAttachEvent(btnAddCustomer);
-            attachEventListeners(customerContainer);
+            addVendingToCustomerAttachEventListeners(customerContainer);
+            sortCustomers();
+            attachEventListenerCustomerVending();
+            // addVendingToCustomerAttachEventListeners(customerContainer);
         })
 }
 
@@ -45,9 +50,8 @@ export function formNewCustomerAttachEventListeners(formNewCustomer) {
 }
 
 
-function newCustomer(formNewCustomer) {
-
-
+function newCustomer(formNewCustomer)
+{
     let formData = new FormData(formNewCustomer)
     formData.append('context', 'newCustomer');
 
@@ -64,7 +68,7 @@ function newCustomer(formNewCustomer) {
                 btnAddCustomerAttachEvent(btnAddCustomer)
 
                 const customerContainer = document.querySelector('.CustomerContainer');
-                attachEventListeners(customerContainer);
+                addVendingToCustomerAttachEventListeners(customerContainer);
             })
     } else {
         const invalidFields = Array.from(formNewCustomer.elements).filter(element => !element.validity.valid);

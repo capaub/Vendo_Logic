@@ -1,6 +1,6 @@
 
 
-function attachEventListenerCustomerVending()
+export function attachEventListenerCustomerVending()
 {
     const vendings = document.querySelectorAll('.Vending');
     vendings.forEach(vending => {

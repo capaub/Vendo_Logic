@@ -7,3 +7,5 @@
 /assets/img
 
 /templates/statique
+
+/config/config.php

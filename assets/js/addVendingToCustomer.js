@@ -3,9 +3,8 @@ import {toggleClass, moveLabel} from "./global.js";
 const baseUrl = window.location.origin + window.location.pathname.replace('index.php', 'ajax.php');
 const url = new URL('ajax.php', baseUrl);
 
-const containerAddVending = document.querySelector('.container_add_vending_form');
 
-export function attachEventListeners(container) {
+export function addVendingToCustomerAttachEventListeners(container) {
     const customers = container.querySelectorAll('section .Customer_name');
 
     customers.forEach(customer => {
@@ -38,7 +37,11 @@ function addVendingToCustomer(event)
                 const targetCustomerContainer = document.querySelector(`section[data-customer-id='${id}']`)
                 refreshCustomer(targetCustomerContainer, data)
             })
-            .then(() => toggleClass(containerAddVending, 'hidden'))
+            .then(() => {
+
+                const containerAddVending = document.querySelector('.container_add_vending_form');
+                toggleClass(containerAddVending, 'hidden');
+            })
     } else {
         const invalidFields = Array.from(formElement.elements).filter(element => !element.validity.valid);
 
@@ -65,7 +68,11 @@ function showContainerAddVending(event)
 
     fetch(url.toString(), {method: 'POST', body: data})
         .then(response => response.text())
-        .then(data => replaceContainer(containerAddVending, data))
+        .then(data => {
+
+            const containerAddVending = document.querySelector('.container_add_vending_form');
+            replaceContainer(containerAddVending, data);
+        })
         .then(() => {
             moveLabel();
             listenCloseButton();
@@ -74,13 +81,13 @@ function showContainerAddVending(event)
 
 function refreshCustomer(container, data) {
     container.outerHTML = data;
-    attachEventListeners(container);
+    addVendingToCustomerAttachEventListeners(container);
 }
 
 function replaceContainer(container, data) {
     container.innerHTML = data;
     showCustomerContainer(container);
-    attachEventListeners(container);
+    addVendingToCustomerAttachEventListeners(container);
 }
 
 function listenCloseButton() {
@@ -97,4 +104,4 @@ function showCustomerContainer(container) {
 }
 
 const customerContainer = document.querySelector('.CustomerContainer');
-attachEventListeners(customerContainer);
+addVendingToCustomerAttachEventListeners(customerContainer);

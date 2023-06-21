@@ -1,57 +1,44 @@
 
-.containerBackgroundVending {
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: rgba(255, 255, 255, 0.6509803922);
-  border-radius: 0.5em;
-  padding: 3em 10em 15em 3em;
-  border: solid 5px;
-  width: max-content;
-  margin: 2em auto;
-  position: relative;
-  //&::after {
-  //  content: '';
-  //  position: absolute;
-  //  height: 70px;
-  //  width: 92%;
-  //  border: solid 4px;
-  //  bottom: -80px;
-  //  left: 50%;
-  //  transform: translateX(-50%);
-  //}
-  //&::before{
-  //  content: '';
-  //  position: absolute;
-  //  height: 70px;
-  //  width: 92%;
-  //  border: solid 4px red;
-  //  bottom: 80px;
-  //  left: 50%;
-  //  transform: translateX(-50%);
-  //}
-}
-
 .vendingGrid{
-  @media screen and (max-width: 780px) {
-    transform: scale($scaleFactor780px);
-    position: relative;
-    top: calc((1 - 0.8) * 100%);
-  }
+  //@media screen and (max-width: 780px) {
+  //  transform: scale($scaleFactor780px);
+  //  position: relative;
+  //  top: calc((1 - 0.8) * 100%);
+  //}
+  position: relative;
   background-color: rgba(255, 255, 255, 0.6509803922);
   border-radius: 0.5em;
-  padding: 1em;
+  padding: 2em 5em 7em 2em;
   border: solid;
   width: max-content;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   row-gap: 0.2em;
+  &::after{
+    content: "";
+    position: absolute;
+    top: 1.7em;
+    left: 1.7em;
+    right: 4.7em;
+    bottom: 6.7em;
+    border: solid 1px;
+  }
+  &::before{
+    content: "";
+    position: absolute;
+    top: 12em;
+    height: 100px;
+    right: 0.8em;
+    width: 50px;
+    border: solid 1px;
+  }
   & ul.plateau {
     display: grid;
     justify-items: center;
     vertical-align: bottom;
     column-gap: 0.2em;
-    transition: 0.6s ;
+    transition: 0.2s ;
     border-radius: 5px;
     &:hover{
       transform: scale(130%);
@@ -70,7 +57,7 @@
       background-position: center;
       text-align: center;
       cursor: pointer;
-      transition: 0.4s ;
+      transition: 0.2s ;
       border-radius: 5px;
       &:hover{
         transform: scale(130%);

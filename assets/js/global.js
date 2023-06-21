@@ -30,11 +30,19 @@ burgerAnim.addEventListener('click',function () {
 })
 
 export function buildGridTemplateColumns(gridContainer) {
-    gridContainer.forEach( row => {
-        const fields = row.children;
+
+        gridContainer.forEach( row => {
+            const fields = row.children;
+            const numberOfColumns = fields.length;
+            row.style.gridTemplateColumns = `repeat(${numberOfColumns}, 1fr)`;
+        })
+}
+export function buildSidebarGridTemplateColumns(sidebarGridContainer) {
+    if (window.innerWidth >= 1024) {
+        const fields = sidebarGridContainer.children;
         const numberOfColumns = fields.length;
-        row.style.gridTemplateColumns = `repeat(${numberOfColumns}, 1fr)`;
-    })
+        sidebarGridContainer.style.gridTemplateColumns = `repeat(${numberOfColumns}, 1fr)`;
+    }
 }
 
 export function toggleClass(elements, token)
@@ -98,3 +106,5 @@ document.addEventListener('DOMContentLoaded',listenInputNumber);
 document.addEventListener('DOMContentLoaded',moveLabel);
 const gridContainer = document.querySelectorAll('.grid_container');
 buildGridTemplateColumns(gridContainer);
+const sidebarGridContainer = document.querySelector('.Sidebar_links');
+buildSidebarGridTemplateColumns(sidebarGridContainer);
