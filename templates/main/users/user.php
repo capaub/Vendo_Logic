@@ -17,7 +17,7 @@
            disabled
            value="<?= $oUser->getLastname(); ?>">
     <input class="input-form"
-           type="text"
+           type="email"
            name="field_email"
            id="mail"
            disabled

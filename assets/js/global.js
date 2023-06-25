@@ -37,6 +37,7 @@ export function buildGridTemplateColumns(gridContainer) {
             row.style.gridTemplateColumns = `repeat(${numberOfColumns}, 1fr)`;
         })
 }
+
 export function buildSidebarGridTemplateColumns(sidebarGridContainer) {
     if (window.innerWidth >= 1024) {
         const fields = sidebarGridContainer.children;
@@ -49,6 +50,7 @@ export function toggleClass(elements, token)
 {
     elements.classList.toggle(token);
 }
+
 export function moveLabel() {
 
     const inputsText = document.querySelectorAll(

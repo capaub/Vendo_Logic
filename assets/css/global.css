@@ -358,6 +358,12 @@ select + label, input[type=date] + label, #location + label {
 .grid_container_form .input-form:disabled {
   background-color: rgba(255, 255, 255, 0.1);
 }
+.grid_container_form .input-form.field_empty {
+  border: none;
+  background-color: rgba(255, 0, 0, 0.08);
+  border-left: solid 1px rgba(255, 0, 0, 0.8);
+  border-top: solid 1px rgba(255, 0, 0, 0.8);
+}
 .grid_container_form .text {
   text-align: center;
 }
@@ -440,7 +446,7 @@ select + label, input[type=date] + label, #location + label {
 
 .vendingGrid {
   position: relative;
-  background-color: rgba(255, 255, 255, 0.6509803922);
+  background-color: rgba(255, 255, 255, 0.65);
   border-radius: 0.5em;
   padding: 2em 5em 7em 2em;
   border: solid;
@@ -449,6 +455,20 @@ select + label, input[type=date] + label, #location + label {
   display: flex;
   flex-direction: column;
   row-gap: 0.2em;
+}
+@media screen and (max-width: 780px) {
+  .vendingGrid {
+    top: -10%;
+    transform: scale(0.8);
+    margin: 0;
+  }
+}
+@media screen and (max-width: 630px) {
+  .vendingGrid {
+    top: -20%;
+    transform: scale(0.6);
+    margin: 0;
+  }
 }
 .vendingGrid::after {
   content: "";
@@ -478,7 +498,7 @@ select + label, input[type=date] + label, #location + label {
 }
 .vendingGrid ul.plateau:hover {
   transform: scale(130%);
-  box-shadow: 0 4px 8px -1px rgba(0, 0, 0, 0.4588235294);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4), 0 16px 32px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.2);
   position: relative;
   z-index: 2;
   opacity: 1.1;
@@ -545,7 +565,7 @@ ul {
 }
 
 .Header {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
   padding: 0.8em;
   width: 100%;
   position: fixed;
@@ -587,7 +607,7 @@ ul {
   right: -15px;
   bottom: -7px;
   background-color: rgba(255, 255, 255, 0.1);
-  box-shadow: 0px 0px 30px -5px rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 30px -5px rgba(255, 255, 255, 0.8);
 }
 .Header_search {
   height: 40px;
@@ -651,7 +671,6 @@ ul {
 
 .Container {
   background: #24476B;
-  background-size: cover;
   min-height: 100vh;
   display: grid;
   padding-top: 8em;
@@ -669,7 +688,7 @@ ul {
 
 .Sidebar {
   position: absolute;
-  bottom: -0.8em;
+  bottom: 0;
   left: 50%;
   transform: translateX(-50%);
   min-width: 80px;
@@ -686,32 +705,27 @@ ul {
   padding: 1em;
   text-transform: uppercase;
   position: relative;
-  bottom: 11px;
 }
 .Sidebar_links_link:any-link::before, .Sidebar_links_link:any-link::after {
   content: "";
   position: absolute;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background-color: rgba(0, 0, 0, 0.2);
   z-index: -1;
 }
 .Sidebar_links_link:any-link.selected {
   text-decoration: underline;
   background-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4), 0 16px 32px rgba(0, 0, 0, 0.2), inset 0 0 4px rgba(0, 0, 0, 0.2);
-  position: relative;
-  bottom: 11px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4), 0 16px 32px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 .Sidebar_links_link:any-link:active {
   box-shadow: none;
 }
 .Sidebar_links_link:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4), 0 16px 32px rgba(0, 0, 0, 0.2), inset 0 0 4px rgba(0, 0, 0, 0.2);
-  position: relative;
-  bottom: 11px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4), 0 16px 32px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 .Sidebar_links_link_user {
   height: 30px;
@@ -723,28 +737,29 @@ ul {
   .Sidebar.active {
     animation: burgerAnim 0.8s ease 0s 1 normal forwards;
     position: absolute;
+    left: auto;
     right: 0;
-    top: 60px;
+    top: 100px;
     z-index: 2;
     display: block;
-    min-width: 55%;
+    min-width: 30%;
     max-width: 200px;
     height: auto;
     text-align: center;
     background-color: #3F444E;
   }
   .Sidebar_links {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    display: flex;
+    text-align: right;
+    align-items: stretch;
+    flex-direction: column;
   }
   .Sidebar_links_link:any-link {
     transition: 0.3s ease-in-out;
     text-decoration: none;
     color: white;
-    padding: 1em;
+    padding: 1em 2em 1em 0;
     text-transform: uppercase;
-    border-radius: 1em 0 0 1em;
     position: relative;
     right: 0;
     bottom: 0;
@@ -755,7 +770,6 @@ ul {
     font-size: 1.1em;
     backdrop-filter: blur(3px);
     position: relative;
-    right: 35px;
   }
   .Sidebar_links_link:any-link:active {
     box-shadow: none;
@@ -765,14 +779,23 @@ ul {
     font-size: 1.1em;
     backdrop-filter: blur(3px);
     position: relative;
-    right: 35px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .Sidebar.active {
+    min-width: 40%;
+  }
+}
+@media screen and (max-width: 550px) {
+  .Sidebar.active {
+    min-width: 50%;
   }
 }
 
 .Main {
   position: relative;
-  width: 80%;
   margin: 2em auto 8em;
+  width: 80%;
   transition: 1s ease;
 }
 .Main.activeBlur {
@@ -790,11 +813,11 @@ ul {
 }
 .Main_customers {
   display: flex;
-  gap: 1em;
+  gap: 3em;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: flex-start;
-  margin-top: 0.3em;
+  position: relative;
 }
 .Main_customers.withAlert {
   border: solid 2px;
@@ -812,6 +835,7 @@ ul {
   background-color: white;
   border-radius: 0.5em;
   overflow: hidden;
+  position: relative;
 }
 @media screen and (min-width: 1024px) {
   .Customer {
@@ -859,7 +883,7 @@ ul {
 }
 @media screen and (max-width: 1024px) {
   .Customer_container {
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
 }
 .Customer_container_infos {
@@ -877,29 +901,32 @@ ul {
   width: 100%;
   display: grid;
   grid-template-rows: 1fr 1fr;
-  justify-items: start;
+  justify-items: center;
   align-items: center;
   justify-content: space-evenly;
   gap: 5px;
 }
-.Customer_container_infos_contact_title {
+.Customer_container_infos_contact_group {
+  text-align: center;
+}
+.Customer_container_infos_contact_group_title {
   grid-row: 1/2;
 }
-.Customer_container_infos_contact_ul {
+.Customer_container_infos_contact_group_ul {
   grid-row: 2/3;
 }
-.Customer_container_infos_contact_title {
-  border-bottom: solid 1px black;
+.Customer_container_infos_contact_group_title {
+  text-decoration: underline;
   font-size: 1em;
 }
-.Customer_container_infos_contact_ul {
+.Customer_container_infos_contact_group_ul {
   margin-top: 2px;
 }
-.Customer_container_infos_contact_ul li {
+.Customer_container_infos_contact_group_ul li {
   font-size: 0.6em;
 }
 @media screen and (min-width: 768px) {
-  .Customer_container_infos_contact {
+  .Customer_container_infos_contact_group {
     display: flex;
     flex-direction: column;
   }
@@ -920,22 +947,9 @@ ul {
   position: absolute;
   top: 0;
   left: 0;
-  width: calc(100% - 1px);
+  width: calc(100% - 2px);
   height: 100%;
   object-fit: cover;
-}
-.Customer_container_infos_maps_address {
-  text-align: center;
-  border-top: solid 1px black;
-  border-radius: 0 0 3px 3px;
-  font-size: 0.5em;
-  position: absolute;
-  bottom: 2px;
-  left: 2px;
-  width: calc(100% - 4px);
-  padding: 5% 0;
-  background-color: rgba(245, 245, 245, 0.75);
-  color: black;
 }
 
 .Customer.alert .Customer_name {

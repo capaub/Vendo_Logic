@@ -1,4 +1,4 @@
-import {VendingLocationAttachEventListeners} from './addBatchToVending.js';
+import {vendingLocationAttachEventListeners} from './addBatchToVending.js';
 import {handleImageSize} from "./handleImageSize.js";
 
 import {toggleClass} from "./global.js";
@@ -117,7 +117,7 @@ function styleVending() {
         });
     });
 
-    VendingLocationAttachEventListeners(vendingContainer)
+    vendingLocationAttachEventListeners(vendingContainer)
 }
 
 function showVending(container)

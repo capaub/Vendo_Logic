@@ -4,14 +4,14 @@ import { moveLabel, toggleClass } from "./global.js";
 const baseUrl = window.location.origin + window.location.pathname.replace('index.php', 'ajax.php');
 const url = new URL('ajax.php', baseUrl);
 
-export function VendingLocationAttachEventListeners(container) {
+                    export function vendingLocationAttachEventListeners(container) {
 
-    const vendingLocation = container.querySelectorAll('li.spiral');
+                        const vendingLocation = container.querySelectorAll('li.spiral');
 
-    vendingLocation.forEach(spiral => {
-        spiral.addEventListener('click', handleClickVendingLocation);
-    });
-}
+                        vendingLocation.forEach(spiral => {
+                            spiral.addEventListener('click', handleClickVendingLocation);
+                        });
+                    }
 
 function handleClickVendingLocation(event)
 {
