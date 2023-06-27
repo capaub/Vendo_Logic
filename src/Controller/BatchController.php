@@ -111,9 +111,91 @@ class BatchController extends AbstractController
 
         return $this->render('stock.php', [
             'seo_title'             => PAGE_STOCK,
-            'pooledDataForBatch'    => $aDataToRender
-        ],$bAjax);
+            'pooledDataForBatch'],$bAjax);
     }
+
+//    /**
+//     * @return string
+//     * @throws BadRequestException
+//     * @throws InvalidArgumentException
+//     * @throws ProductNotFoundException
+//     * @throws \Exception
+//     *
+//     */
+//    public function createBatch(): string
+//    {
+//
+//        if (isset($_POST['barcode'])) {
+//
+//            $sCleanBarcode = strip_tags($_POST['barcode']);
+//            $oProductDetails = ExternalOpenFoodFactAPIService::findProductAPI($sCleanBarcode);
+//
+//            if (!(GoodsRepository::isExist($oProductDetails['_id']))) {
+//
+//                (new GoodsController)->createGoods($oProductDetails);
+//            }
+//
+//            $oGoods = GoodsRepository::getGoodsByBarcode($oProductDetails['_id']);
+//
+//            $iCompanyId = $oGoods->getCompanyId(); //$_SESSION['user']->getCompanyId()
+//            $iGoodsId = $oGoods->getId();
+//
+//
+//            $sCleanDlc = strip_tags($_POST['dlc']);
+//
+//            $iCleanQuantity = intval(strip_tags($_POST['quantity']));
+//
+//            ///////////////////////////////////////////////
+//
+//            $iBatchId = BatchRepository::isCombinationExist($sCleanDlc,$iGoodsId);
+//
+//            if ($iBatchId !== null) {
+//
+//                $oBatch = BatchRepository::find($iBatchId);
+//
+//                $iBatchId = $oBatch->getId();
+//                $iQuantity = $oBatch->getQuantity() + $iCleanQuantity;
+//
+//                $aCriterias =
+//                    [
+//                        'id' => $iBatchId,
+//                        'dlc' => $sCleanDlc,
+//                        'quantity' => $iQuantity
+//                    ];
+//
+//                $aUpdateData = BatchRepository::buildCriterias($aCriterias);
+//
+//                BatchRepository::update($aUpdateData);
+//
+//
+//            } else {
+//
+//                $sTpsFilePathQrCode = BatchRepository::generateTempQrCodeForBatch($iCompanyId, $iGoodsId, $sCleanDlc, $iCleanQuantity);
+//                $oBatch = BatchRepository::createNewBatch($sCleanDlc, $iCleanQuantity, $sTpsFilePathQrCode, $iGoodsId);
+//
+//                $sFilenameQrCode = BatchRepository::generateQrCodeForBatch($iCompanyId, $oBatch);
+//
+//                BatchRepository::updateBatchQrCode($oBatch, $sFilenameQrCode);
+//
+//                if (file_exists($sTpsFilePathQrCode)) {
+//                    if (unlink($sTpsFilePathQrCode)) {
+//                        $_SESSION['flashes'] = ['SUCCES' => 'Le fichier a été supprimé avec succès.'];
+//                    } else {
+//                        $_SESSION['flashes'] = ['ERREUR' => 'Une erreur s\'est produite lors de la suppression du fichier.'];
+//                    }
+//                } else {
+//                    $_SESSION['flashes'] = ['WARNING' => 'Le fichier n\'existe pas.'];
+//                }
+//
+//            }
+//
+//            ////////////////////////////////////////////
+//
+//        }
+//
+//        return $this->getStockInfo();
+//
+//    }
 
     /**
      * @return string
@@ -121,81 +203,63 @@ class BatchController extends AbstractController
      * @throws InvalidArgumentException
      * @throws ProductNotFoundException
      * @throws \Exception
-     *
      */
     public function createBatch(): string
     {
+        if (!isset($_POST['barcode'])) {
+            return $this->getStockInfo();
+        }
 
-        if (isset($_POST['barcode'])) {
+        $sCleanBarcode = strip_tags($_POST['barcode']);
+        $oProductDetails = ExternalOpenFoodFactAPIService::findProductAPI($sCleanBarcode);
 
-            $sCleanBarcode = strip_tags($_POST['barcode']);
-            $oProductDetails = ExternalOpenFoodFactAPIService::findProductAPI($sCleanBarcode);
+        if (!GoodsRepository::isExist($oProductDetails['_id'])) {
+            (new GoodsController)->createGoods($oProductDetails);
+        }
 
-            if (!(GoodsRepository::isExist($oProductDetails['_id']))) {
+        $oGoods = GoodsRepository::getGoodsByBarcode($oProductDetails['_id']);
+        $iCompanyId = $oGoods->getCompanyId(); // $_SESSION['user']->getCompanyId()
+        $iGoodsId = $oGoods->getId();
 
-                (new GoodsController)->createGoods($oProductDetails);
-            }
+        $sCleanDlc = strip_tags($_POST['dlc']);
+        $iCleanQuantity = intval(strip_tags($_POST['quantity']));
 
-            $oGoods = GoodsRepository::getGoodsByBarcode($oProductDetails['_id']);
+        $iBatchId = BatchRepository::isCombinationExist($sCleanDlc, $iGoodsId);
 
-            $iCompanyId = $oGoods->getCompanyId(); //$_SESSION['user']->getCompanyId()
-            $iGoodsId = $oGoods->getId();
+        if ($iBatchId !== null) {
+            $oBatch = BatchRepository::find($iBatchId);
+            $iBatchId = $oBatch->getId();
+            $iCleanQuantity = $oBatch->getQuantity() + $iCleanQuantity;
 
+            $aUpdateData = [
+                'id' => $iBatchId,
+                'dlc' => $sCleanDlc,
+                'quantity' => $iCleanQuantity
+            ];
 
-            $sCleanDlc = strip_tags($_POST['dlc']);
+            BatchRepository::update(BatchRepository::buildCriterias($aUpdateData));
+        } else {
+            $sTpsFilePathQrCode = BatchRepository::generateTempQrCodeForBatch($iCompanyId, $iGoodsId, $sCleanDlc, $iCleanQuantity);
+            $oBatch = BatchRepository::createNewBatch($sCleanDlc, $iCleanQuantity, $sTpsFilePathQrCode, $iGoodsId);
+            $sFilenameQrCode = BatchRepository::generateQrCodeForBatch($iCompanyId, $oBatch);
+            BatchRepository::updateBatchQrCode($oBatch, $sFilenameQrCode);
 
-            $iCleanQuantity = intval(strip_tags($_POST['quantity']));
-
-            ///////////////////////////////////////////////
-
-            $iBatchId = BatchRepository::isCombinationExist($sCleanDlc,$iGoodsId);
-
-            if ($iBatchId !== null) {
-
-                $oBatch = BatchRepository::find($iBatchId);
-
-                $iBatchId = $oBatch->getId();
-                $iQuantity = $oBatch->getQuantity() + $iCleanQuantity;
-
-                $aCriterias =
-                    [
-                        'id' => $iBatchId,
-                        'dlc' => $sCleanDlc,
-                        'quantity' => $iQuantity
-                    ];
-
-                $aUpdateData = BatchRepository::buildCriterias($aCriterias);
-
-                BatchRepository::update($aUpdateData);
-
-
-            } else {
-
-                $sTpsFilePathQrCode = BatchRepository::generateTempQrCodeForBatch($iCompanyId, $iGoodsId, $sCleanDlc, $iCleanQuantity);
-                $oBatch = BatchRepository::createNewBatch($sCleanDlc, $iCleanQuantity, $sTpsFilePathQrCode, $iGoodsId);
-
-                $sFilenameQrCode = BatchRepository::generateQrCodeForBatch($iCompanyId, $oBatch);
-
-                BatchRepository::updateBatchQrCode($oBatch, $sFilenameQrCode);
-
-                if (file_exists($sTpsFilePathQrCode)) {
-                    if (unlink($sTpsFilePathQrCode)) {
-                        $_SESSION['flashes'] = ['SUCCES' => 'Le fichier a été supprimé avec succès.'];
-                    } else {
-                        $_SESSION['flashes'] = ['ERREUR' => 'Une erreur s\'est produite lors de la suppression du fichier.'];
-                    }
+            if (file_exists($sTpsFilePathQrCode)) {
+                if (unlink($sTpsFilePathQrCode)) {
+                    $_SESSION['flashes'] = ['SUCCES' => 'Le fichier a été supprimé avec succès.'];
                 } else {
-                    $_SESSION['flashes'] = ['WARNING' => 'Le fichier n\'existe pas.'];
+                    $_SESSION['flashes'] = ['ERREUR' => 'Une erreur s\'est produite lors de la suppression du fichier.'];
                 }
-
+            } else {
+                $_SESSION['flashes'] = ['WARNING' => 'Le fichier n\'existe pas.'];
             }
-
-            ////////////////////////////////////////////
-
         }
 
         return $this->getStockInfo();
-
     }
+
+
+
+
 
 }
