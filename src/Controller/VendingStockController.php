@@ -9,6 +9,7 @@ use DaBuild\Repository\VendingStockRepository;
 
 class VendingStockController extends AbstractController
 {
+
     /**
      * @return void
      */
@@ -28,8 +29,7 @@ class VendingStockController extends AbstractController
             $oVendingStock = new VendingStock($sCleanQuantity,$sCleanBatchId,$oVendingLocation->getId());
 
             VendingStockRepository::save($oVendingStock);
-
-
         }
     }
+
 }

@@ -132,8 +132,7 @@ class CompanyController extends AbstractController
                     $sMessage = $oUser->getFirstname() . ', utilisateur créer avec succés';
                     $_SESSION['flashes'][] = ['SUCCESS' => $sMessage];
 
-                        // Affichage du message dans une pop-up
-                        echo '<script>alert("' . $sMessage . '");</script>';
+
 
                     mail(
                         'capitone.aubry@gmail.com',

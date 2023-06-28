@@ -199,14 +199,12 @@ class BatchRepository extends AbstractRepository
      */
     public static function find(int $iId): ?object
     {
-
         $oPdo = DbManager::getInstance();
 
         $sQuery = 'SELECT * FROM ' . static::TABLE . ' WHERE `id` =  :id';
 
         $oPdoBatch = $oPdo->prepare($sQuery);
-        $oPdoBatch->bindValue(':id', $iId, \PDO::PARAM_INT);
-        $oPdoBatch->execute();
+        $oPdoBatch->execute([':id' => $iId]);
 
         $oDBBatch = $oPdoBatch->fetch();
 

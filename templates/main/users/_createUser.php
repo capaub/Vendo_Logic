@@ -8,7 +8,7 @@
 <!--    </div>-->
 
     <fieldset class="fieldset">
-        <legend>Renseignements utilisateur</legend>
+        <legend>Création d'un utilisateur</legend>
 
         <div class="elements">
             <input required type="text" id="firstname" name="field_firstname">

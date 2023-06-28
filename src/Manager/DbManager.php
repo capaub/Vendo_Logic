@@ -26,4 +26,5 @@ class DbManager
         }
         return static::$instance;
     }
+
 }

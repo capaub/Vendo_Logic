@@ -199,8 +199,7 @@ class VendingRepository extends AbstractRepository
         $sQuery = 'SELECT * FROM ' . static::TABLE . ' WHERE `id` =  :id';
 
         $oPdoVending = $oPdo->prepare($sQuery);
-        $oPdoVending->bindValue(':id', $iId, \PDO::PARAM_INT);
-        $oPdoVending->execute();
+        $oPdoVending->execute([':id' =>  $iId]);
 
         $oDBVending = $oPdoVending->fetch();
 

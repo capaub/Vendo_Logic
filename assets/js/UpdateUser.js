@@ -107,76 +107,74 @@ function userSaveChange(event) {
     }
 }
 
-    function listenCancelButton(container) {
-        const cancelButton = container.querySelector('.cancel');
-        cancelButton.addEventListener('click', cancelModify);
+function listenCancelButton(container) {
+    const cancelButton = container.querySelector('.cancel');
+    cancelButton.addEventListener('click', cancelModify);
+}
+
+function cancelModify(event) {
+
+    event.preventDefault();
+    const userForm = event.currentTarget.closest('[data-user-id]');
+    const userId = userForm.dataset.userId;
+
+    initialFormValues[userId].restoreShot();
+
+    toggleBtns(userForm);
+    toggleDisabledForm(userForm);
+
+    const container = document.querySelector('.UsersContainer');
+    removeDisabled(container);
+}
+
+function removeDisabledOnSaveButton(event) {
+    const saveButton = event.currentTarget.querySelector('.save');
+    saveButton.removeAttribute("disabled");
+}
+
+function toggleDisabledForm(formElement) {
+    const inputItems = formElement.querySelectorAll('form input,form select');
+    for (let i = 0; i < inputItems.length; i++) {
+        inputItems[i].disabled = !inputItems[i].disabled;
     }
+}
 
-    function cancelModify(event) {
+function toggleBtns(formElement) {
 
-        event.preventDefault();
-        const userForm = event.currentTarget.closest('[data-user-id]');
-        const userId = userForm.dataset.userId;
+    const buttons = formElement.querySelectorAll('button');
+    buttons.forEach(button => {
+        toggleClass(button, "hidden")
+    });
+}
 
-        console.log(initialFormValues[userId]);
-        console.log(initialFormValues[userId].constructor.name)
-        initialFormValues[userId].restoreShot();
-
-        toggleBtns(userForm);
-        toggleDisabledForm(userForm);
-
-        const container = document.querySelector('.UsersContainer');
-        removeDisabled(container);
-    }
-
-    function removeDisabledOnSaveButton(event) {
-        const saveButton = event.currentTarget.querySelector('.save');
-        saveButton.removeAttribute("disabled");
-    }
-
-    function toggleDisabledForm(formElement) {
-        const inputItems = formElement.querySelectorAll('form input,form select');
-        for (let i = 0; i < inputItems.length; i++) {
-            inputItems[i].disabled = !inputItems[i].disabled;
-        }
-    }
-
-    function toggleBtns(formElement) {
-
-        const buttons = formElement.querySelectorAll('button');
-        buttons.forEach(button => {
-            toggleClass(button, "hidden")
-        });
-    }
-
-    function removeDisabled(container) {
-        const userButton = container.querySelectorAll('.update, .delete');
-        userButton.forEach(button => {
-            button.disabled = false;
-        })
-    }
-
-    function replaceContainer(container, data) {
-        container.innerHTML = data;
-        listenUpdateButton(container);
-        listenDeleteButton(container);
-    }
-
-    function deleteContainer(container) {
-        container.parentNode.removeChild(container);
-    }
-
-    const gridContainerForm = document.querySelectorAll('.grid_container_form');
-    buildGridTemplateColumns(gridContainerForm);
-
-    const usersContainer = document.querySelector('.UsersContainer');
-    listenUpdateButton(usersContainer);
-    listenDeleteButton(usersContainer);
-
-    const usersForm = usersContainer.querySelectorAll('.user form');
-    usersForm.forEach(userForm => {
-        createInitialShot(userForm)
+function removeDisabled(container) {
+    const userButton = container.querySelectorAll('.update, .delete');
+    userButton.forEach(button => {
+        button.disabled = false;
     })
+}
+
+function replaceContainer(container, data) {
+    container.innerHTML = data;
+    listenUpdateButton(container);
+    listenDeleteButton(container);
+}
+
+function deleteContainer(container) {
+    container.parentNode.removeChild(container);
+}
+
+const gridContainerForm = document.querySelectorAll('.grid_container_form');
+buildGridTemplateColumns(gridContainerForm);
+
+const usersContainer = document.querySelector('.UsersContainer');
+listenUpdateButton(usersContainer);
+listenDeleteButton(usersContainer);
+
+const usersForm = usersContainer.querySelectorAll('.user form');
+usersForm.forEach(userForm => {
+    createInitialShot(userForm)
+})
 
 // TODO Bibliothèque sweetAlert2 pour gérer le confirm
 // npm install sweetalert2

@@ -26,14 +26,12 @@ function addBatchFormAttachEventListeners(formAddBatch) {
 
     submitButton.addEventListener('click', (event) => {
         event.preventDefault();
-
         newBatch(formAddBatch)
     })
 }
 
 
 function newBatch(formAddBatch) {
-
 
     let barcodeSibling = formAddBatch.querySelector('input[name=field_barcode]');
     let barcode = barcodeSibling.value;
