@@ -1,4 +1,4 @@
-import {buildGridTemplateColumns, toggleClass} from "./global.js";
+import {buildGridTemplateColumns} from "./global.js";
 import {SnapShotForm} from "./SnapShotForm.js";
 
 const baseUrl = window.location.origin + window.location.pathname.replace('index.php', 'ajax.php');
@@ -8,7 +8,6 @@ let initialFormValues = {};
 
 function createInitialShot(formUser) {
     const userId = formUser.dataset.userId;
-
     const snapshotForm = new SnapShotForm(formUser);
 
     snapshotForm.shot();
@@ -143,7 +142,7 @@ function toggleBtns(formElement) {
 
     const buttons = formElement.querySelectorAll('button');
     buttons.forEach(button => {
-        toggleClass(button, "hidden")
+        button.classList.toggle("hidden")
     });
 }
 

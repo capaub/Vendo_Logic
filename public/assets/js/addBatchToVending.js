@@ -46,9 +46,9 @@ function listenCloseButton(container)
 
 function handleClickCloseBtn(event)
 {
-    const container = document.querySelector('.container_add_batch_form');
     event.preventDefault();
-    toggleClass(container,'hidden')
+    const container = document.querySelector('.container_add_batch_form');
+    container.classList.toggle('hidden')
 }
 
 function listenSubmitButton()
