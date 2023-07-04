@@ -8,34 +8,13 @@ use DaBuild\Controller\VendingStockController;
 use DaBuild\Controller\VendingPerCustomerController;
 use DaBuild\Controller\UserController;
 use DaBuild\Controller\VendingController;
-use DaBuild\Repository\BatchRepository;
 
 require '../vendor/autoload.php';
 session_start();
 require_once '../config/config.php';
 
-//if (isset($_POST['context'])) {
-//    echo match ($_POST['context']) {
-//        AJAX_NEW_USER                   => (new CompanyController)->createUser(),
-//        AJAX_USER_UPDATE                => (new UserController)->updateUser(),
-//        AJAX_USER_REFRESH               => (new UserController)->refreshUser(),
-//        AJAX_USER_DELETE                => (new UserController)->deleteUser(),
-//        AJAX_SHOW_VENDING               => (new VendingController)->buildVending(),
-//        AJAX_SHOW_CONTAINER_ADD_VENDING => (new VendingController)->showAvailableVending(),
-//        AJAX_ADD_VENDING_TO_CUSTOMER    => (new VendingPerCustomerController)->addVendingToCustomer(),
-//        AJAX_ADD_STOCK_TO_VENDING       => (new VendingStockController)->addStockToVending(),
-//        AJAX_SHOW_BATCH_FOR_VENDING     => (new BatchController)->getAllBatch(),
-//        AJAX_NEW_BATCH                  => (new BatchController)->createBatch(),
-//        AJAX_CHANGE_BATCH               => (new BatchController)->getBatchDataChangeAjax(),
-//        AJAX_NEW_CUSTOMER               => (new CustomerController)->addCustomer(),
-//        AJAX_BACK_TO_CUSTOMER           => (new DefaultController)->showCustomers(),
-//        AJAX_NEW_VENDING                => (new VendingController())->createVending(),
-//        default                         => 'default',
-//    };
-//}
-
-if (isset($_POST['context'])){
-    switch ($_POST['context']){
+if (isset($_POST['context'])) {
+    switch ($_POST['context']) {
         case AJAX_NEW_USER:
             echo (new CompanyController)->createUser();
             break;
@@ -76,7 +55,7 @@ if (isset($_POST['context'])){
             echo (new DefaultController)->showCustomers();
             break;
         case AJAX_NEW_VENDING:
-            echo (new VendingController())-> createVending();
+            echo (new VendingController())->createVending();
             break;
         default :
             echo 'default';

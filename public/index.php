@@ -13,7 +13,7 @@ if (!isset($_SESSION['id'])) {
 
 $sPage = $_GET['page'] ?? PAGE_LOGIN;
 
-if (!array_key_exists($sPage,ROUTING)) {
+if (!array_key_exists($sPage, ROUTING)) {
     $sPage = PAGE_LOGIN;
 }
 

@@ -27,31 +27,31 @@ const DLC_TIMEOUT_ALERT = '+3 weeks';
 const QUANTITY_LIMIT_ALERT = '+3 weeks';
 
 const NUM_TO_ALPHA = [
-    1   => 'A',
-    2   => 'B',
-    3   => 'C',
-    4   => 'D',
-    5   => 'E',
-    6   => 'F',
-    7   => 'G',
-    8   => 'H',
-    9   => 'I',
-    10  => 'J',
-    11  => 'K',
-    12  => 'L',
-    13  => 'M',
-    14  => 'N',
-    15  => 'O',
-    16  => 'P',
-    17  => 'Q',
-    18  => 'R',
-    19  => 'S',
-    20  => 'T',
-    21  => 'U',
-    22  => 'V',
-    23  => 'W',
-    24  => 'X',
-    25  => 'Y'
+    1 => 'A',
+    2 => 'B',
+    3 => 'C',
+    4 => 'D',
+    5 => 'E',
+    6 => 'F',
+    7 => 'G',
+    8 => 'H',
+    9 => 'I',
+    10 => 'J',
+    11 => 'K',
+    12 => 'L',
+    13 => 'M',
+    14 => 'N',
+    15 => 'O',
+    16 => 'P',
+    17 => 'Q',
+    18 => 'R',
+    19 => 'S',
+    20 => 'T',
+    21 => 'U',
+    22 => 'V',
+    23 => 'W',
+    24 => 'X',
+    25 => 'Y'
 ];
 
 const PAGE_HOME = 'home';
@@ -60,62 +60,39 @@ const PAGE_LOGOUT = 'logout';
 const PAGE_REGISTER = 'register';
 const PAGE_CUSTOMERS = 'customers';
 const PAGE_STOCK = 'stock';
-
-
-
-
 const PAGE_USERS = 'users';
 const PAGE_ADD_VENDING = 'addVending';
 const PAGE_SAVE_VENDING = 'saveVending';
 const PAGE_VENDINGS = 'vendings';
-
 const PAGE_ACCOUNT = 'account';
-
-
+const PAGE_VENDING = 'vending';
 
 const AJAX_NEW_USER = 'newUser';
 const AJAX_USER_DELETE = 'usersDelete';
 const AJAX_USER_UPDATE = 'usersUpdate';
 const AJAX_USER_REFRESH = 'usersRefresh';
-
-
 const AJAX_NEW_CUSTOMER = 'newCustomer';
 const AJAX_BACK_TO_CUSTOMER = 'backToCustomers';
 const AJAX_SHOW_CONTAINER_ADD_VENDING = 'showContainerAddVending';
 const AJAX_ADD_VENDING_TO_CUSTOMER = 'addVendingToCustomer';
-
-
-
-const AJAX_NEW_BATCH ='newBatch';
+const AJAX_NEW_BATCH = 'newBatch';
 const AJAX_CHANGE_BATCH = 'changeBatch';
-
 const AJAX_NEW_VENDING = 'newVending';
-
 const AJAX_SHOW_VENDING = 'vendingId';
 const AJAX_GENERATE_CUSTOMER_VENDING = 'generateCustomerVending';
 const AJAX_SHOW_BATCH_FOR_VENDING = 'getBatch';
 const AJAX_ADD_STOCK_TO_VENDING = 'addStockToVending';
 
 
-const PAGE_VENDING = 'vending';
-
-
-
 const ROUTING = [
-    PAGE_REGISTER       => '\DaBuild\Controller\CompanyController::register',
-
-    PAGE_HOME           => '\DaBuild\Controller\DefaultController::home',
-
-    PAGE_USERS          => '\DaBuild\Controller\DefaultController::showUsers',
-    PAGE_CUSTOMERS      => '\DaBuild\Controller\DefaultController::showCustomers',
-    PAGE_VENDINGS       => '\DaBuild\Controller\DefaultController::showVending',
-
-    PAGE_VENDING        => '\DaBuild\Controller\VendingController::buildVending',
-
-    PAGE_STOCK          => '\DaBuild\Controller\BatchController::getStockInfo',
-
-    PAGE_LOGIN          => '\DaBuild\Controller\UserController::login',
-    PAGE_LOGOUT         => '\DaBuild\Controller\UserController::logout',
-
-    PAGE_ACCOUNT        =>  '\DaBuild\Controller\DefaultController::pageAccount'
+    PAGE_REGISTER => '\DaBuild\Controller\CompanyController::register',
+    PAGE_HOME => '\DaBuild\Controller\DefaultController::home',
+    PAGE_USERS => '\DaBuild\Controller\DefaultController::showUsers',
+    PAGE_CUSTOMERS => '\DaBuild\Controller\DefaultController::showCustomers',
+    PAGE_VENDINGS => '\DaBuild\Controller\DefaultController::showVending',
+    PAGE_VENDING => '\DaBuild\Controller\VendingController::buildVending',
+    PAGE_STOCK => '\DaBuild\Controller\BatchController::getStockInfo',
+    PAGE_LOGIN => '\DaBuild\Controller\UserController::login',
+    PAGE_LOGOUT => '\DaBuild\Controller\UserController::logout',
+    PAGE_ACCOUNT => '\DaBuild\Controller\DefaultController::pageAccount'
 ];

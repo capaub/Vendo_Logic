@@ -7,10 +7,10 @@ interface UserAuthInterface
     /**
      * @return string
      */
-    public function getPassword() : string;
+    public function getPassword(): string;
 
     /**
      * @return string|null
      */
-    public function getSalt() : ?string;
+    public function getSalt(): ?string;
 }
