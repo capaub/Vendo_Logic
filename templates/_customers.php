@@ -1,8 +1,4 @@
-<?php /** @var Customer $oCustomer */
-
-use DaBuild\Entity\Customer;
-
-foreach ($customer as $oCustomer) : ?>
+<?php foreach ($customer as $oCustomer) : ?>
     <section class="Main_customers_customer Customer <?= $customerStatus[$oCustomer->getId()] ?? '' ?> ajaxCustomer"
              data-customer-id="<?= $oCustomer->getId(); ?>"
              data-company-name="<?= $oCustomer->getCompanyName(); ?>">

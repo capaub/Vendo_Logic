@@ -1,6 +1,3 @@
-<?php use DaBuild\Entity\User; ?>
-
-
 <form class="grid_container_form grid_container"
       method="post"
       data-user-id="<?= $oUser->getId(); ?>">

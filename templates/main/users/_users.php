@@ -1,6 +1,3 @@
-<?php use DaBuild\Entity\User
-    /**@param User $oUser */ ; ?>
-
 <ul class="grid_container">
     <li>Prénom</li>
     <li>Nom</li>
@@ -13,7 +10,7 @@
     <div class="grid_container">
         <p>Aucuns utilisateurs enregistré</p>
     </div>
-<?php endif ; ?>
+<?php endif; ?>
 
 <?php foreach ($user as $oUser) : ?>
     <?php include 'user.php' ?>

@@ -1,5 +1,3 @@
-
-
 <main class="Main UsersContainer">
 
     <div class="containerBlur">

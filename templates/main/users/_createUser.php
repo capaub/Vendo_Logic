@@ -3,7 +3,7 @@
 <form method="POST"
       class="form_container new_user_form">
 
-        <button class="close closeNewUserForm">X</button>
+    <button class="close closeNewUserForm">X</button>
 
     <fieldset class="fieldset">
         <legend>Création d'un utilisateur</legend>
@@ -26,7 +26,8 @@
         <div class="elements">
             <select name="field_role" id="role">
                 <?php foreach (User::ROLE_CONF as $key => $value) : ?>
-                    <option value="<?= $key ?>" <?= ($key == User::ROLE_SUPPLIER) ? "selected" : ""  ?>><?= $value['label'] ?></option>
+                    <option
+                        value="<?= $key ?>" <?= ($key == User::ROLE_SUPPLIER) ? "selected" : "" ?>><?= $value['label'] ?></option>
                 <?php endforeach; ?>
             </select>
             <label for="role">Role</label>
@@ -34,6 +35,6 @@
 
     </fieldset>
 
-        <input type="submit" class="newUserSubmit">
+    <input type="submit" class="newUserSubmit">
 
 </form>

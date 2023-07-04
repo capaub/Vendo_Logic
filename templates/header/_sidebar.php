@@ -3,7 +3,6 @@
 <aside class="Container_sidebar Sidebar">
     <nav class="Sidebar_links">
 
-
         <?php if (isset($_SESSION['user']) && $_SESSION['user'] instanceof User) : ?>
 
             <?php if (($_SESSION['user']->getRole() === User::ROLE_ADMIN)

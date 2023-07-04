@@ -1,6 +1,3 @@
-<?php use DaBuild\Entity\Vending; ?>
-
-
 <form method="POST"
       class="form_container add_vending_form"
       data-customer-id="<?= $customerId ?>">
@@ -12,8 +9,7 @@
 
         <div class="elements">
             <select name="field_vending_id" id="vendings" required="required">
-                <?php /** @var Vending $availableVending */
-                if (empty($availableVending)) : ?>
+                <?php if (empty($availableVending)) : ?>
                     <option>
                         Aucuns D.A. disponible
                     </option>

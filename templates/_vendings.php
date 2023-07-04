@@ -1,7 +1,3 @@
-<?php /** @var Vending $oVending */
-
-use DaBuild\Entity\Vending; ?>
-
 <ul class="grid_container">
     <li>Marque</li>
     <li>Model</li>

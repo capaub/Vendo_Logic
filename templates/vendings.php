@@ -1,4 +1,3 @@
-
 <main class="Container_main Main">
 
     <h1 class="Main_title">Machines</h1>

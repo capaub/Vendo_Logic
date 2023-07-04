@@ -1,10 +1,5 @@
-<?php
+<?php use DaBuild\Entity\User; ?>
 
-use DaBuild\Entity\User;
-
-/** @var User $user */
-
-?>
 <main class="Container_main Main CustomerContainer customerContainer">
     <h1 class="Main_title">Mon compte</h1>
 

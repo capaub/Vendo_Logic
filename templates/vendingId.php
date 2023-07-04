@@ -1,6 +1,5 @@
 <?php if (isset($dataVendingStock, $nbVendingTray, $nbVendingSpiral, $vendingId)) : ?>
 
-
     <?php for ($i = 1; $i <= $nbVendingTray; $i++): ?>
         <ul class="plateau">
             <?php for ($j = 1; $j <= $nbVendingSpiral; $j++): ?>
