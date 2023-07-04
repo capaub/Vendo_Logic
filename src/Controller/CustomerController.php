@@ -16,7 +16,7 @@ class CustomerController extends AbstractController
      * @return string
      * @throws \Exception
      */
-    public function addCustomer() : string
+    public function addCustomer(): string
     {
 
         if (!empty($_POST['field_company_siret'])
@@ -31,18 +31,18 @@ class CustomerController extends AbstractController
             && !empty($_POST['field_lastname'])
         ) {
             if ($_SESSION['user'] instanceof User
-                && $_SESSION['user']->getRole() === User::ROLE_ADMIN){
+                && $_SESSION['user']->getRole() === User::ROLE_ADMIN) {
 
-                $sCleanCompanySiret      = strip_tags($_POST['field_company_siret']);
-                $sCleanCompanyName       = strip_tags($_POST['field_company_name']);
-                $sCleanPostalCode        = strip_tags($_POST['field_postal_code']);
-                $sCleanEmail             = strip_tags($_POST['field_email']);
-                $sCleanPhone             = strip_tags($_POST['field_phone']);
-                $sCleanFirstname         = strip_tags($_POST['field_firstname']);
-                $sCleanLastname          = strip_tags($_POST['field_lastname']);
-                $sCleanStreetName        = strip_tags($_POST['field_street_name']);
-                $sCleanCountry           = strip_tags($_POST['field_country']);
-                $sCleanCity              = strip_tags($_POST['field_city']);
+                $sCleanCompanySiret = strip_tags($_POST['field_company_siret']);
+                $sCleanCompanyName = strip_tags($_POST['field_company_name']);
+                $sCleanPostalCode = strip_tags($_POST['field_postal_code']);
+                $sCleanEmail = strip_tags($_POST['field_email']);
+                $sCleanPhone = strip_tags($_POST['field_phone']);
+                $sCleanFirstname = strip_tags($_POST['field_firstname']);
+                $sCleanLastname = strip_tags($_POST['field_lastname']);
+                $sCleanStreetName = strip_tags($_POST['field_street_name']);
+                $sCleanCountry = strip_tags($_POST['field_country']);
+                $sCleanCity = strip_tags($_POST['field_city']);
 
                 $oAddress = new Address(
                     $sCleanCountry,

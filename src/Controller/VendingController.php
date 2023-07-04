@@ -64,7 +64,6 @@ class VendingController extends AbstractController
     }
 
 
-
     /**
      * @return string
      * @throws \Exception
@@ -85,11 +84,11 @@ class VendingController extends AbstractController
             return $this->render(
                 $sView,
                 [
-                    'vendingTags'       => $vendingTags,
-                    'dataVendingStock'  => $aDataVendingStock,
-                    'vendingId'         => $oVending->getId(),
-                    'nbVendingTray'     => $oVending->getNbMaxTray(),
-                    'nbVendingSpiral'   => $oVending->getNbMaxSpiral()
+                    'vendingTags' => $vendingTags,
+                    'dataVendingStock' => $aDataVendingStock,
+                    'vendingId' => $oVending->getId(),
+                    'nbVendingTray' => $oVending->getNbMaxTray(),
+                    'nbVendingSpiral' => $oVending->getNbMaxSpiral()
                 ], $bAjax);
         }
         return $this->render('home');
@@ -117,14 +116,14 @@ class VendingController extends AbstractController
                 $oBatch = BatchRepository::find($oVendingStock->getBatchId());
                 $oGoods = GoodsRepository::find($oBatch->getGoodsId());
                 $aLocationInfo = [
-                    'batch_id'      => $oBatch->getId(),
-                    'dlc'           => $oBatch->getDlc(),
-                    'qr_code'       => $oBatch->getQrCode(),
-                    'quantity'      => $oVendingStock->getQuantity(),
-                    'barcode'       => $oGoods->getBarcode(),
-                    'brand'         => $oGoods->getBrand(),
-                    'img'           => $oGoods->getImg(),
-                    'nutri-score'   => $oGoods->getNutriScore()
+                    'batch_id' => $oBatch->getId(),
+                    'dlc' => $oBatch->getDlc(),
+                    'qr_code' => $oBatch->getQrCode(),
+                    'quantity' => $oVendingStock->getQuantity(),
+                    'barcode' => $oGoods->getBarcode(),
+                    'brand' => $oGoods->getBrand(),
+                    'img' => $oGoods->getImg(),
+                    'nutri-score' => $oGoods->getNutriScore()
                 ];
                 $aDataVendingStock[$sLocation] = $aLocationInfo;
             }

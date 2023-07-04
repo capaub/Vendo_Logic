@@ -18,17 +18,17 @@ class CompanyController extends AbstractController
     public function register(): string
     {
         if (isset(
-                $_POST['field_company_name'],
-                $_POST['field_siret'],
-                $_POST['field_firstname'],
-                $_POST['field_lastname'],
-                $_POST['field_email'],
-                $_POST['field_password'],
-                $_POST['field_password_confirm'],
-                $_POST['field_country'],
-                $_POST['field_city'],
-                $_POST['field_postal_code'],
-                $_POST['field_street_name'])
+            $_POST['field_company_name'],
+            $_POST['field_siret'],
+            $_POST['field_firstname'],
+            $_POST['field_lastname'],
+            $_POST['field_email'],
+            $_POST['field_password'],
+            $_POST['field_password_confirm'],
+            $_POST['field_country'],
+            $_POST['field_city'],
+            $_POST['field_postal_code'],
+            $_POST['field_street_name'])
         ) {
             $sCleanCompanyName = strip_tags($_POST['field_company_name']);
             $sCleanSiret = strip_tags($_POST['field_siret']);
@@ -71,8 +71,6 @@ class CompanyController extends AbstractController
                         User::ROLE_ADMIN);
 
                     UserRepository::save($oUser);
-
-//                    $_SESSION['user'] = $oUser;
 
                     $_SESSION['flashes'][] = ['SUCCESS' => 'Utilisateur créer avec succés'];
 
@@ -133,7 +131,6 @@ class CompanyController extends AbstractController
                     $_SESSION['flashes'][] = ['SUCCESS' => $sMessage];
 
 
-
                     mail(
                         'capitone.aubry@gmail.com',
                         "Initialisation du compte",
@@ -143,7 +140,7 @@ class CompanyController extends AbstractController
                     return $this->render('main/users/_users.php', [
                         'seo_title' => 'Utilisateurs',
                         'user' => UserRepository::findAll()
-                    ],$bAjax);
+                    ], $bAjax);
 
                 } else {
                     $_SESSION['flashes'][] = ['ERREUR' => 'Utilisateur déjà existant'];
@@ -154,8 +151,6 @@ class CompanyController extends AbstractController
         }
         return $this->render('main/users/_createUser.php', [
             'seo_title' => 'Création d\'un utilisateur',
-        ],$bAjax);
+        ], $bAjax);
     }
-
-
 }

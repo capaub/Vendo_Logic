@@ -33,9 +33,9 @@ class BatchController extends AbstractController
 
         $aSelectedBatch =
             [
-                'quantity'          => $oBatch->getQuantity(),
-                'updated_at_date'   => $oBatch->getUpdatedAt()->format('d-m-Y') ?? '',
-                'updated_at_time'   => $oBatch->getUpdatedAt()->format('H:i:s') ?? ''
+                'quantity' => $oBatch->getQuantity(),
+                'updated_at_date' => $oBatch->getUpdatedAt()->format('d-m-Y') ?? '',
+                'updated_at_time' => $oBatch->getUpdatedAt()->format('H:i:s') ?? ''
             ];
 
         header('Content-Type: application/json');
@@ -49,34 +49,34 @@ class BatchController extends AbstractController
      */
     public function getStockInfo(): string
     {
-        $bAjax = !empty($_POST['context']) ?? false ;
+        $bAjax = !empty($_POST['context']) ?? false;
 
         $aBatch = BatchRepository::findAll();
 
 
         $aBatchInfo = [];
 
-        foreach ($aBatch as $oBatch){
+        foreach ($aBatch as $oBatch) {
 
             $oGoods = GoodsRepository::find($oBatch->getGoodsId());
 
             $aBatchInfo[$oBatch->getId()] =
                 [
-                    'dlc'               => $oBatch->getDlc()->format('d-m-Y'),
-                    'qr_code'           => $oBatch->getQrCode(),
-                    'quantity'          => $oBatch->getQuantity(),
-                    'created_at'        => $oBatch->getCreatedAt()->format('d-m-Y'),
-                    'updated_at_date'   => $oBatch->getUpdatedAt()->format('d-m-Y') ?? '',
-                    'updated_at_time'   => $oBatch->getUpdatedAt()->format('H:i:s') ?? '',
-                    'sold_out_at'       => $oBatch->getSoldOutAt()->format('d-m-Y') ?? '',
-                    'brand'             => $oGoods->getBrand(),
-                    'img'               => $oGoods->getImg(),
-                    'barcode'           => $oGoods->getBarcode()
+                    'dlc' => $oBatch->getDlc()->format('d-m-Y'),
+                    'qr_code' => $oBatch->getQrCode(),
+                    'quantity' => $oBatch->getQuantity(),
+                    'created_at' => $oBatch->getCreatedAt()->format('d-m-Y'),
+                    'updated_at_date' => $oBatch->getUpdatedAt()->format('d-m-Y') ?? '',
+                    'updated_at_time' => $oBatch->getUpdatedAt()->format('H:i:s') ?? '',
+                    'sold_out_at' => $oBatch->getSoldOutAt()->format('d-m-Y') ?? '',
+                    'brand' => $oGoods->getBrand(),
+                    'img' => $oGoods->getImg(),
+                    'barcode' => $oGoods->getBarcode()
                 ];
         }
 
 
-        $aPooledDataForBatch = [] ;
+        $aPooledDataForBatch = [];
 
         foreach ($aBatchInfo as $iBatchId => $aData) {
 
@@ -108,8 +108,8 @@ class BatchController extends AbstractController
         }
 
         return $this->render('stock.php', [
-            'seo_title'             => PAGE_STOCK,
-            'dataToRender' => $aDataToRender],$bAjax);
+            'seo_title' => PAGE_STOCK,
+            'dataToRender' => $aDataToRender], $bAjax);
     }
 
     /**

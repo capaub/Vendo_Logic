@@ -13,9 +13,9 @@ class VendingLocationController extends AbstractController
      */
     function getVendingLocations(
         array $location,
-        int $i,
-        int $j,
-        array &$aDisplayedLocations) : array
+        int   $i,
+        int   $j,
+        array &$aDisplayedLocations): array
     {
         $aVendingLocations = [];
 
@@ -30,7 +30,4 @@ class VendingLocationController extends AbstractController
 
         return $aVendingLocations;
     }
-
-
-
 }

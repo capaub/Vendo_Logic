@@ -34,14 +34,13 @@ class VendingPerCustomerController extends AbstractController
                 $oVendingPerCustomer = new VendingPerCustomer(
                     intval($sCleanVendingId),
                     $iCleanCustomerId,
-                VendingPerCustomer::ASSIGNED);
+                    VendingPerCustomer::ASSIGNED);
 
                 VendingPerCustomerRepository::save($oVendingPerCustomer);
 
                 $aData['customer_id'] = $iCleanCustomerId;
                 $aData['vending_id'] = $sCleanVendingId;
-                $aData['url']  = 'http://localhost/Vendo_Logic/public/?page=vending&vending_id='.$sCleanVendingId; //TODO à changer au passage sur hébergeur
-                // au scanne du qr code je veux avoir la machine
+                $aData['url'] = 'http://localhost/Vendo_Logic/public/?page=vending&vending_id=' . $sCleanVendingId; //TODO à changer au passage sur hébergeur
 
                 (new ExternalQrCodeAPIService)->generateQrCode($aData);
 
@@ -49,18 +48,18 @@ class VendingPerCustomerController extends AbstractController
 
                 $aVendingCriterias =
                     [
-                      'id'      => intval($sCleanVendingId),
-                      'name'    => $sCleanVendingName,
-                      'qr_code' => $sFilenameQrCode
+                        'id' => intval($sCleanVendingId),
+                        'name' => $sCleanVendingName,
+                        'qr_code' => $sFilenameQrCode
                     ];
 
                 $aCriterias = VendingRepository::buildCriterias($aVendingCriterias);
 
-               VendingRepository::update($aCriterias);
+                VendingRepository::update($aCriterias);
 
                 $aVending = [];
 
-               $bAjax = !empty($_POST['context']);
+                $bAjax = !empty($_POST['context']);
 
                 $aVendingPerCustomerCriterias =
                     [
@@ -76,21 +75,17 @@ class VendingPerCustomerController extends AbstractController
                     $iVendingId = $oVendingPerCustomer->getVendingId();
                     $oVending = VendingRepository::find($iVendingId);
 
-
                     $aVending[$iCustomerId][$iVendingId] = $oVending;
 
-
                 }
-               return $this->render('_customers.php',
-                   [
-                       'customer' => [CustomerRepository::find($iCleanCustomerId)],
-                       'vending' => $aVending
-                   ],$bAjax);
+                return $this->render('_customers.php',
+                    [
+                        'customer' => [CustomerRepository::find($iCleanCustomerId)],
+                        'vending' => $aVending
+                    ], $bAjax);
 
             }
         }
         return null;
     }
-
-
 }

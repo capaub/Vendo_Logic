@@ -92,17 +92,13 @@ class UserController extends AbstractController
     {
         $bAjax = !empty($_POST['context']) ?? false;
 
-//        if (empty($_SESSION['user']))   {
-//         $this->redirectAndDie('?page='.PAGE_LOGIN);
-//        }
-
         if (!empty($_POST['field_password']) && !empty($_POST['field_password_confirm'])) {
 
             $sHashpassword = (new UserManager)->hashUserPassword($_POST['field_password']);
 
             $aUserCriterias =
                 [
-                    'password'=>$sHashpassword,
+                    'password' => $sHashpassword,
                     'id' => $_POST['id']
                 ];
 

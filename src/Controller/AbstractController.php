@@ -10,7 +10,7 @@ abstract class AbstractController
      * @param string $sUrl
      * @return void
      */
-    #[NoReturn] protected function redirectAndDie(string $sUrl):void
+    #[NoReturn] protected function redirectAndDie(string $sUrl): void
     {
         header('Location: ' . $sUrl);
         die;

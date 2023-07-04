@@ -37,20 +37,20 @@ class DefaultController extends AbstractController
 
             foreach ($aVendingPerCustomer as $oVendingPerCustomer) {
 
-                $iCustomerId        = $oVendingPerCustomer->getCustomerId();
-                $iVendingId         = $oVendingPerCustomer->getVendingId();
-                $oVending           = VendingRepository::find($iVendingId);
+                $iCustomerId = $oVendingPerCustomer->getCustomerId();
+                $iVendingId = $oVendingPerCustomer->getVendingId();
+                $oVending = VendingRepository::find($iVendingId);
 
                 $aVending[$iCustomerId][$iVendingId] = $oVending;
 
-                $aVendingLocation   = VendingLocationRepository::findAllForOne($iVendingId);
+                $aVendingLocation = VendingLocationRepository::findAllForOne($iVendingId);
                 foreach ($aVendingLocation as $oVendingLocation) {
                     $aVendingStock = VendingStockRepository::findBy(['vending_location_id' => $oVendingLocation->getId()]);
 
                     $iBatchId = $aVendingStock != null ? $aVendingStock[0]->getBatchId() : '';
                     $oBatch = BatchRepository::find(intval($iBatchId));
 
-                    if ($oBatch !== NULL && ($oBatch->getDlc() < (new \DateTime(DLC_TIMEOUT_ALERT)))){
+                    if ($oBatch !== NULL && ($oBatch->getDlc() < (new \DateTime(DLC_TIMEOUT_ALERT)))) {
                         if (empty($aVendingAlert[$iVendingId])) {
                             $aVendingAlert[$iVendingId] = 'dlc';
                         } elseif ($aVendingAlert[$iVendingId] === 'rupture') {
@@ -58,7 +58,7 @@ class DefaultController extends AbstractController
                         }
                     }
 
-                    if ($aVendingStock == null || ($aVendingStock[0]->getQuantity() < QUANTITY_LIMIT_ALERT) ){
+                    if ($aVendingStock == null || ($aVendingStock[0]->getQuantity() < QUANTITY_LIMIT_ALERT)) {
                         if (empty($aVendingAlert[$iVendingId])) {
                             $aVendingAlert[$iVendingId] = 'rupture';
                         } elseif ($aVendingAlert[$iVendingId] === 'dlc') {
@@ -77,17 +77,17 @@ class DefaultController extends AbstractController
 
         return $this->render('customers.php',
             [
-                'seo_title'         => PAGE_CUSTOMERS,
-                'customer'          => $aCustomer,
-                'vending'           => $aVending,
-                'status'            => $aVendingAlert,
-                'customerStatus'    => $aCustomerAlert,
-            ],$bAjax);
+                'seo_title' => PAGE_CUSTOMERS,
+                'customer' => $aCustomer,
+                'vending' => $aVending,
+                'status' => $aVendingAlert,
+                'customerStatus' => $aCustomerAlert,
+            ], $bAjax);
     }
 
     public function pageAccount(): string
     {
-        return $this->render('account.php',['user' => $_SESSION['user']]);
+        return $this->render('account.php', ['user' => $_SESSION['user']]);
     }
 
 
@@ -151,16 +151,4 @@ class DefaultController extends AbstractController
             ['seo_title' => PAGE_ADD_VENDING]
         );
     }
-
-//    /**
-//     * @return string
-//     */
-//    public function vendingBuilder(): string
-//    {
-//        return $this->render(
-//            'vendingBuilder.php',
-//            ['seo_title' => PAGE_SAVE_VENDING]
-//        );
-//    }
-
 }
