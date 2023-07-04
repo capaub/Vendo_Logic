@@ -7,21 +7,23 @@ use DateTime;
 class VendingPerCustomer
 {
 
-    /** @var int  */
+    /** @var int */
     private int $id;
-    /** @var string  */
+    /** @var string */
     private string $status;
-    /** @var DateTime  */
+    /** @var DateTime */
     private DateTime $installData;
-    /** @var DateTime  */
+    /** @var DateTime */
     private DateTime $removalData;
-    /** @var int  */
+    /** @var int */
     private int $vendingId;
-    /** @var int  */
+    /** @var int */
     private int $customerId;
 
     const NOT_ASSIGNED = '0';
     const ASSIGNED = '1';
+
+    // TODO gerer le status des machines pour pouvoir retirer une machine de chez un client
 
     const STATUS = [
         self::NOT_ASSIGNED => 'disponible',
@@ -33,14 +35,14 @@ class VendingPerCustomer
      * @param int $iCustomerId
      * @param string $sStatus
      */
-    public function __construct(int $iVendingId,
-                                int $iCustomerId,
+    public function __construct(int    $iVendingId,
+                                int    $iCustomerId,
                                 string $sStatus = self::NOT_ASSIGNED)
     {
-        $this->vendingId    = $iVendingId;
-        $this->customerId   = $iCustomerId;
-        $this->status       = $sStatus;
-        $this->installData  = new DateTime('now');
+        $this->vendingId = $iVendingId;
+        $this->customerId = $iCustomerId;
+        $this->status = $sStatus;
+        $this->installData = new DateTime('now');
     }
 
     /**

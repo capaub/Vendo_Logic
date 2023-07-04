@@ -9,11 +9,11 @@ class Company
 
     use Timestampable;
 
-    /** @var string  */
+    /** @var string */
     private string $id;
-    /** @var string  */
+    /** @var string */
     private string $siret;
-    /** @var string  */
+    /** @var string */
     private string $name;
 
 
@@ -23,8 +23,8 @@ class Company
      */
     public function __construct(string $iSiret, string $sName)
     {
-        $this->siret        = $iSiret;
-        $this->name         = $sName;
+        $this->siret = $iSiret;
+        $this->name = $sName;
     }
 
     /**

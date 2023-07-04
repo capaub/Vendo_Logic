@@ -8,7 +8,7 @@ class Address
 {
     use Timestampable;
 
-    /** @var int  */
+    /** @var int */
     private int $id;
     /** @var string */
     private string $country;
@@ -31,12 +31,13 @@ class Address
      * @param string|null $sStreetNumber
      */
     public function __construct(
-        string $sCountry,
-        string $sCity,
-        string $iPostalCode,
-        string $sStreetName,
+        string  $sCountry,
+        string  $sCity,
+        string  $iPostalCode,
+        string  $sStreetName,
         ?string $sStreetNumber = NULL
-    ) {
+    )
+    {
         $this->country = $sCountry;
         $this->city = $sCity;
         $this->postalCode = $iPostalCode;

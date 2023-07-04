@@ -11,17 +11,17 @@ class User
 
     /** @var int */
     private int $id;
-    /** @var string  */
+    /** @var string */
     private string $firstname;
-    /** @var string  */
+    /** @var string */
     private string $lastname;
-    /** @var string  */
+    /** @var string */
     private string $email;
-    /** @var ?string  */
+    /** @var ?string */
     private ?string $password;
-    /** @var string  */
+    /** @var string */
     private string $role;
-    /** @var ?DateTime  */
+    /** @var ?DateTime */
     private ?DateTime $connectedAt;
     /** @var int|null */
     private ?int $addressId;
@@ -29,12 +29,13 @@ class User
     private int $companyId;
 
 
-    public const ROLE_ADMIN = '1'; /** voir enum */
+    public const ROLE_ADMIN = '1';
+    /** voir enum */
     public const ROLE_SUPPLIER = '2';
     public const ROLE_CONF =
         [
-            self::ROLE_ADMIN     => ['label' => 'Admin'],
-            self::ROLE_SUPPLIER  => ['label' => 'Approvisionneur']
+            self::ROLE_ADMIN => ['label' => 'Admin'],
+            self::ROLE_SUPPLIER => ['label' => 'Approvisionneur']
         ];
 
 
@@ -50,19 +51,19 @@ class User
     public function __construct(string $sFirstname,
                                 string $sLastname,
                                 string $sMail,
-                                int $iCompanyId,
-                                int $iAddressId = NULL,
+                                int    $iCompanyId,
+                                int    $iAddressId = NULL,
                                 string $sPassword = NULL,
                                 string $sRole = self::ROLE_SUPPLIER)
     {
-        $this->firstname    = $sFirstname;
-        $this->lastname     = $sLastname;
-        $this->email        = $sMail;
-        $this->addressId    = $iAddressId;
-        $this->companyId    = $iCompanyId;
-        $this->password     = $sPassword;
-        $this->role         = $sRole;
-        $this->updatedAt    = new DateTime('now');
+        $this->firstname = $sFirstname;
+        $this->lastname = $sLastname;
+        $this->email = $sMail;
+        $this->addressId = $iAddressId;
+        $this->companyId = $iCompanyId;
+        $this->password = $sPassword;
+        $this->role = $sRole;
+        $this->updatedAt = new DateTime('now');
     }
 
     /**

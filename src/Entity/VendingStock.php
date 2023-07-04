@@ -9,13 +9,13 @@ class VendingStock
 
     use Timestampable;
 
-    /** @var int  */
+    /** @var int */
     private int $id;
-    /** @var int  */
+    /** @var int */
     private int $quantity;
-    /** @var int  */
+    /** @var int */
     private int $batchId;
-    /** @var int  */
+    /** @var int */
     private int $vendingLocationId;
 
     /**
@@ -27,10 +27,10 @@ class VendingStock
                                 int $iBatchId,
                                 int $iVendingLocationId)
     {
-        $this->quantity             = $iQuantity;
-        $this->batchId              = $iBatchId;
-        $this->vendingLocationId    = $iVendingLocationId;
-        $this->updatedAt            = new DateTime('now');
+        $this->quantity = $iQuantity;
+        $this->batchId = $iBatchId;
+        $this->vendingLocationId = $iVendingLocationId;
+        $this->updatedAt = new DateTime('now');
     }
 
     /**

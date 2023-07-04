@@ -9,23 +9,23 @@ class Customer
 
     use Timestampable;
 
-    /** @var int  */
+    /** @var int */
     private int $id;
-    /** @var string  */
+    /** @var string */
     private string $siret;
-    /** @var string  */
+    /** @var string */
     private string $companyName;
-    /** @var string  */
+    /** @var string */
     private string $email;
-    /** @var string  */
+    /** @var string */
     private string $phone;
-    /** @var string  */
+    /** @var string */
     private string $firstname;
-    /** @var string  */
+    /** @var string */
     private string $lastname;
-    /** @var int  */
+    /** @var int */
     private int $addressId;
-    /** @var int  */
+    /** @var int */
     private int $companyId;
 
     /**
@@ -44,18 +44,18 @@ class Customer
                                 string $sPhone,
                                 string $sFirstname,
                                 string $sLastname,
-                                int $sAddressId,
-                                int $sCompanyId)
+                                int    $sAddressId,
+                                int    $sCompanyId)
     {
-        $this->siret        = $iSiret;
-        $this->companyName  = $sCompanyName;
-        $this->addressId    = $sAddressId;
-        $this->email        = $sMail;
-        $this->phone        = $sPhone;
-        $this->firstname    = $sFirstname;
-        $this->lastname     = $sLastname;
-        $this->companyId    = $sCompanyId;
-        $this->updatedAt    = new DateTime('now');
+        $this->siret = $iSiret;
+        $this->companyName = $sCompanyName;
+        $this->addressId = $sAddressId;
+        $this->email = $sMail;
+        $this->phone = $sPhone;
+        $this->firstname = $sFirstname;
+        $this->lastname = $sLastname;
+        $this->companyId = $sCompanyId;
+        $this->updatedAt = new DateTime('now');
     }
 
     /**

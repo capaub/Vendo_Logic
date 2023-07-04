@@ -8,7 +8,7 @@ use DateTime;
 trait CreatedAt
 {
 
-    /** @var DateTime  */
+    /** @var DateTime */
     private DateTime $createdAt;
 
 

@@ -9,18 +9,18 @@ class VendingLocation
 
     use Timestampable;
 
-    /** @var int  */
+    /** @var int */
     private int $id;
-    /** @var string  */
+    /** @var string */
     private string $location;
-    /** @var string  */
+    /** @var string */
     private string $vendingId;
 
     public function __construct(string $sLocation, int $iVendingId)
     {
         $this->location = $sLocation;
-        $this->vendingId= $iVendingId;
-        $this->updatedAt    = new DateTime('now');
+        $this->vendingId = $iVendingId;
+        $this->updatedAt = new DateTime('now');
     }
 
     /**

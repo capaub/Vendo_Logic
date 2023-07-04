@@ -9,17 +9,17 @@ class Goods
 
     use Timestampable;
 
-    /** @var int  */
+    /** @var int */
     private int $id;
-    /** @var string  */
+    /** @var string */
     private string $barcode;
     /** @var string */
     private string $brand;
-    /** @var string  */
+    /** @var string */
     private string $img;
-    /** @var string  */
+    /** @var string */
     private string $nutriScore;
-    /** @var int  */
+    /** @var int */
     private int $companyId;
 
     /**
@@ -33,14 +33,14 @@ class Goods
                                 string $sBrand,
                                 string $sImg,
                                 string $sNutriScore,
-                                int $iCompanyId
+                                int    $iCompanyId
     )
     {
-        $this->barcode      = $iBarcode;
-        $this->brand        = $sBrand;
-        $this->img          = $sImg;
-        $this->nutriScore   = $sNutriScore;
-        $this->companyId    = $iCompanyId;
+        $this->barcode = $iBarcode;
+        $this->brand = $sBrand;
+        $this->img = $sImg;
+        $this->nutriScore = $sNutriScore;
+        $this->companyId = $iCompanyId;
     }
 
     /**

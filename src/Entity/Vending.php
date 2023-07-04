@@ -9,21 +9,21 @@ class Vending
 
     use Timestampable;
 
-    /** @var int  */
+    /** @var int */
     private int $id;
-    /** @var string  */
+    /** @var string */
     private string $brand;
-    /** @var string  */
+    /** @var string */
     private string $model;
-    /** @var ?string  */
+    /** @var ?string */
     private ?string $name;
-    /** @var int  */
+    /** @var int */
     private int $nbMaxTray;
-    /** @var int  */
+    /** @var int */
     private int $nbMaxSpiral;
-    /** @var ?string  */
+    /** @var ?string */
     private ?string $qrCode;
-    /** @var int  */
+    /** @var int */
     private int $companyId;
 
     /**
@@ -35,22 +35,22 @@ class Vending
      * @param string|null $sQrCode
      * @param string|null $sName
      */
-    public function __construct(string $sBrand,
-                                string $sModel,
-                                int $nbMaxTray,
-                                int $nbMaxSpiral,
-                                int $iCompanyId,
+    public function __construct(string  $sBrand,
+                                string  $sModel,
+                                int     $nbMaxTray,
+                                int     $nbMaxSpiral,
+                                int     $iCompanyId,
                                 ?string $sQrCode = NULL,
                                 ?string $sName = NULL)
     {
-        $this->brand        = $sBrand;
-        $this->model        = $sModel;
-        $this->nbMaxTray    = $nbMaxTray;
-        $this->nbMaxSpiral  = $nbMaxSpiral;
-        $this->companyId    = $iCompanyId;
-        $this->qrCode       = $sQrCode;
-        $this->name         = $sName;
-        $this->updatedAt    = new DateTime('now');
+        $this->brand = $sBrand;
+        $this->model = $sModel;
+        $this->nbMaxTray = $nbMaxTray;
+        $this->nbMaxSpiral = $nbMaxSpiral;
+        $this->companyId = $iCompanyId;
+        $this->qrCode = $sQrCode;
+        $this->name = $sName;
+        $this->updatedAt = new DateTime('now');
     }
 
     /**
