@@ -9,7 +9,6 @@ class UserRepository extends AbstractRepository
 {
     const TABLE = '`user`';
 
-
     /**
      * @param int|string $sEmail
      * @return bool
@@ -131,7 +130,6 @@ class UserRepository extends AbstractRepository
             'params' => $aParams,
             'id' => $aCriterias['id'] ?? ''
         ];
-
     }
 
     /**
@@ -178,7 +176,6 @@ class UserRepository extends AbstractRepository
         $oPdoCustomer->execute([':company_id' => $_SESSION['user']->getCompanyId()]);
 
         return static::extracted($oPdoCustomer);
-
     }
 
     /**
@@ -253,5 +250,4 @@ class UserRepository extends AbstractRepository
 
         $stmt->execute();
     }
-
 }

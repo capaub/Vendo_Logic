@@ -9,7 +9,6 @@ class GoodsRepository extends AbstractRepository
 {
     const TABLE = '`goods`';
 
-
     /**
      * @param int|string $sBarcode
      * @return bool
@@ -135,13 +134,12 @@ class GoodsRepository extends AbstractRepository
 
         $sQuery = 'SELECT * FROM ' . static::TABLE . '
             WHERE `company_id` = :company_id
-            ORDER BY ' . static::ORDERED_BY . ' DESC ' ;
+            ORDER BY ' . static::ORDERED_BY . ' DESC ';
 
         $oPdoCustomer = $oPdo->prepare($sQuery);
         $oPdoCustomer->execute([':company_id' => $_SESSION['user']->getCompanyId()]);
 
         return static::extracted($oPdoCustomer);
-
     }
 
     /**
@@ -174,8 +172,7 @@ class GoodsRepository extends AbstractRepository
     {
         $aCriterias = ['barcode' => $barcode];
         $aGoods = GoodsRepository::findBy($aCriterias);
-        
+
         return $aGoods[0];
     }
-
 }

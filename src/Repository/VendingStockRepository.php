@@ -31,48 +31,6 @@ class VendingStockRepository extends AbstractRepository
         return ($oDbInfo['nb'] > 0);
     }
 
-//    /**
-//     * @param object $oVendingStock
-//     * @return void
-//     */
-//    public static function save(object $oVendingStock): void
-//    {
-//        $oPdo = DbManager::getInstance();
-//
-//        $sQuery = '
-//        START TRANSACTION;
-//
-//        INSERT INTO ' . static::TABLE . ' (`quantity`,
-//                                           `batch_id`,
-//                                           `updated_at`,
-//                                           `vending_location_id`)
-//        VALUES (:quantity,
-//                :batch_id,
-//                :updated_at,
-//                :vending_location_id);
-//
-//        UPDATE ' . BatchRepository::TABLE . '
-//        JOIN (SELECT * FROM ' . BatchRepository::TABLE . ' WHERE `id` = :batch_id) AS subquery
-//        SET ' . BatchRepository::TABLE . '.`quantity` = subquery.`quantity` - :quantity
-//        WHERE ' . BatchRepository::TABLE . '.`id` = :batch_id;
-//
-//        COMMIT;';
-//
-//        $oPdoVendingStock = $oPdo->prepare($sQuery);
-//
-//        $oPdoVendingStock->execute([
-//            ':quantity'             => $oVendingStock->getQuantity(),
-//            ':batch_id'             => $oVendingStock->getBatchId(),
-//            ':updated_at'           => $oVendingStock->getUpdatedAt()->format('Y-m-d'),
-//            ':vending_location_id'  => $oVendingStock->getVendingLocationId()
-//            ]);
-//
-//        if ($oPdoVendingStock->rowCount() === 0) {
-//            $_SESSION['flashes'][] = ['ERROR' => 'quantité du lot insuffisante'];
-//        }
-//
-//        $oVendingStock->setId($oPdo->lastInsertId());
-//    }
     /**
      * @param object $oVendingStock
      * @throws \Exception
@@ -135,21 +93,21 @@ class VendingStockRepository extends AbstractRepository
         }
 
         if (!empty($aCriterias['quantity'])) {
-            $aWhere[]  = '`quantity` = :quantity' ;
-            $aParams[':quantity']  = $aCriterias['quantity'];
+            $aWhere[] = '`quantity` = :quantity';
+            $aParams[':quantity'] = $aCriterias['quantity'];
         }
         if (!empty($aCriterias['batch_id'])) {
-            $aWhere[]  = '`batch_id` = :batch_id' ;
-            $aParams[':batch_id']  = $aCriterias['batch_id'];
+            $aWhere[] = '`batch_id` = :batch_id';
+            $aParams[':batch_id'] = $aCriterias['batch_id'];
         }
         if (!empty($aCriterias['vending_location_id'])) {
-            $aWhere[]  = '`vending_location_id` = :vending_location_id' ;
-            $aParams[':vending_location_id']  = $aCriterias['vending_location_id'];
+            $aWhere[] = '`vending_location_id` = :vending_location_id';
+            $aParams[':vending_location_id'] = $aCriterias['vending_location_id'];
         }
 
         if (!empty($aCriterias['updated_at'])) {
-            $aWhere[]  = '`updated_at` = :updated_at' ;
-            $aParams[':updated_at']  = $aCriterias['updated_at'];
+            $aWhere[] = '`updated_at` = :updated_at';
+            $aParams[':updated_at'] = $aCriterias['updated_at'];
         }
 
         if ((!empty($aCriterias['from']))) {
@@ -170,7 +128,7 @@ class VendingStockRepository extends AbstractRepository
         return [
             'where' => $sWhere,
             'params' => $aParams,
-            'id'    => $aCriterias['id'] ?? ''
+            'id' => $aCriterias['id'] ?? ''
         ];
 
     }
@@ -189,7 +147,7 @@ class VendingStockRepository extends AbstractRepository
 
 
         $oVendingStock->setId($aDBVendingStock['id']);
-        if ($aDBVendingStock['updated_at'] !== null){
+        if ($aDBVendingStock['updated_at'] !== null) {
             $oVendingStock->setUpdatedAt(new \DateTime($aDBVendingStock['updated_at']));
         }
 
@@ -205,12 +163,11 @@ class VendingStockRepository extends AbstractRepository
         $oPdo = DbManager::getInstance();
 
         $sQuery = 'SELECT * FROM ' . static::TABLE . '
-            ORDER BY ' . static::ORDERED_BY . ' DESC ' ;
+            ORDER BY ' . static::ORDERED_BY . ' DESC ';
 
         $oPdoVendingStock = $oPdo->prepare($sQuery);
 
         return static::extracted($oPdoVendingStock);
-
     }
 
     /**
@@ -233,39 +190,4 @@ class VendingStockRepository extends AbstractRepository
 
         return $oDBVendingStock ? static::hydrate($oDBVendingStock) : NULL;
     }
-
-//    function getVendingStock(array $aVendingStocks, VendingLocation $oVendingLocation, Batch $oBatch): ?array
-//    {
-//
-//        foreach ($aVendingStocks as $aVendingStock) {
-//            foreach ($aVendingStock as $oVendingStock) {
-//                if ($oVendingStock->getVendingLocationId() === $oVendingLocation->getId()) {
-//                    $iBatchId = $oVendingStock->getBatchId();
-//                    if ($oBatch->getId() === $iBatchId) {
-//                        return (new BatchRepository())->buildBatchInfos($oBatch, $oVendingStock);
-//                    }
-//                }
-//            }
-//        }
-//        return NULL;
-//    }
-
-//    public static function findWhere(array $aVendingLocation): array
-//    {
-//
-//        $oPdo = DbManager::getInstance();
-//        $aList = [];
-//
-//            foreach ($aVendingLocation as $key => $oVendingLocation) {
-//                $oDbVendingStock = $oPdo->query(
-//                    'SELECT * FROM ' . static::TABLE .
-//                    ' WHERE `vending_location_id` = ' . $oVendingLocation->getId()
-//                );
-//
-//                $aList[$key] = static::extracted($oDbVendingStock);
-//            }
-//
-//        return $aList;
-//    }
-
 }

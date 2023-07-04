@@ -76,16 +76,16 @@ class VendingPerCustomerRepository extends AbstractRepository
         }
 
         if (!empty($aCriterias['status'])) {
-            $aWhere[]  = '`status` = :status' ;
-            $aParams[':status']  = $aCriterias['status'];
+            $aWhere[] = '`status` = :status';
+            $aParams[':status'] = $aCriterias['status'];
         }
         if (!empty($aCriterias['customer_id'])) {
-            $aWhere[]  = '`customer_id` = :customer_id' ;
-            $aParams[':customer_id']  = $aCriterias['customer_id'];
+            $aWhere[] = '`customer_id` = :customer_id';
+            $aParams[':customer_id'] = $aCriterias['customer_id'];
         }
         if (!empty($aCriterias['install_date'])) {
-            $aWhere[]  = '`install_date` = :install_date' ;
-            $aParams[':install_date']  = $aCriterias['install_date'];
+            $aWhere[] = '`install_date` = :install_date';
+            $aParams[':install_date'] = $aCriterias['install_date'];
         }
 
         if ((!empty($aCriterias['from']))) {
@@ -106,7 +106,7 @@ class VendingPerCustomerRepository extends AbstractRepository
         return [
             'where' => $sWhere,
             'params' => $aParams,
-            'id'    => $aCriterias['id'] ?? ''
+            'id' => $aCriterias['id'] ?? ''
         ];
 
     }
@@ -138,7 +138,7 @@ class VendingPerCustomerRepository extends AbstractRepository
         $oPdo = DbManager::getInstance();
 
         $sQuery = 'SELECT * FROM ' . static::TABLE . '
-            ORDER BY ' . static::ORDERED_BY . ' DESC ' ;
+            ORDER BY ' . static::ORDERED_BY . ' DESC ';
 
         $oPdoVendingPerCustomer = $oPdo->prepare($sQuery);
 
@@ -172,9 +172,8 @@ class VendingPerCustomerRepository extends AbstractRepository
     {
         $oPdo = DbManager::getInstance();
 
-        $oDbVending = $oPdo->query('SELECT * FROM '.static::TABLE.' WHERE `customer_id` = '.$iCustomerId);
+        $oDbVending = $oPdo->query('SELECT * FROM ' . static::TABLE . ' WHERE `customer_id` = ' . $iCustomerId);
 
         return static::extracted($oDbVending);
     }
-
 }

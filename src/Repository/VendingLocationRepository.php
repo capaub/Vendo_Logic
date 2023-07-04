@@ -10,7 +10,6 @@ class VendingLocationRepository extends AbstractRepository
 
     const TABLE = '`vending_location`';
 
-
     /**
      * @param int|string $iId
      * @return bool
@@ -72,12 +71,12 @@ class VendingLocationRepository extends AbstractRepository
         }
 
         if (!empty($aCriterias['vending_id'])) {
-            $aWhere[]  = '`vending_id` = :vending_id' ;
-            $aParams[':vending_id']  = $aCriterias['vending_id'];
+            $aWhere[] = '`vending_id` = :vending_id';
+            $aParams[':vending_id'] = $aCriterias['vending_id'];
         }
         if (!empty($aCriterias['created_at'])) {
-            $aWhere[]  = '`created_at` = :created_at' ;
-            $aParams[':created_at']  = $aCriterias['created_at'];
+            $aWhere[] = '`created_at` = :created_at';
+            $aParams[':created_at'] = $aCriterias['created_at'];
         }
 
         if ((!empty($aCriterias['from']))) {
@@ -98,7 +97,7 @@ class VendingLocationRepository extends AbstractRepository
         return [
             'where' => $sWhere,
             'params' => $aParams,
-            'id'    => $aCriterias['id']
+            'id' => $aCriterias['id']
         ];
 
     }
@@ -133,13 +132,12 @@ class VendingLocationRepository extends AbstractRepository
 
         $sQuery = 'SELECT * FROM ' . static::TABLE . '
             WHERE `vending_id` = :vending_id
-            ORDER BY ' . static::ORDERED_BY . ' DESC ' ;
+            ORDER BY ' . static::ORDERED_BY . ' DESC ';
 
         $oPdoVendingLocation = $oPdo->prepare($sQuery);
         $oPdoVendingLocation->execute([':vending_id' => $iVendingId]);
 
         return static::extracted($oPdoVendingLocation);
-
     }
 
     /**
@@ -154,13 +152,12 @@ class VendingLocationRepository extends AbstractRepository
 
         $sQuery = 'SELECT * FROM ' . static::TABLE . '
             WHERE `vending_id` = :vending_id
-            ORDER BY ' . static::ORDERED_BY . ' DESC ' ;
+            ORDER BY ' . static::ORDERED_BY . ' DESC ';
 
         $oPdoVendingLocation = $oPdo->prepare($sQuery);
         $oPdoVendingLocation->execute([':vending_id' => $iVendingId]);
 
         return static::extracted($oPdoVendingLocation);
-
     }
 
     /**
@@ -193,7 +190,7 @@ class VendingLocationRepository extends AbstractRepository
     {
         $oPdo = DbManager::getInstance();
 
-        $oPdoVendingLocation = $oPdo->prepare('SELECT * FROM '.static::TABLE.' WHERE `vending_id` = :vendingId');
+        $oPdoVendingLocation = $oPdo->prepare('SELECT * FROM ' . static::TABLE . ' WHERE `vending_id` = :vendingId');
         $oPdoVendingLocation->bindValue(':vendingId', $iVendingId, \PDO::PARAM_INT);
         $oPdoVendingLocation->execute();
 

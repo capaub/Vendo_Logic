@@ -18,7 +18,7 @@ class AddressRepository extends AbstractRepository
     {
         $oPdo = DbManager::getInstance();
 
-        $sQuery = 'SELECT COUNT(*) AS nb FROM '.static::TABLE.' WHERE `id` = :id';
+        $sQuery = 'SELECT COUNT(*) AS nb FROM ' . static::TABLE . ' WHERE `id` = :id';
         $oPdoCompany = $oPdo->prepare($sQuery);
         $oPdoCompany->bindValue(':id', $iId);
         $oPdoCompany->execute();
@@ -39,7 +39,7 @@ class AddressRepository extends AbstractRepository
         $iCompanyId = $_SESSION['company_id'] ?? $_SESSION['user']->getCompanyId();
 
 
-        $sQuery = 'INSERT INTO '.static::TABLE.' (
+        $sQuery = 'INSERT INTO ' . static::TABLE . ' (
                                                 `address`,
                                                 `postal_code`,
                                                 `city`,
@@ -74,23 +74,23 @@ class AddressRepository extends AbstractRepository
     {
         $aWhere = $aParams = [];
 
-        if (!empty($aCriterias['magic-search'])){
+        if (!empty($aCriterias['magic-search'])) {
             $aWhere[] = '((`address`LIKE :magicSearch ) OR (`city` LIKE :magicSearch ))';
-            $aParams[':magicSearch'] = '%'.$aCriterias['magic-search'].'%';
+            $aParams[':magicSearch'] = '%' . $aCriterias['magic-search'] . '%';
         }
 
-        if (!empty($aCriterias['address'])){
+        if (!empty($aCriterias['address'])) {
             $aWhere[] = '(`address` = :address)';
             $aParams[':address'] = $aCriterias['address'];
         }
 
-        if ((!empty($aCriterias['from']))){
+        if ((!empty($aCriterias['from']))) {
             $aWhere[] = '(`created_at` >= :from)';
-            $aParams[':from'] =  $aCriterias['from'];
+            $aParams[':from'] = $aCriterias['from'];
         }
-        if ((!empty($aCriterias['to']))){
+        if ((!empty($aCriterias['to']))) {
             $aWhere[] = '(`created_at` <= :to)';
-            $aParams[':to'] =  $aCriterias['to'] . ' 23:59:59';
+            $aParams[':to'] = $aCriterias['to'] . ' 23:59:59';
         }
 
         $sWhere = '';
@@ -100,8 +100,8 @@ class AddressRepository extends AbstractRepository
         }
 
         return [
-            'where'     => $sWhere,
-            'params'    => $aParams
+            'where' => $sWhere,
+            'params' => $aParams
         ];
     }
 
@@ -132,9 +132,9 @@ class AddressRepository extends AbstractRepository
     {
         $oPdo = DbManager::getInstance();
 
-        $sQuery = 'SELECT * FROM '.static::TABLE.'
+        $sQuery = 'SELECT * FROM ' . static::TABLE . '
             WHERE `company_id` = :company_id
-            ORDER BY '.static::ORDERED_BY.' DESC ';
+            ORDER BY ' . static::ORDERED_BY . ' DESC ';
 
         $oPdoAddress = $oPdo->prepare($sQuery);
 
@@ -154,7 +154,7 @@ class AddressRepository extends AbstractRepository
 
         $oPdo = DbManager::getInstance();
 
-        $sQuery = 'SELECT * FROM '.static::TABLE.' WHERE `id` =  :id';
+        $sQuery = 'SELECT * FROM ' . static::TABLE . ' WHERE `id` =  :id';
 
         $oPdoAddress = $oPdo->prepare($sQuery);
         $oPdoAddress->bindValue(':id', $iId, \PDO::PARAM_INT);
@@ -164,6 +164,4 @@ class AddressRepository extends AbstractRepository
 
         return $oDbAddress ? static::hydrate($oDbAddress) : NULL;
     }
-
-
 }

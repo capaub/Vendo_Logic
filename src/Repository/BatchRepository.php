@@ -39,7 +39,7 @@ class BatchRepository extends AbstractRepository
      * @param int $sGoodsId
      * @return int|null
      */
-    public static function isCombinationExist(string $sDlc, int $sGoodsId) : ?int
+    public static function isCombinationExist(string $sDlc, int $sGoodsId): ?int
     {
         $oPdo = DbManager::getInstance();
 
@@ -215,7 +215,8 @@ class BatchRepository extends AbstractRepository
      * @param array $aUpdateData
      * @return void
      */
-    public static function update(array $aUpdateData): void    {
+    public static function update(array $aUpdateData): void
+    {
         $oPdo = DbManager::getInstance();
 
 
@@ -224,12 +225,12 @@ class BatchRepository extends AbstractRepository
 
 
         $sModifiedWhereToSetQuery = str_replace(
-            ['WHERE','AND','(',')'],
-            ['SET',', ',' ',' '],
+            ['WHERE', 'AND', '(', ')'],
+            ['SET', ', ', ' ', ' '],
             $aUpdateData['where']);
 
         $sQuery =
-            ' UPDATE '. static::TABLE
+            ' UPDATE ' . static::TABLE
             . $sModifiedWhereToSetQuery .
             ' WHERE `id` = :id';
 
@@ -251,7 +252,7 @@ class BatchRepository extends AbstractRepository
     public static function updateBatchQrCode(Batch $oBatch, string $sQrCode): void
     {
         $aBatchCriterias = [
-            'id'      => $oBatch->getId(),
+            'id' => $oBatch->getId(),
             'qr_code' => $sQrCode
         ];
 
@@ -282,7 +283,7 @@ class BatchRepository extends AbstractRepository
      * @param string $sQuantity
      * @return string
      */
-    public static function generateTempQrCodeForBatch(int $iCompanyId,int $iGoodsId, string $sDlc, string $sQuantity): string
+    public static function generateTempQrCodeForBatch(int $iCompanyId, int $iGoodsId, string $sDlc, string $sQuantity): string
     {
 
         $iUniqId = uniqid();
@@ -290,15 +291,14 @@ class BatchRepository extends AbstractRepository
         $aData =
             [
                 'company_id' => $iCompanyId,
-                'goods_id'   => $iGoodsId,
-                'uniqid'     => $iUniqId,
-                'dlc'        => $sDlc,
-                'quantity'   => $sQuantity,
-                'url'        => $iCompanyId . ' ' . $iGoodsId . ' ' . $sDlc . ' ' . $sQuantity
+                'goods_id' => $iGoodsId,
+                'uniqid' => $iUniqId,
+                'dlc' => $sDlc,
+                'quantity' => $sQuantity,
+                'url' => $iCompanyId . ' ' . $iGoodsId . ' ' . $sDlc . ' ' . $sQuantity
             ];
 
         return ExternalQrCodeAPIService::generateQrCode($aData);
-
     }
 
     /**
@@ -311,49 +311,12 @@ class BatchRepository extends AbstractRepository
         $aData =
             [
                 'company_id' => $iCompanyId,
-                'batch_id'   => $oBatch->getId(),
-                'dlc'        => $oBatch->getDlc()->format('Y-m'),
-                'quantity'   => $oBatch->getQuantity(),
-                'url'        => 'https://acdigitalsolutions.fr/Vendo_Logic/public/?page=vending&vending_id='
+                'batch_id' => $oBatch->getId(),
+                'dlc' => $oBatch->getDlc()->format('Y-m'),
+                'quantity' => $oBatch->getQuantity(),
+                'url' => 'http://localhost/Vendo_Logic/public/?page=vending&vending_id=' // TODO a modifier pour stock machine
             ];
 
         return ExternalQrCodeAPIService::generateQrCode($aData);
     }
-
 }
-
-
-//    function buildBatchInfos(Batch $oBatch, VendingStock $oVendingStock): array
-//    {
-//        $oGoods = GoodsRepository::find($oBatch->getGoodsId());
-//
-//        $aVendingStockInfos = [];
-//
-//            $aVendingStockInfos['quantity'] = $oVendingStock->getQuantity();
-//            $aVendingStockInfos['dlc'] = $oBatch->getDlc()->format('d/m/Y');
-//            $aVendingStockInfos['barcode'] = $oGoods->getBarcode();
-//            $aVendingStockInfos['nutri_score'] = $oGoods->getNutriScore();
-//            $aVendingStockInfos['batchId'] = $oBatch->getId();
-//
-//        return $aVendingStockInfos;
-//    }
-
-
-//    function buildBatcheInfos(array $aBatches, int $iBatchId, VendingLocation $oLocation, array &$aDisplayedLocations, array &$aDisplayedBatches, VendingStock $oVendingStock):array
-//    {
-//        $aVendingStockInfos = [];
-//        foreach ($aBatches as $oBatches) {
-//            if ($oBatches->getId() === $iBatchId) {
-//                if (!in_array($oLocation->getId(), $aDisplayedLocations) && !in_array($iBatchId, $aDisplayedBatches)) {
-//                    $aDisplayedBatches[] = $iBatchId;
-//                    $aDisplayedLocations[] = $oLocation->getId();
-//                    $aVendingStockInfos['quantity'] = $oVendingStock->getQuantity();
-//                    $aVendingStockInfos['dlc'] = $oBatches->getDlc()->format('d/m/Y');
-//                    $aVendingStockInfos['batcheId'] = $oBatches->getId();
-//                }
-//            }
-//        }
-//        return $aVendingStockInfos;
-//    }
-
-

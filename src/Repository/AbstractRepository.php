@@ -22,7 +22,7 @@ abstract class AbstractRepository
      * @param Object $O
      * @return void
      */
-    abstract public static function save(Object $O): void;
+    abstract public static function save(object $O): void;
 
     /**
      * @param array $aCriterias
@@ -34,7 +34,7 @@ abstract class AbstractRepository
      * @param array $aDB
      * @return Object
      */
-    abstract public static function hydrate(array $aDB): Object;
+    abstract public static function hydrate(array $aDB): object;
 
     /**
      * @return array
@@ -45,7 +45,7 @@ abstract class AbstractRepository
      * @param int $iId
      * @return Object|null
      */
-    abstract public static function find(int $iId): ?Object;
+    abstract public static function find(int $iId): ?object;
 
 
     /**
@@ -61,7 +61,7 @@ abstract class AbstractRepository
 
         $aResult = static::buildCriterias($aCriterias);
 
-        if ($iOffset < 0){
+        if ($iOffset < 0) {
             $iOffset = 0;
         }
 
@@ -85,11 +85,11 @@ abstract class AbstractRepository
 
         $aResultCriterias = static::buildCriterias($aCriterias);
 
-        $sQuery = ' SELECT COUNT(*) AS nbElts FROM '.static::TABLE;
+        $sQuery = ' SELECT COUNT(*) AS nbElts FROM ' . static::TABLE;
         $sQuery .= $aResultCriterias['where'];
 
         $oPdoStmt = $oPdo->prepare($sQuery);
-        $oPdoStmt->execute($aResultCriterias['params']) ;
+        $oPdoStmt->execute($aResultCriterias['params']);
 
         $oBdInfo = $oPdoStmt->fetch(\PDO::FETCH_ASSOC);
 
@@ -112,75 +112,4 @@ abstract class AbstractRepository
 
         return $aList;
     }
-
-    /**
-     * @return void
-     */
-//    protected static function BuildForm()
-//    {
-//        $oPdo = DbManager::getInstance();
-//        $sTableName = static::TABLE;
-//        $sDBName = DB_NAME;
-//
-//// requête pour récupérer le nombre de colonnes
-//        $sQuery = "SELECT count(COLUMN_NAME) as count FROM information_schema.COLUMNS
-//        WHERE table_name = '" . $sTableName . "'
-//        AND table_schema = '" . $sDBName . "'
-//        AND COLUMN_NAME NOT LIKE '%\_at'
-//        AND COLUMN_NAME NOT LIKE '%\_date'
-//        AND COLUMN_NAME NOT LIKE '%id'";
-//
-//        $oPdoStmt = $oPdo->query($sQuery);
-//        $oDBCount = $oPdoStmt->fetch();
-//        $iNbColumn = $oDBCount["count"];
-//
-//// requête pour récupérer les noms des colonnes
-//        $sQuery = "SELECT COLUMN_NAME as column_name FROM information_schema.COLUMNS
-//        WHERE table_name = '" . $sTableName . "'
-//        AND table_schema = '" . $sDBName . "'
-//        AND COLUMN_NAME NOT LIKE '%\_at'
-//        AND COLUMN_NAME NOT LIKE '%\_date'
-//        AND COLUMN_NAME NOT LIKE '%id'";
-//
-//        $oPdoStmt = $oPdo->query($sQuery);
-//        $aColumnName = array();
-//        while ($oDBColumnName = $oPdoStmt->fetch()) {
-//            $aColumnName[] = $oDBColumnName["column_name"];
-//        }
-//
-//// créer un formulaire automatiquement
-//
-//
-//        echo '<main class="Container_main Main">
-//    <h1 class="Main_title">Création automatisé d\'un formulaire</h1>';
-//
-//        var_dump($iNbColumn);
-//        var_dump($aColumnName);
-//        echo '<form method="POST"
-//          class="form_container">
-//        <fieldset class="fieldset">
-//            <legend>legend</legend>';
-//        for ($i = 0; $i < $iNbColumn; $i++) {
-//
-//            // Modification de la string de la bdd
-//            $labelToLower = strtolower($aColumnName[$i]);
-//            $labelForUser = ucfirst(str_replace('_', ' ', $labelToLower));
-//
-//            echo '
-//                    <div class="elements">
-//                        <input
-//                        required
-//                        type="text"
-//                        id="firstname"
-//                        name="field_' . $labelToLower . '" id="' . $labelToLower . '">
-//                        <label for="' . $labelToLower . '">' . $labelForUser . '</label>
-//                    </div>';
-//        }
-//        echo '</fieldset>';
-//        echo '
-//        <div class="elements submit">
-//            <input type="submit" name="form_' . $sTableName . '" value="Envoyer">
-//        </div>';
-//        echo '</form>';
-//    }
 }

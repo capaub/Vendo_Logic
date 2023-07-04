@@ -10,7 +10,6 @@ class CompanyRepository extends AbstractRepository
 
     const TABLE = '`company`';
 
-
     /**
      * @param int|string $value
      * @return bool
@@ -22,7 +21,7 @@ class CompanyRepository extends AbstractRepository
         $sQuery = 'SELECT COUNT(*) AS nb FROM ' . static::TABLE . ' WHERE `siret` = :siret';
         $aParams = [':siret' => $value];
 
-        if (intval($value)){
+        if (intval($value)) {
 
             $sQuery = 'SELECT COUNT(*) AS nb FROM ' . static::TABLE . ' WHERE `id` = :id';
             $aParams = [':id' => $value];
@@ -126,13 +125,12 @@ class CompanyRepository extends AbstractRepository
         $oPdo = DbManager::getInstance();
 
         $sQuery = 'SELECT * FROM ' . static::TABLE . '
-            ORDER BY ' . static::ORDERED_BY . ' DESC ' ;
+            ORDER BY ' . static::ORDERED_BY . ' DESC ';
 
         $oPdoCompany = $oPdo->prepare($sQuery);
         $oPdoCompany->execute();
 
         return static::extracted($oPdoCompany);
-
     }
 
     /**
@@ -155,5 +153,4 @@ class CompanyRepository extends AbstractRepository
 
         return $oDBBatch ? static::hydrate($oDBBatch) : NULL;
     }
-
 }

@@ -41,7 +41,6 @@ class ExternalQrCodeAPIService
 
         $oPngWriter = new PngWriter();
 
-        // Création du Qr Code
         $oQrCode = QrCode::create($sData)
             ->setEncoding(new Encoding('UTF-8'))
             ->setErrorCorrectionLevel(new ErrorCorrectionLevelLow())
@@ -51,26 +50,13 @@ class ExternalQrCodeAPIService
             ->setForegroundColor(new Color(0, 0, 0))
             ->setBackgroundColor(new Color(255, 255, 255));
 
-        // Création du logo
-//        $logo = Logo::create($sPath . $sTags . '.jpg')
-//            ->setResizeToWidth(80);
-
-        // Création du label
-        //$label = Label::create('COUCOU')
-        //    ->setTextColor(new Color(255, 0, 0));
-
-
         $oResult = $oPngWriter->write($oQrCode);
 
-        // Validation du resultat
-        //$writer->validateResult($result, 'https://wiki.openfoodfacts.org/API#Notice_for_API_users');
-
-        $sPath = $sDir . '/' .  $sTags . '.jpg';
+        $sPath = $sDir . '/' . $sTags . '.jpg';
 
         $oResult->saveToFile($sPath);
 
         return $sPath;
 
     }
-
 }

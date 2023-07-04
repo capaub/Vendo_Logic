@@ -85,36 +85,36 @@ class VendingRepository extends AbstractRepository
         }
 
         if (!empty($aCriterias['brand'])) {
-            $aWhere[]  = '`brand` = :brand' ;
-            $aParams[':brand']  = $aCriterias['brand'];
+            $aWhere[] = '`brand` = :brand';
+            $aParams[':brand'] = $aCriterias['brand'];
         }
         if (!empty($aCriterias['model'])) {
-            $aWhere[]  = '`model` = :model' ;
-            $aParams[':model']  = $aCriterias['model'];
+            $aWhere[] = '`model` = :model';
+            $aParams[':model'] = $aCriterias['model'];
         }
         if (!empty($aCriterias['name'])) {
-            $aWhere[]  = '`name` = :name' ;
-            $aParams[':name']  = $aCriterias['name'];
+            $aWhere[] = '`name` = :name';
+            $aParams[':name'] = $aCriterias['name'];
         }
         if (!empty($aCriterias['max_tray'])) {
-            $aWhere[]  = '`max_tray` = :max_tray' ;
-            $aParams[':max_tray']  = $aCriterias['max_tray'];
+            $aWhere[] = '`max_tray` = :max_tray';
+            $aParams[':max_tray'] = $aCriterias['max_tray'];
         }
         if (!empty($aCriterias['max_spiral'])) {
-            $aWhere[]  = '`max_spiral` = :max_spiral' ;
-            $aParams[':max_spiral']  = $aCriterias['max_spiral'];
+            $aWhere[] = '`max_spiral` = :max_spiral';
+            $aParams[':max_spiral'] = $aCriterias['max_spiral'];
         }
         if (!empty($aCriterias['update_at'])) {
-            $aWhere[]  = '`update_at` = :update_at' ;
-            $aParams[':update_at']  = $aCriterias['update_at'];
+            $aWhere[] = '`update_at` = :update_at';
+            $aParams[':update_at'] = $aCriterias['update_at'];
         }
         if (!empty($aCriterias['qr_code'])) {
-            $aWhere[]  = '`qr_code` = :qr_code' ;
-            $aParams[':qr_code']  = $aCriterias['qr_code'];
+            $aWhere[] = '`qr_code` = :qr_code';
+            $aParams[':qr_code'] = $aCriterias['qr_code'];
         }
         if (!empty($aCriterias['created_at'])) {
-            $aWhere[]  = '`created_at` = :created_at' ;
-            $aParams[':created_at']  = $aCriterias['created_at'];
+            $aWhere[] = '`created_at` = :created_at';
+            $aParams[':created_at'] = $aCriterias['created_at'];
         }
 
         if ((!empty($aCriterias['from']))) {
@@ -135,7 +135,7 @@ class VendingRepository extends AbstractRepository
         return [
             'where' => $sWhere,
             'params' => $aParams,
-            'id'    => $aCriterias['id'] ?? ''
+            'id' => $aCriterias['id'] ?? ''
         ];
 
     }
@@ -157,10 +157,10 @@ class VendingRepository extends AbstractRepository
         $oVending->setId($aDBVending['id']);
         $oVending->setCreatedAt(new DateTime($aDBVending['created_at']));
 
-        if ($aDBVending['name'] !== NULL ) {
+        if ($aDBVending['name'] !== NULL) {
             $oVending->setName($aDBVending['name']);
         }
-        if ($aDBVending['qr_code'] !== NULL ) {
+        if ($aDBVending['qr_code'] !== NULL) {
             $oVending->setQrCode($aDBVending['qr_code']);
         }
 
@@ -177,7 +177,7 @@ class VendingRepository extends AbstractRepository
 
         $sQuery = 'SELECT * FROM ' . static::TABLE . '
             WHERE `company_id` = :company_id
-            ORDER BY ' . static::ORDERED_BY . ' DESC ' ;
+            ORDER BY ' . static::ORDERED_BY . ' DESC ';
 
         $oPdoVending = $oPdo->prepare($sQuery);
         $oPdoVending->execute([':company_id' => $_SESSION['user']->getCompanyId()]);
@@ -199,7 +199,7 @@ class VendingRepository extends AbstractRepository
         $sQuery = 'SELECT * FROM ' . static::TABLE . ' WHERE `id` =  :id';
 
         $oPdoVending = $oPdo->prepare($sQuery);
-        $oPdoVending->execute([':id' =>  $iId]);
+        $oPdoVending->execute([':id' => $iId]);
 
         $oDBVending = $oPdoVending->fetch();
 
@@ -229,11 +229,11 @@ class VendingRepository extends AbstractRepository
         $rowCount = $oCountStatement->fetchColumn();
 
         if ($rowCount > 0) {
-            // La table n'est pas vide, exécuter la requête avec les paramètres
+            // La table n'est pas vide, exécute la requête avec les paramètres
             $oPdoVending->execute([':company_id' => $_SESSION['user']->getCompanyId()]);
             return VendingRepository::extracted($oPdoVending);
         } else {
-            // La table est vide, retourner un tableau vide
+            // La table est vide, retourne un tableau vide
             return [];
         }
     }
@@ -251,12 +251,12 @@ class VendingRepository extends AbstractRepository
 
 
         $sModifiedWhereToSetQuery = str_replace(
-            ['WHERE','AND','(',')'],
-            ['SET',', ',' ',' '],
+            ['WHERE', 'AND', '(', ')'],
+            ['SET', ', ', ' ', ' '],
             $aUpdateData['where']);
 
         $sQuery =
-            ' UPDATE '. static::TABLE
+            ' UPDATE ' . static::TABLE
             . $sModifiedWhereToSetQuery .
             ' WHERE `id` = :id';
 
