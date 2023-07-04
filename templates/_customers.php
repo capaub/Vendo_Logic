@@ -9,15 +9,15 @@ foreach ($customer as $oCustomer) : ?>
         <h3 class="Customer_name" data-text="Attribuer une machine"><?= strtoupper($oCustomer->getCompanyName()); ?>
             <span>infos</span>
         </h3>
-        <button class="btn_add_vending_to_customer" data-text="Attribuer une machine"  title="Attribuer une machine"></button>
+        <button class="btn_add_vending_to_customer" data-text="Attribuer une machine"
+                title="Attribuer une machine"></button>
         <div class="Customer_container">
             <?php if (isset($vending[$oCustomer->getId()])) : ?>
                 <div class="Customer_container_vendings <?= $customerStatus[$oCustomer->getId()] ?? 'hidden' ?>">
                     <?php foreach ($vending[$oCustomer->getId()] as $oVending) : ?>
                         <div class="Customer_vendings_vending Vending <?= $status[$oVending->getId()] ?? 'hidden'; ?>"
                              data-vending-id="<?= $oVending->getId() ?>">
-                            <!--                            --><?php //var_dump($status); ?>
-                            <img class="Vending_img" src="../assets/img/vending/vending.svg"
+                            <img class="Vending_img" src="../public/assets/img/vending/vending.svg"
                                  alt="illustratoin d'un distributeur automatique">
                             <div class="Vending_footer">
                                 <p class="Vending_footer_name"><?= $oVending->getName() ?? ''; ?></p>
@@ -44,8 +44,7 @@ foreach ($customer as $oCustomer) : ?>
                     </div>
                 </div>
                 <div class="Customer_container_infos_maps">
-                    <img class="Customer_container_infos_maps_img" src="../assets/img/maps.jpg" alt="">
-<!--                    <p class="Customer_container_infos_maps_address">--><?php //= $oCustomer->getAddressid()->getAdress() . ', ' . $oCustomer->getAddressid()->getPostalCode(); ?><!--</p>-->
+                    <img class="Customer_container_infos_maps_img" src="../public/assets/img/maps.jpg" alt="">
                 </div>
             </div>
         </div>

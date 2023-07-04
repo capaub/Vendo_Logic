@@ -5,7 +5,7 @@
       class="form_container add_vending_form"
       data-customer-id="<?= $customerId ?>">
 
-        <button class="close closeAddVendingForm">X</button>
+    <button class="close closeAddVendingForm">X</button>
 
     <fieldset class="fieldset">
         <legend><span class="company_name"><?= $companyName ?></span></legend>
@@ -40,6 +40,6 @@
         </div>
     </fieldset>
 
-        <input type="submit" class="addVending">
+    <input type="submit" class="addVending">
 
 </form>

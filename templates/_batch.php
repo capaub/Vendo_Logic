@@ -1,4 +1,3 @@
-
 <ul class="grid_container list_stock" data-barcode="<?= $sBarcode ?>">
     <li class="batch_info"><p><?= $sBarcode; ?></p></li>
 

@@ -3,11 +3,9 @@
 namespace DaBuild\Controller;
 
 use DaBuild\Entity\User;
-use DaBuild\Manager\DbManager;
 use DaBuild\Manager\UserManager;
 use DaBuild\Repository\CompanyRepository;
 use DaBuild\Repository\UserRepository;
-use function Composer\Autoload\includeFile;
 
 class UserController extends AbstractController
 {

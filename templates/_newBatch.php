@@ -1,50 +1,37 @@
+<form method="post" class="search_form form_container">
 
-    <form method="post" class="search_form form_container">
+    <button class="close closeNewBatchForm">X</button>
 
-            <button class="close closeNewBatchForm">X</button>
+    <fieldset class="fieldset">
+        <legend>Ajouter un lot</legend>
 
-        <fieldset class="fieldset">
-            <legend>Ajouter un lot</legend>
+        <div class="elements">
+            <input type="number"
+                   name="field_barcode"
+                   id="barcode"
+                   required="required"
+                   data-max-length="13">
+            <label for="barcode">Code barre</label>
+        </div>
 
-            <div class="elements">
-                <input type="number"
-                       name="field_barcode"
-                       id="barcode"
-                       required="required"
-                       data-max-length="13">
-                <label for="barcode">Code barre</label>
-            </div>
+        <div class="elements">
+            <input type="text"
+                   name="field_quantity"
+                   id="quantity"
+                   required="required">
+            <label for="quantity">Quantité</label>
+        </div>
 
-            <div class="elements">
-                <input type="text"
-                       name="field_quantity"
-                       id="quantity"
-                       required="required">
-                <label for="quantity">Quantité</label>
-            </div>
+        <div class="elements">
+            <input type="date"
+                   name="field_dlc"
+                   id="dlc"
+                   required="required">
+            <label for="dlc">DLC</label>
+        </div>
 
-            <div class="elements">
-                <input type="date"
-                       name="field_dlc"
-                       id="dlc"
-                       required="required">
-                <label for="dlc">DLC</label>
-            </div>
+    </fieldset>
 
-        </fieldset>
+    <input type="submit" class="new_batch_submit">
 
-            <input type="submit" class="new_batch_submit">
-
-    </form>
-
-<!--    --><?php //if (isset($product)) :?>
-<!--<div>-->
-<!--        <p>Catégorie : --><?php //= $product['categories'] ?? ''; ?><!--</p>-->
-<!--        <p>Nutri-Score : --><?php //= strtoupper($product['nutriscore_grade']) ?? ''; ?><!--</p>-->
-<!--        <p>Marque : --><?php //= $product['brands'] ?? ''; ?><!--</p>-->
-<!--        <p>Code-barre : --><?php //= $product['_id'] ?? ''; ?><!--</p>-->
-<!--        <p>Quantité : --><?php //= $product['product_quantity'] ?? ''; ?><!--</p>-->
-<!--        <p>Mots-clés : --><?php //= implode(', ', $product['_keywords']) ?? ''; ?><!--</p>-->
-<!--        <img src="--><?php //= $product['image_url'] ?? ''; ?><!--" alt="">-->
-<!--</div>-->
-<!--    --><?php //endif; ?>
+</form>

@@ -656,7 +656,7 @@ ul {
   }
 }
 .Header_topNav_img {
-  background-image: url("../../assets/img/user.svg");
+  background-image: url("user.svg");
   cursor: pointer;
   background-repeat: no-repeat;
   background-position: center;

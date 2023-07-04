@@ -11,7 +11,7 @@
 </ul>
 <?php if (empty($user)) : ?>
     <div class="grid_container">
-        <li>Aucuns utilisateurs enregistré</li>
+        <p>Aucuns utilisateurs enregistré</p>
     </div>
 <?php endif ; ?>
 

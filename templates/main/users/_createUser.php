@@ -3,9 +3,7 @@
 <form method="POST"
       class="form_container new_user_form">
 
-<!--    <div class="elements submit">-->
         <button class="close closeNewUserForm">X</button>
-<!--    </div>-->
 
     <fieldset class="fieldset">
         <legend>Création d'un utilisateur</legend>
@@ -36,8 +34,6 @@
 
     </fieldset>
 
-<!--    <div class="elements submit">-->
         <input type="submit" class="newUserSubmit">
-<!--    </div>-->
 
 </form>

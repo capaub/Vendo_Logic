@@ -31,88 +31,92 @@ class VendingStockRepository extends AbstractRepository
         return ($oDbInfo['nb'] > 0);
     }
 
-    /**
-     * @param object $oVendingStock
-     * @return void
-     */
-    public static function save(object $oVendingStock): void
-    {
-        $oPdo = DbManager::getInstance();
-
-        $sQuery = '
-        START TRANSACTION;
-
-        INSERT INTO ' . static::TABLE . ' (`quantity`,
-                                           `batch_id`,
-                                           `updated_at`,
-                                           `vending_location_id`)
-        VALUES (:quantity,
-                :batch_id,
-                :updated_at,
-                :vending_location_id);
-
-        UPDATE ' . BatchRepository::TABLE . '
-        JOIN (SELECT * FROM ' . BatchRepository::TABLE . ' WHERE `id` = :batch_id) AS subquery
-        SET ' . BatchRepository::TABLE . '.`quantity` = subquery.`quantity` - :quantity
-        WHERE ' . BatchRepository::TABLE . '.`id` = :batch_id;
-
-        COMMIT;';
-
-        $oPdoVendingStock = $oPdo->prepare($sQuery);
-
-        $oPdoVendingStock->execute([
-            ':quantity'             => $oVendingStock->getQuantity(),
-            ':batch_id'             => $oVendingStock->getBatchId(),
-            ':updated_at'           => $oVendingStock->getUpdatedAt()->format('Y-m-d'),
-            ':vending_location_id'  => $oVendingStock->getVendingLocationId()
-            ]);
-
-        $oVendingStock->setId($oPdo->lastInsertId());
-    }
 //    /**
 //     * @param object $oVendingStock
-//     * @throws \Exception
+//     * @return void
 //     */
 //    public static function save(object $oVendingStock): void
 //    {
 //        $oPdo = DbManager::getInstance();
 //
 //        $sQuery = '
-//    START TRANSACTION;
+//        START TRANSACTION;
 //
-//    SET @newQuantity = (
-//        SELECT `quantity` - :quantity
-//        FROM ' . BatchRepository::TABLE . '
-//        WHERE `id` = :batch_id
-//        FOR UPDATE
-//    );
-//
-//    IF (@newQuantity >= 0) THEN
-//        INSERT INTO ' . static::TABLE . ' (`quantity`, `batch_id`, `updated_at`, `vending_location_id`)
-//        VALUES (:quantity, :batch_id, :updated_at, :vending_location_id);
+//        INSERT INTO ' . static::TABLE . ' (`quantity`,
+//                                           `batch_id`,
+//                                           `updated_at`,
+//                                           `vending_location_id`)
+//        VALUES (:quantity,
+//                :batch_id,
+//                :updated_at,
+//                :vending_location_id);
 //
 //        UPDATE ' . BatchRepository::TABLE . '
-//        SET `quantity` = @newQuantity
-//        WHERE `id` = :batch_id;
-//    END IF;
+//        JOIN (SELECT * FROM ' . BatchRepository::TABLE . ' WHERE `id` = :batch_id) AS subquery
+//        SET ' . BatchRepository::TABLE . '.`quantity` = subquery.`quantity` - :quantity
+//        WHERE ' . BatchRepository::TABLE . '.`id` = :batch_id;
 //
-//    COMMIT;';
+//        COMMIT;';
 //
 //        $oPdoVendingStock = $oPdo->prepare($sQuery);
 //
 //        $oPdoVendingStock->execute([
-//            ':quantity' => $oVendingStock->getQuantity(),
-//            ':batch_id' => $oVendingStock->getBatchId(),
-//            ':updated_at' => $oVendingStock->getUpdatedAt()->format('Y-m-d'),
-//            ':vending_location_id' => $oVendingStock->getVendingLocationId()
-//        ]);
+//            ':quantity'             => $oVendingStock->getQuantity(),
+//            ':batch_id'             => $oVendingStock->getBatchId(),
+//            ':updated_at'           => $oVendingStock->getUpdatedAt()->format('Y-m-d'),
+//            ':vending_location_id'  => $oVendingStock->getVendingLocationId()
+//            ]);
 //
 //        if ($oPdoVendingStock->rowCount() === 0) {
-//            throw new \Exception('Failed to save vending stock.');
+//            $_SESSION['flashes'][] = ['ERROR' => 'quantité du lot insuffisante'];
 //        }
 //
 //        $oVendingStock->setId($oPdo->lastInsertId());
 //    }
+    /**
+     * @param object $oVendingStock
+     * @throws \Exception
+     */
+    public static function save(object $oVendingStock): void
+    {
+        $oPdo = DbManager::getInstance();
+
+        $sQuery = '
+    START TRANSACTION;
+
+    SET @newQuantity = (
+        SELECT `quantity` - :quantity
+        FROM ' . BatchRepository::TABLE . '
+        WHERE `id` = :batch_id
+        FOR UPDATE
+    );
+
+    IF (@newQuantity >= 0) THEN
+        INSERT INTO ' . static::TABLE . ' (`quantity`, `batch_id`, `updated_at`, `vending_location_id`)
+        VALUES (:quantity, :batch_id, :updated_at, :vending_location_id);
+
+        UPDATE ' . BatchRepository::TABLE . '
+        SET `quantity` = @newQuantity
+        WHERE `id` = :batch_id;
+    END IF;
+
+    COMMIT;';
+
+        $oPdoVendingStock = $oPdo->prepare($sQuery);
+
+        $oPdoVendingStock->execute([
+            ':quantity' => $oVendingStock->getQuantity(),
+            ':batch_id' => $oVendingStock->getBatchId(),
+            ':updated_at' => $oVendingStock->getUpdatedAt()->format('Y-m-d'),
+            ':vending_location_id' => $oVendingStock->getVendingLocationId()
+        ]);
+
+        if ($oPdoVendingStock->rowCount() === 0) {
+            $_SESSION['flashes'][] = ['ERROR' => 'quantité du lot insuffisante'];
+        }
+
+        $oVendingStock->setId($oPdo->lastInsertId());
+    }
 
     /**
      * @param array $aCriterias

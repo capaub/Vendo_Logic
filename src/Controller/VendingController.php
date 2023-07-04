@@ -27,8 +27,8 @@ class VendingController extends AbstractController
             && !empty($_POST['field_max_spiral'])) {
             $sCleanBrand = strip_tags($_POST['field_brand']);
             $sCleanModel = strip_tags($_POST['field_model']);
-            $sCleanMaxTray = intval(strip_tags($_POST['field_max_tray']));
-            $sCleanMaxSpiral = intval(strip_tags($_POST['field_max_spiral']));
+            $sCleanMaxTray = intval(strip_tags($_POST['field_max_tray'])); //TODO preg_match()
+            $sCleanMaxSpiral = intval(strip_tags($_POST['field_max_spiral'])); //TODO preg_match()
 
             if (CompanyRepository::isExist($_SESSION['user']->getCompanyId())
                 && $_SESSION['user'] instanceof User
@@ -63,128 +63,7 @@ class VendingController extends AbstractController
             ], $bAjax);
     }
 
-//    /**
-//     * @throws \Exception
-//     */
-//    public function buildVending(): string
-//    {
-//        $bAjax = !empty($_POST['context']) ?? false;
-//
-//        if (!empty($_GET['vending_id']) && VendingRepository::isExist($_GET['vending_id'])) {
-//
-//            $iCleanVendingId = intval(strip_tags($_GET['vending_id']));
-//
-//            $oVending = VendingRepository::find($iCleanVendingId);
-//
-//            $aVendingLocation = VendingLocationRepository::findAllForOne($oVending->getId());
-//
-//            $aDataVendingLocation = [];
-//
-//            foreach ($aVendingLocation as $oVendingLocation) {
-//                $aDataVendingLocation[$oVendingLocation->getLocation()] = $oVendingLocation->getId();
-//            }
-//
-//            $aDataVendingStock = [];
-//
-//            foreach ($aDataVendingLocation as $sLocation => $iVendingLocationId) {
-//
-//                $aVendingStockCriterias = ['vending_location_id' => $iVendingLocationId];
-//
-//                $aVendingStock = VendingStockRepository::findBy($aVendingStockCriterias);
-//
-//                foreach ($aVendingStock as $oVendingStock) {
-//
-//                    $oBatch = BatchRepository::find($oVendingStock->getBatchId());
-//                    $oGoods = GoodsRepository::find($oBatch->getGoodsId());
-//
-//                    $aLocationInfo = [
-//                        'batch_id'      => $oBatch->getId(),
-//                        'dlc'           => $oBatch->getDlc(),
-//                        'qr_code'       => $oBatch->getQrCode(),
-//                        'quantity'      => $oVendingStock->getQuantity(),
-//                        'barcode'       => $oGoods->getBarcode(),
-//                        'brand'         => $oGoods->getBrand(),
-//                        'img'           => $oGoods->getImg(),
-//                        'nutri-score'   => $oGoods->getNutriScore()
-//                    ];
-//
-//                    $aDataVendingStock[$sLocation] =  $aLocationInfo;
-//                }
-//            }
-//
-//            $sCleanVendingTags = isset($_GET['vending_tags']) ? strip_tags($_GET['vending_tags']) : '';
-//
-//            return $this->render(
-//
-//                'vendingByQrcode.php',
-//                [
-//                    'vendingTags'       => $sCleanVendingTags,
-//                    'dataVendingStock'  => $aDataVendingStock,
-//                    'vendingId'         => $oVending->getId(),
-//                    'nbVendingTray'     => $oVending->getNbMaxTray(),
-//                    'nbVendingSpiral'   => $oVending->getNbMaxSpiral()
-//                ]);
-//        }
-//
-//
-//        if (!empty($_POST['vending_id'])) {
-//
-//            $iCleanVendingId = intval(strip_tags($_POST['vending_id']));
-//
-//            $oVending = VendingRepository::find($iCleanVendingId);
-//
-//            $aVendingLocation = VendingLocationRepository::findAllForOne($oVending->getId());
-//
-//            $aDataVendingLocation = [];
-//
-//            foreach ($aVendingLocation as $oVendingLocation) {
-//                $aDataVendingLocation[$oVendingLocation->getLocation()] = $oVendingLocation->getId();
-//            }
-//
-//            $aDataVendingStock = [];
-//
-//            foreach ($aDataVendingLocation as $sLocation => $iVendingLocationId) {
-//
-//                $aVendingStockCriterias = ['vending_location_id' => $iVendingLocationId];
-//
-//                $aVendingStock = VendingStockRepository::findBy($aVendingStockCriterias);
-//
-//                foreach ($aVendingStock as $oVendingStock) {
-//
-//                    $oBatch = BatchRepository::find($oVendingStock->getBatchId());
-//                    $oGoods = GoodsRepository::find($oBatch->getGoodsId());
-//
-//                    $aLocationInfo = [
-//                        'batch_id' => $oBatch->getId(),
-//                        'dlc' => $oBatch->getDlc(),
-//                        'quantity' => $oVendingStock->getQuantity(),
-//                        'qr_code' => $oBatch->getQrCode(),
-//                        'barcode' => $oGoods->getBarcode(),
-//                        'brand' => $oGoods->getBrand(),
-//                        'img' => $oGoods->getImg(),
-//                        'nutri-score' => $oGoods->getNutriScore()
-//                    ];
-//
-//                    $aDataVendingStock[$sLocation] =  $aLocationInfo;
-//                }
-//            }
-//
-//            $sCleanVendingTags = isset($_POST['vending_tags']) ? strip_tags($_POST['vending_tags']) : '';
-//
-//            return $this->render(
-//                'vendingId.php',
-//                [
-//                    'vendingTags'       => $sCleanVendingTags,
-//                    'dataVendingStock'  => $aDataVendingStock,
-//                    'vendingId'         => $oVending->getId(),
-//                    'nbVendingTray'     => $oVending->getNbMaxTray(),
-//                    'nbVendingSpiral'   => $oVending->getNbMaxSpiral()
-//                ], $bAjax);
-//        }
-//
-//        return $this->render('home');
-//
-//    }
+
 
     /**
      * @return string

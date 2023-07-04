@@ -75,3 +75,4 @@ addUserButton.addEventListener('click', () => {
 
 listenCloseButton();
 formNewUserAttachEventListeners(formNewUser);
+

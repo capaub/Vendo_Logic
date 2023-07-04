@@ -20,12 +20,8 @@
         </fieldset>
 
         <input class="savePassword" type="submit" name="form_login" value="Soumettre">
-<!--        <a href="?page=--><?php //= PAGE_REGISTER ?><!--">Inscription</a>-->
 
-<!--        <div class="elements submit">-->
-<!--            <button class="savePassword">Soumettre</button>-->
-<!--        </div>-->
     </form>
 </main>
 
-<script type="module" src="../assets/js/createPassword.js"></script>
+<script type="module" src="../public/assets/js/createPassword.js"></script>

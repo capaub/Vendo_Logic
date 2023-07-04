@@ -30,7 +30,6 @@
                 </div>
             </fieldset>
             <fieldset class="fieldset">
-<!--                <legend>Contact</legend>-->
 
                 <div class="elements">
                     <input type="text"
@@ -109,51 +108,9 @@
 
             </fieldset>
 
-                <input type="submit" class="new_customer_submit">
+            <input type="submit" class="new_customer_submit">
 
         </form>
 
     </div>
 </main>
-
-<!--        <section class="Main_customers_customer Customer alert">-->
-<!--            <fieldset>-->
-<!--                <legend>Les plages d'interventions possible</legend>-->
-<!--                <form method="POST">-->
-<!--                    <div>-->
-<!--                    <button type="button" value="Monday">Lundi</button>-->
-<!--                    <button type="button" value="Tuesday">Mardi</button>-->
-<!--                    <button type="button" value="Wednesday">Mercredi</button>-->
-<!--                    <button type="button" value="Thursday">Jeudi</button>-->
-<!--                    <button type="button" value="Friday">Vendredi</button>-->
-<!--                    <button type="button" value="Saturday">Samedi</button>-->
-<!--                    <button type="button" value="Snuday">Dimanche</button>-->
-<!--                    </div>-->
-<!--                    <div>-->
-<!--                        <input type="time"-->
-<!--                               class=""-->
-<!--                               id="start_first"-->
-<!--                               name="filed_start_first"-->
-<!--                               required>-->
-<!--                        <input type="time"-->
-<!--                               class=""-->
-<!--                               id="end_first"-->
-<!--                               name="filed_end_first"-->
-<!--                               required>-->
-<!--                        <input type="time"-->
-<!--                               class=""-->
-<!--                               id="start_second"-->
-<!--                               name="filed_start_second"-->
-<!--                               required>-->
-<!--                        <input type="time"-->
-<!--                               class=""-->
-<!--                               id="end_second"-->
-<!--                               name="filed_end_second"-->
-<!--                               required>-->
-<!--                        <input type="submit">-->
-<!--                    </div>-->
-<!--                </form>-->
-<!--            </fieldset>-->
-<!--        </section>-->
-<!--    </div>-->
-

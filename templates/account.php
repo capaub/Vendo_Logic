@@ -1,6 +1,7 @@
 <?php
 
 use DaBuild\Entity\User;
+
 /** @var User $user */
 
 ?>
@@ -57,19 +58,5 @@ use DaBuild\Entity\User;
                     <p class="text"><?= $user->getConnectedAt()->format('H:i:s'); ?></p>
                 <?php endif; ?>
             </div>
-
-<!--            <div>-->
-<!--                <button class="save hidden">enregistrer</button>-->
-<!---->
-<!--                <button class="update">-->
-<!--                    <span class="material-symbols-outlined">upgrade</span>-->
-<!--                </button>-->
-<!---->
-<!--                <button class="delete">-->
-<!--                    <span class="material-symbols-outlined">delete_sweep</span>-->
-<!--                </button>-->
-<!---->
-<!--            </div>-->
-
         </form>
 </main>

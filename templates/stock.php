@@ -33,6 +33,6 @@
 
 </main>
 
-<script type="module" src="../assets/js/styleImageStockList.js"></script>
-<script type="module" src="../assets/js/newBatch.js"></script>
-<script type="module" src="../assets/js/changeBatchInfo.js"></script>
+<script type="module" src="../public/assets/js/styleImageStockList.js"></script>
+<script type="module" src="../public/assets/js/newBatch.js"></script>
+<script type="module" src="../public/assets/js/changeBatchInfo.js"></script>

@@ -5,7 +5,7 @@ use DaBuild\Entity\User;
 ;?>
 
 <header class="Header">
-    <div class="Header_logo" ><img src="../assets/img/logo.svg" alt="logo Vendo Logic"></div>
+    <div class="Header_logo" ><img src="../public/assets/img/newLogo.svg" alt="logo Vendo Logic"></div>
     <form class="Header_search hidden">
         <label for="search">
             <input class="Header_search_field" type="search" id="search" placeholder="Recherche">

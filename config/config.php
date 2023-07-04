@@ -13,11 +13,12 @@ const DB_HOST = 'localhost';
 const DB_USER = 'root';
 const DB_PWD = '';
 
-const DIR_PRODUCTS_IMG = '../assets/img/products';
-const DIR_QR_VENDING_IMG = '../assets/img/qrcode/vending';
 
-const DIR_QR_IMG = '../assets/img/qrcode';
-const DIR_QR_BATCH_IMG = '../assets/img/qrcode/batch';
+const DIR_PRODUCTS_IMG = '../public/assets/img/products';
+const DIR_QR_VENDING_IMG = '../public/assets/img/qrcode/vending';
+
+const DIR_QR_IMG = '../public/assets/img/qrcode';
+const DIR_QR_BATCH_IMG = '../public/assets/img/qrcode/batch';
 const PREFIX_BATCH_IMG = 'VENLO_';
 const PREFIX_VENDING_QRCODE = 'VENDING_';
 const PREFIX_BATCH_QRCODE = 'BATCH_';
@@ -84,6 +85,7 @@ const AJAX_SHOW_CONTAINER_ADD_VENDING = 'showContainerAddVending';
 const AJAX_ADD_VENDING_TO_CUSTOMER = 'addVendingToCustomer';
 
 
+
 const AJAX_NEW_BATCH ='newBatch';
 const AJAX_CHANGE_BATCH = 'changeBatch';
 
@@ -114,8 +116,6 @@ const ROUTING = [
 
     PAGE_LOGIN          => '\DaBuild\Controller\UserController::login',
     PAGE_LOGOUT         => '\DaBuild\Controller\UserController::logout',
-
-//    PAGE_ADD_VENDING    => '\DaBuild\Controller\DefaultController::vending',
 
     PAGE_ACCOUNT        =>  '\DaBuild\Controller\DefaultController::pageAccount'
 ];

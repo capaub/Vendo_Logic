@@ -104,7 +104,7 @@ function styleVending() {
 
         tray.style.gridTemplateColumns = `repeat(${numberOfSpiral}, 1fr)`;
 
-        const imgDir = "../assets/img/products/";
+        const imgDir = "../public/assets/img/products/";
 
         spirals.forEach((spiral) => {
             const id = spiral.dataset.productBarcode;

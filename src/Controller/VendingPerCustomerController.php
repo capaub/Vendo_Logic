@@ -40,7 +40,7 @@ class VendingPerCustomerController extends AbstractController
 
                 $aData['customer_id'] = $iCleanCustomerId;
                 $aData['vending_id'] = $sCleanVendingId;
-                $aData['url']  = 'https://acdigitalsolutions.fr/Vendo_Logic/public/?page=vending&vending_id='.$sCleanVendingId;
+                $aData['url']  = 'http://localhost/Vendo_Logic/public/?page=vending&vending_id='.$sCleanVendingId; //TODO à changer au passage sur hébergeur
                 // au scanne du qr code je veux avoir la machine
 
                 (new ExternalQrCodeAPIService)->generateQrCode($aData);

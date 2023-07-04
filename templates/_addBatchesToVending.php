@@ -1,22 +1,18 @@
 <?php use DaBuild\Repository\GoodsRepository; ?>
 
-
 <form method="POST"
       class="add_batch_form form_container"
-      data-vending-id="<?= $_POST['vending_id'] ?? ''?>">
+      data-vending-id="<?= $_POST['vending_id'] ?? '' ?>">
 
     <button class="close closeAddVendingForm">X</button>
 
+    <fieldset data-vending-tags="<?= $_POST['vending_tags'] ?? '' ?>" class="fieldset">
 
-    <fieldset data-vending-tags="<?= $_POST['vending_tags'] ?? ''?>" class="fieldset">
-<!--        <legend>-->
-<!--            --><?php //= $_POST['vending_tags'] ?? ''?>
-<!--        </legend>-->
         <?php if (isset($batch)) : ?>
             <div class="elements">
                 <select name="field_batch" id="batch" required="required">
                     <?php foreach ($batch as $key => $oBatch) : ?>
-                        <option value="<?= $oBatch->getId() ?>"  <?= ($batch[$key] === 1) ? "selected" : ""  ?>>
+                        <option value="<?= $oBatch->getId() ?>" <?= ($batch[$key] === 1) ? "selected" : "" ?>>
                             <?= (GoodsRepository::find($oBatch->getGoodsId()))->getBrand(); ?>
                         </option>
                     <?php endforeach; ?>
@@ -45,8 +41,6 @@
 
     </fieldset>
 
-
-        <input type="submit" class="add_batch_submit">
-
+    <input type="submit" class="add_batch_submit">
 
 </form>
