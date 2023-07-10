@@ -1,28 +1,32 @@
-import {listenInputNumber, toggleClass} from "./global.js";
+import {listenInputNumber} from "./global.js";
 import {StyleImageStockList} from "./styleImageStockList.js";
 import {goodsOptionAttachEventListener} from "./changeBatchInfo.js";
 
-let baseUrl = window.location.origin + window.location.pathname.replace('index.php', 'ajax.php');
-let url = new URL('ajax.php', baseUrl);
+const baseUrl = window.location.origin + window.location.pathname.replace('index.php', 'ajax.php');
+const url = new URL('ajax.php', baseUrl);
 
-let token = 'hidden';
-let containerFormAddBatch = document.querySelector('.container_new_batch_form');
-
-let formAddBatch = containerFormAddBatch.querySelector('.search_form');
-let addBatchButton = document.querySelector('.btnAddBatch');
+const containerFormAddBatch = document.querySelector('.container_new_batch_form');
+const formAddBatch = containerFormAddBatch.querySelector('.search_form');
+const addBatchButton = document.querySelector('.btnAddBatch');
+let eventListenerAttached = false;
 
 function addBatchButtonAttacheEventListener(addBatchButton) {
 
-    addBatchButton.addEventListener('click', () => {
+    if (eventListenerAttached) {
+        addBatchButton.removeEventListener('click', handleClick)
+        eventListenerAttached = false;
+    }
+        addBatchButton.addEventListener('click', handleClick)
+}
 
-        toggleClass(containerFormAddBatch, token);
-
-    })
+function handleClick() {
+    containerFormAddBatch.classList.toggle('hidden');
+    eventListenerAttached = true;
 }
 
 function addBatchFormAttachEventListeners(formAddBatch) {
     listenInputNumber();
-    let submitButton = formAddBatch.querySelector('input[type=submit]')
+    const submitButton = formAddBatch.querySelector('input[type=submit]')
 
     submitButton.addEventListener('click', (event) => {
         event.preventDefault();
@@ -33,12 +37,12 @@ function addBatchFormAttachEventListeners(formAddBatch) {
 
 function newBatch(formAddBatch) {
 
-    let barcodeSibling = formAddBatch.querySelector('input[name=field_barcode]');
-    let barcode = barcodeSibling.value;
-    let quantitySibling = formAddBatch.querySelector('input[name=field_quantity]');
-    let quantity = quantitySibling.value;
-    let dlcSibling = formAddBatch.querySelector('input[name=field_dlc]');
-    let dlc = dlcSibling.value;
+    const barcodeSibling = formAddBatch.querySelector('input[name=field_barcode]');
+    const barcode = barcodeSibling.value;
+    const quantitySibling = formAddBatch.querySelector('input[name=field_quantity]');
+    const quantity = quantitySibling.value;
+    const dlcSibling = formAddBatch.querySelector('input[name=field_dlc]');
+    const dlc = dlcSibling.value;
 
     let formData = new FormData()
     formData.append('context', 'newBatch');
@@ -48,13 +52,20 @@ function newBatch(formAddBatch) {
 
     if (formAddBatch.checkValidity()) {
         fetch(url.toString(), {method: 'POST', body: formData})
-            .then( response => response.text() )
-            .then( data => refreshStockList( data ) )
-            .then( () => StyleImageStockList() )
-            .then( () => {
-                let addBatchButton = document.querySelector('.btnAddBatch');
-                let batchSelect = document.querySelectorAll('.select_dlc_batch');
-                let formAddBatch = document.querySelector('.search_form');
+            .then(response => response.text())
+            .then(data => refreshStockList(data))
+            .then(() => {
+                const tableHeader = document.querySelector('.grid_container');
+                const lengthHeader = document.querySelectorAll('.colHeader');
+                const numberOfCol = lengthHeader.length;
+
+                tableHeader.style.gridTemplateColumns = `repeat(${numberOfCol}, 1fr)`;
+                StyleImageStockList();
+            })
+            .then(() => {
+                const addBatchButton = document.querySelector('.btnAddBatch');
+                const batchSelect = document.querySelectorAll('.select_dlc_batch');
+                const formAddBatch = document.querySelector('.search_form');
                 goodsOptionAttachEventListener(batchSelect);
                 addBatchButtonAttacheEventListener(addBatchButton);
                 addBatchFormAttachEventListeners(formAddBatch);
@@ -63,24 +74,24 @@ function newBatch(formAddBatch) {
     } else {
         const invalidFields = Array.from(formAddBatch.elements).filter(element => !element.validity.valid);
 
-        invalidFields.forEach( field => {
+        invalidFields.forEach(field => {
             field.classList.add("field_empty");
         });
     }
 }
 
-function refreshStockList(data){
-    let containerStock = document.querySelector('.Main_stock');
+function refreshStockList(data) {
+    const containerStock = document.querySelector('.Main_stock');
     containerStock.outerHTML = data;
 }
 
 function listenCloseButton() {
-    let close = document.querySelector('.closeNewBatchForm');
+    const close = document.querySelector('.closeNewBatchForm');
 
     close.addEventListener('click', (event) => {
         event.preventDefault();
 
-        toggleClass(containerFormAddBatch, token);
+        containerFormAddBatch.classList.toggle('hidden');
     });
 }
 

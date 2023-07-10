@@ -1,19 +1,23 @@
 export function sortCustomers() {
     const container = document.querySelector('.Main_customers');
-    const elements = container.children;
 
-    const sortedElements = Array.from(elements).sort(function (a) {
-        const aHasClass = a.classList.contains('alert');
+    if (container !== null) {
+        const elements = container.children;
 
-        if (aHasClass) {
-            return -1;
-        } else {
-            return 1;
-        }
-    });
+        const sortedElements = Array.from(elements).sort(function (a) {
+            const aHasClass = a.classList.contains('alert');
 
-    sortedElements.forEach(function (element) {
-        container.appendChild(element);
-    });
+            if (aHasClass) {
+                return -1;
+            } else {
+                return 1;
+            }
+        });
+
+        sortedElements.forEach(function (element) {
+            container.appendChild(element);
+        });
+    }
 }
+
 sortCustomers();

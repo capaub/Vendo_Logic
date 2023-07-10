@@ -3,11 +3,9 @@
 export function handleImageSize(parentContainer, backgroundImageURL, selector) {
 
     const imageContainer = parentContainer.querySelector(selector);
-
-
     const image = new Image();
-    image.src = backgroundImageURL;
 
+    image.src = backgroundImageURL;
     image.addEventListener('load', function() {
 
         if (image.naturalWidth < image.naturalHeight) {
@@ -20,9 +18,8 @@ export function handleImageSize(parentContainer, backgroundImageURL, selector) {
 }
 
 function styleImageLandscape(element,imageUrl) {
-
-    element.style.height= '40px';
-    element.style.width= '80px';
+    element.style.height = '40px';
+    element.style.width = '80px';
     element.style.backgroundImage= `url(${imageUrl})`;
     element.style.backgroundSize= '100%';
     element.style.backgroundRepeat= 'no-repeat';
@@ -31,13 +28,11 @@ function styleImageLandscape(element,imageUrl) {
 }
 
 function styleImagePortrait(element,imageUrl) {
-
-    element.style.height= '80px';
-    element.style.width= '40px';
+    element.style.height = '80px';
+    element.style.width = '40px';
     element.style.backgroundImage = `url(${imageUrl})`;
     element.style.backgroundSize = 'auto 100%';
     element.style.backgroundRepeat = 'no-repeat';
     element.style.backgroundPosition = 'center';
-
 }
 

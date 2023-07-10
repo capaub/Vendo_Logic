@@ -1,4 +1,6 @@
 @import 'mixins';
+@import 'keyframes';
+@import 'variables';
 @import 'form';
 @import 'vendingGrid';
 
@@ -117,7 +119,7 @@ ul {
     }
 
     &_img {
-      background-image: url("user.svg");
+      background-image: url("../img/user.svg");
       cursor: pointer;
       background-repeat: no-repeat;
       background-position: center;
@@ -276,10 +278,7 @@ ul {
 .Main {
   position: relative;
   margin: 2em auto 8em;
-  //left: 50%;
-  //transform: translateX(-50%);
   width: 80%;
-  //margin-bottom: 4em;
   transition: 1s ease;
 
   &.activeBlur {
@@ -442,36 +441,21 @@ ul {
           height: 100%;
           object-fit: cover;
         }
-
-        //&_address {
-        //  text-align: center;
-        //  border-top: solid 1px black;
-        //  border-radius: 0 0 3px 3px;
-        //  font-size: 0.5em;
-        //  position: absolute;
-        //  bottom: 2px;
-        //  left: 2px;
-        //  width: calc(100% - 4px);
-        //  padding: 5% 0;
-        //  background-color: rgba(245, 245, 245, 0.75);
-        //  color: black;
-        //}
       }
     }
   }
 }
 
-  .Customer.alert {
-    .Customer_name {
-      position: relative;
+.Customer.alert {
+  .Customer_name {
+    position: relative;
+  }
+
+  .Customer_container {
+    @media screen and (min-width: 1024px) {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
     }
-
-    .Customer_container {
-      @media screen and (min-width: 1024px) {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-      }
-
     &_infos {
       display: flex;
       flex-direction: column;

@@ -81,7 +81,7 @@ class UserController extends AbstractController
         }
 
         return $this->render('_login.php',
-            ['seo_title' => PAGE_HOME]);
+            ['seo_title' => PAGE_CUSTOMERS]);
     }
 
 

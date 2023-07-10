@@ -5,11 +5,11 @@
 
     <section class="list_container batch">
         <ul class="grid_container">
-            <li>Code-barre</li>
-            <li>DLC</li>
-            <li>Quantité</li>
-            <li>Modifier le</li>
-            <li>Image</li>
+            <li class="colHeader">Code-barre</li>
+            <li class="colHeader">DLC</li>
+            <li class="colHeader">Quantité</li>
+            <li class="colHeader">Modifier le</li>
+            <li class="colHeader">Image</li>
         </ul>
         <?php if (empty($dataToRender)) : ?>
 

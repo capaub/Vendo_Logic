@@ -33,7 +33,7 @@ class BatchController extends AbstractController
 
         $aSelectedBatch =
             [
-                'quantity' => $oBatch->getQuantity(),
+                'quantity'        => $oBatch->getQuantity(),
                 'updated_at_date' => $oBatch->getUpdatedAt()->format('d-m-Y') ?? '',
                 'updated_at_time' => $oBatch->getUpdatedAt()->format('H:i:s') ?? ''
             ];

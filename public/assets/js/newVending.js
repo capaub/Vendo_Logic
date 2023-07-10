@@ -1,4 +1,4 @@
-import { buildGridTemplateColumns, moveLabel, toggleClass } from "./global.js";
+import { buildGridTemplateColumns, moveLabel } from "./global.js";
 import { handleClickVendingList } from "./showVending.js";
 
 const baseUrl = window.location.origin + window.location.pathname.replace('index.php', 'ajax.php');
@@ -8,11 +8,11 @@ function handleClickBtnBackToVendingList() {
 
     const newVendingForm = document.querySelector('.new_vending_form');
     const btnAddVending = document.querySelector('.btn_add_vending');
-    const btnBackAddVendingToVendingList = document.querySelector('.btn_back_add_batch_vending_to_vendingList');
+    const btnBackAddVendingToVendingList = document.querySelector('.btn_back_new_vending_to_vendingList');
 
-    toggleClass(btnAddVending, 'hidden');
-    toggleClass(btnBackAddVendingToVendingList, 'hidden');
-    toggleClass(newVendingForm, 'hidden');
+    btnAddVending.classList.toggle('hidden');
+    btnBackAddVendingToVendingList.classList.toggle('hidden');
+    newVendingForm.classList.toggle('hidden');
 
     btnAddVending.addEventListener('click', handleClickBtnAddVending);
 
@@ -32,12 +32,11 @@ function handleClickCloseButton(event)
 
     const containerNewVendingForm = document.querySelector('.container_new_vending_form');
     const btnAddVending = document.querySelector('.btn_add_vending');
-    const btnBackAddVendingToVendingList = document.querySelector('.btn_back_add_batch_vending_to_vendingList');
+    const btnBackAddVendingToVendingList = document.querySelector('.btn_back_new_vending_to_vendingList');
 
-    toggleClass(containerNewVendingForm, 'hidden');
-    toggleClass(btnAddVending, 'hidden');
-    toggleClass(btnBackAddVendingToVendingList, 'hidden');
-
+    containerNewVendingForm.classList.toggle('hidden');
+    btnAddVending.classList.toggle('hidden');
+    btnBackAddVendingToVendingList.classList.toggle('hidden');
     btnAddVending.addEventListener('click', handleClickBtnAddVending);
     btnBackAddVendingToVendingList.removeEventListener('click', handleClickBtnBackToVendingList);
 
@@ -56,14 +55,14 @@ function handleClickBtnAddVending() {
 
     const containerNewVendingForm = document.querySelector('.container_new_vending_form');
     const btnAddVending = document.querySelector('.btn_add_vending');
-    const btnBackAddVendingToVendingList = document.querySelector('.btn_back_add_batch_vending_to_vendingList');
+    const btnBackAddVendingToVendingList = document.querySelector('.btn_back_new_vending_to_vendingList');
     const close = document.querySelector('.close_new_vending_form');
 
     close.addEventListener('click', handleClickCloseButton);
 
-    toggleClass(btnAddVending, 'hidden');
-    toggleClass(btnBackAddVendingToVendingList, 'hidden');
-    toggleClass(containerNewVendingForm, 'hidden');
+    btnAddVending.classList.toggle('hidden');
+    btnBackAddVendingToVendingList.classList.toggle('hidden');
+    containerNewVendingForm.classList.toggle('hidden');
 
     btnAddVending.removeEventListener('click', handleClickBtnAddVending);
     btnBackAddVendingToVendingList.addEventListener('click', handleClickBtnBackToVendingList);
@@ -105,13 +104,14 @@ function handleClickSubmitNewVending(event)
             })
 
             const containerNewVendingForm = document.querySelector('.container_new_vending_form');
-            const btnBackAddVendingToVendingList = document.querySelector('.btn_back_add_vending_to_vendingList');
+            const btnBackAddVendingToVendingList = document.querySelector('.btn_back_new_vending_to_vendingList');
 
-            toggleClass(btnAddVending, 'hidden');
+            btnAddVending.classList.toggle('hidden');
             btnAddVending.addEventListener('click', handleClickBtnAddVending);
 
-            toggleClass(btnBackAddVendingToVendingList, 'hidden');
-            toggleClass(containerNewVendingForm, 'hidden');
+            btnBackAddVendingToVendingList.classList.toggle('hidden');
+            newVendingForm.reset();
+            containerNewVendingForm.classList.toggle('hidden');
         })
     } else {
         const invalidFields = Array.from(newVendingForm.elements).filter(element => !element.validity.valid);

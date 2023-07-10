@@ -141,7 +141,7 @@ button {
 .btnAddCustomer,
 .btn_add_vending,
 .btnBackToCustomers,
-.btnBackToVendingList,
+.btn_back_to_vendingList,
 .btn_back_add_batch_vending_to_vendingList,
 .btn_back_new_vending_to_vendingList {
   display: flex;
@@ -162,7 +162,6 @@ button {
   transition: display 1s;
 
   &:hover {
-    //box-shadow: $boxShadow;
     &::after {
       content: attr(data-text);
       background-color: #4E7EAC;
@@ -180,13 +179,10 @@ button {
   &:hover::before {
     display: none;
   }
-  //&:active{
-  //  box-shadow: none;
-  //}
 }
 
 .btnBackToCustomers,
-.btnBackToVendingList,
+.btn_back_to_vendingList,
 .btn_back_add_batch_vending_to_vendingList,
 .btn_back_new_vending_to_vendingList {
   background-color: #E53935;

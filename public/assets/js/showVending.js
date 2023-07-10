@@ -1,13 +1,10 @@
 import {vendingLocationAttachEventListeners} from './addBatchToVending.js';
 import {handleImageSize} from "./handleImageSize.js";
 
-import {toggleClass} from "./global.js";
-
 const baseUrl = window.location.origin + window.location.pathname.replace('index.php', 'ajax.php');
 const url = new URL('ajax.php', baseUrl);
 
 const vendingContainer = document.querySelector('.vendingGrid');
-
 
 export function vendingListAttachEventListeners() {
 
@@ -22,7 +19,7 @@ export function handleClickVendingList(event)
     const id = event.currentTarget.dataset.vendingId;
 
     const btnAddVending = document.querySelector('.btn_add_vending');
-    const btnBackVendingToVendingList = document.querySelector('.btn_back_new_vending_to_vendingList');
+    const btnBackVendingToVendingList = document.querySelector('.btn_back_to_vendingList');
     const sectionVendingList = document.querySelector('.vending_list_container');
     const elementName = event.currentTarget.querySelector('[data-name]');
     const name = elementName.dataset.name;
@@ -40,9 +37,9 @@ export function handleClickVendingList(event)
             buildVendingContainer(data)
         })
         .then( () => {
-            toggleClass(btnAddVending, token)
-            toggleClass(sectionVendingList, token)
-            toggleClass(btnBackVendingToVendingList, token)
+            btnAddVending.classList.toggle('hidden')
+            sectionVendingList.classList.toggle('hidden')
+            btnBackVendingToVendingList.classList.toggle('hidden')
 
             const vendings = document.querySelectorAll('ul.vending');
 
@@ -52,28 +49,23 @@ export function handleClickVendingList(event)
         })
 }
 
-function buildVending() {
-
-}
-
-const token = 'hidden';
 function attachEventBackActionButton()
 {
-    const btnBackVendingToVendingList = document.querySelector('.btn_back_new_vending_to_vendingList');
+    const btnBackVendingToVendingList = document.querySelector('.btn_back_to_vendingList');
 
     btnBackVendingToVendingList.addEventListener('click', backAction);
 }
 
 function backAction()
 {
-    const btnBackVendingToVendingList = document.querySelector('.btn_back_new_vending_to_vendingList');
+    const btnBackVendingToVendingList = document.querySelector('.btn_back_to_vendingList');
     const sectionVendingList = document.querySelector('.vending_list_container');
     const btnAddVending = document.querySelector('.btn_add_vending');
     const sectionVending = document.querySelector('.vendingGrid');
-    toggleClass(btnBackVendingToVendingList, token);
-    toggleClass(sectionVendingList, token);
-    toggleClass(btnAddVending, token);
-    toggleClass(sectionVending, token);
+    btnBackVendingToVendingList.classList.toggle('hidden');
+    sectionVendingList.classList.toggle('hidden');
+    btnAddVending.classList.toggle('hidden');
+    sectionVending.classList.toggle('hidden');
     btnBackVendingToVendingList.removeEventListener('click', backAction);
     const vendings = document.querySelectorAll('ul.vending');
 
@@ -81,8 +73,6 @@ function backAction()
         vending.addEventListener('click', handleClickVendingList);
     })
 }
-
-
 
 // Fonction qui remplace un conteneur avec les données fournies
 export function buildVendingContainer(data) {
@@ -92,7 +82,7 @@ export function buildVendingContainer(data) {
 
     styleVending();
 
-    attachEventBackActionButton();;
+    attachEventBackActionButton();
 }
 
 function styleVending() {
@@ -124,7 +114,6 @@ function showVending(container)
 {
     container.classList.remove('hidden');
 }
-
 
 vendingListAttachEventListeners();
 styleVending();

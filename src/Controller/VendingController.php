@@ -21,6 +21,8 @@ class VendingController extends AbstractController
     {
         $bAjax = !empty($_POST['context']) ?? false;
 
+
+
         if (!empty($_POST['field_brand'])
             && !empty($_POST['field_model'])
             && !empty($_POST['field_max_tray'])
@@ -91,7 +93,7 @@ class VendingController extends AbstractController
                     'nbVendingSpiral' => $oVending->getNbMaxSpiral()
                 ], $bAjax);
         }
-        return $this->render('home');
+        return $this->render('vendings');
     }
 
     /**
@@ -128,7 +130,6 @@ class VendingController extends AbstractController
                 $aDataVendingStock[$sLocation] = $aLocationInfo;
             }
         }
-
         return $aDataVendingStock;
     }
 

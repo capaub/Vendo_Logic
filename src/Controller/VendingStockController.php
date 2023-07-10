@@ -32,5 +32,4 @@ class VendingStockController extends AbstractController
             VendingStockRepository::save($oVendingStock);
         }
     }
-
 }

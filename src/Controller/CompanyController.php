@@ -42,6 +42,7 @@ class CompanyController extends AbstractController
             $sCleanPostalCode = strip_tags($_POST['field_postal_code']);
             $sCleanStreetName = strip_tags($_POST['field_street_name']);
 
+
             if (!CompanyRepository::isExist($sCleanSiret)) {
                 if ($sCleanPassword === $sCleanPasswordConfirm) {
 

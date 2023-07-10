@@ -39,26 +39,22 @@ class VendingStockRepository extends AbstractRepository
     {
         $oPdo = DbManager::getInstance();
 
-        $sQuery = '
-    START TRANSACTION;
-
-    SET @newQuantity = (
-        SELECT `quantity` - :quantity
-        FROM ' . BatchRepository::TABLE . '
-        WHERE `id` = :batch_id
-        FOR UPDATE
-    );
-
-    IF (@newQuantity >= 0) THEN
-        INSERT INTO ' . static::TABLE . ' (`quantity`, `batch_id`, `updated_at`, `vending_location_id`)
-        VALUES (:quantity, :batch_id, :updated_at, :vending_location_id);
-
-        UPDATE ' . BatchRepository::TABLE . '
-        SET `quantity` = @newQuantity
-        WHERE `id` = :batch_id;
-    END IF;
-
-    COMMIT;';
+        $sQuery = 'START TRANSACTION;
+                   INSERT INTO ' . static::TABLE . ' (`quantity`, 
+                                                      `batch_id`, 
+                                                      `updated_at`, 
+                                                      `vending_location_id`)
+                   VALUES (:quantity, 
+                           :batch_id, 
+                           :updated_at, 
+                           :vending_location_id);
+                           
+                   UPDATE ' . BatchRepository::TABLE . '
+                   JOIN (SELECT * FROM ' . BatchRepository::TABLE . ' WHERE `id` = :batch_id) AS subquerry
+                   SET ' . BatchRepository::TABLE . '.`quantity` = subquerry.`quantity` - :quantity
+                   WHERE ' . BatchRepository::TABLE . '.`id` = :batch_id;
+                   
+                   COMMIT;';
 
         $oPdoVendingStock = $oPdo->prepare($sQuery);
 
@@ -191,3 +187,29 @@ class VendingStockRepository extends AbstractRepository
         return $oDBVendingStock ? static::hydrate($oDBVendingStock) : NULL;
     }
 }
+
+
+
+
+
+
+//TODO modifier la requête pour voir si la quantité est disponible
+//START TRANSACTION;
+//
+//    SET @newQuantity = (
+//SELECT `quantity` - :quantity
+//        FROM ' . BatchRepository::TABLE . '
+//        WHERE `id` = :batch_id
+//        FOR UPDATE
+//        );
+//
+//    IF (@newQuantity >= 0) THEN
+//        INSERT INTO ' . static::TABLE . ' (`quantity`, `batch_id`, `updated_at`, `vending_location_id`)
+//        VALUES (:quantity, :batch_id, :updated_at, :vending_location_id);
+//
+//        UPDATE ' . BatchRepository::TABLE . '
+//        SET `quantity` = @newQuantity
+//        WHERE `id` = :batch_id;
+//    END IF;
+//
+//    COMMIT;';

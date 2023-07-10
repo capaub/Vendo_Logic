@@ -4,15 +4,15 @@ date_default_timezone_set('Europe/Paris');
 
 define('ENV', ($_SERVER['HTTP_HOST'] === 'localhost') ? 'development' : 'production');
 
-if (ENV !== 'development') {
+//if (ENV !== 'development') {
     ini_set('display_errors', false);
-}
+//}
+
 
 const DB_NAME = 'vendo_logic';
 const DB_HOST = 'localhost';
-const DB_USER = 'root';
-const DB_PWD = '';
-
+const DB_USER = 'vendo_admin';
+const DB_PWD = 'vendo_password';
 
 const DIR_PRODUCTS_IMG = '../public/assets/img/products';
 const DIR_QR_VENDING_IMG = '../public/assets/img/qrcode/vending';
@@ -82,7 +82,6 @@ const AJAX_SHOW_VENDING = 'vendingId';
 const AJAX_GENERATE_CUSTOMER_VENDING = 'generateCustomerVending';
 const AJAX_SHOW_BATCH_FOR_VENDING = 'getBatch';
 const AJAX_ADD_STOCK_TO_VENDING = 'addStockToVending';
-
 
 const ROUTING = [
     PAGE_REGISTER => '\DaBuild\Controller\CompanyController::register',

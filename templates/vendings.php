@@ -4,6 +4,7 @@
 
     <button class="btn_add_vending" data-text="Ajouter une machine"></button>
     <button class="btn_back_add_batch_vending_to_vendingList hidden" data-text="Retour"></button>
+    <button class="btn_back_to_vendingList hidden" data-text="Retour"></button>
     <button class="btn_back_new_vending_to_vendingList hidden" data-text="Retour"></button>
 
     <section class="list_container vending_list_container">

@@ -7,6 +7,7 @@
     <div class="Customer_container">
         <?php if (isset($vending[$oCustomer->getId()])) : ?>
             <div class="Customer_container_vendings <?= $customerStatus[$oCustomer->getId()] ?? 'hidden' ?>">
+                <PRE><?= $customerStatus ?? 'hidden' ?></PRE>
                 <?php foreach ($vending[$oCustomer->getId()] as $oVending) : ?>
                     <div class="Customer_vendings_vending Vending
                         <?= $status[$oVending->getId()] ?? ''; ?>" data-vending-id="<?= $oVending->getId() ?>">

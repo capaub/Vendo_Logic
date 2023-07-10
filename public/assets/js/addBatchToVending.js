@@ -1,20 +1,19 @@
-import { buildVendingContainer } from './showVending.js';
-import { moveLabel, toggleClass } from "./global.js";
+import {buildVendingContainer} from './showVending.js';
+import {moveLabel} from "./global.js";
 
 const baseUrl = window.location.origin + window.location.pathname.replace('index.php', 'ajax.php');
 const url = new URL('ajax.php', baseUrl);
 
-                    export function vendingLocationAttachEventListeners(container) {
+export function vendingLocationAttachEventListeners(container) {
 
-                        const vendingLocation = container.querySelectorAll('li.spiral');
+    const vendingLocation = container.querySelectorAll('li.spiral');
 
-                        vendingLocation.forEach(spiral => {
-                            spiral.addEventListener('click', handleClickVendingLocation);
-                        });
-                    }
+    vendingLocation.forEach(spiral => {
+        spiral.addEventListener('click', handleClickVendingLocation);
+    });
+}
 
-function handleClickVendingLocation(event)
-{
+function handleClickVendingLocation(event) {
     const target = event.currentTarget.querySelector('.location_identifier');
     const locationIdentifier = target.innerHTML;
     const vendingTags = target.dataset.vending;
@@ -29,30 +28,27 @@ function handleClickVendingLocation(event)
     data.append('vending_id', vendingId);
 
     fetch(url.toString(), {method: 'POST', body: data})
-        .then( response => response.text() )
-        .then( data => replaceContainer( formAddBatch, data) )
-        .then( () => formAddBatch.setAttribute('data-vending-id', vendingId) )
-        .then( () => {
+        .then(response => response.text())
+        .then(data => replaceContainer(formAddBatch, data))
+        .then(() => formAddBatch.setAttribute('data-vending-id', vendingId))
+        .then(() => {
             const container = document.querySelector('.container_add_batch_form');
             showAddBatchForm(container)
-        } )
+        })
 }
 
-function listenCloseButton(container)
-{
+function listenCloseButton(container) {
     const close = container.querySelector('.close');
     close.addEventListener('click', handleClickCloseBtn);
 }
 
-function handleClickCloseBtn(event)
-{
+function handleClickCloseBtn(event) {
     event.preventDefault();
     const container = document.querySelector('.container_add_batch_form');
     container.classList.toggle('hidden')
 }
 
-function listenSubmitButton()
-{
+function listenSubmitButton() {
     const submit = document.querySelector('.add_batch_submit');
 
     submit.addEventListener('click', handleClickSubmitBtn);
@@ -78,7 +74,7 @@ function handleClickSubmitBtn(event) {
 
     if (form.checkValidity()) {
         fetch(url.toString(), {method: 'POST', body: data})
-            .then(response => response.text() )
+            .then(response => response.text())
             .then(() => refreshVendingGrid(vendingId))
             .then(() => hideAddBatchForm())
     } else {
@@ -92,30 +88,29 @@ function handleClickSubmitBtn(event) {
 
 function refreshVendingGrid(id) {
 
-        let data = new FormData();
-        data.append('context', 'vendingId');
-        data.append('vending_id', id);
+    let data = new FormData();
+    data.append('context', 'vendingId');
+    data.append('vending_id', id);
 
-        fetch(url.toString(), {method: 'POST', body: data} )
-            .then( response => response.text() )
-            .then( data => buildVendingContainer(data) )
-
+    fetch(url.toString(), {method: 'POST', body: data})
+        .then(response => response.text())
+        .then(data => buildVendingContainer(data))
 }
 
-function replaceContainer(container, data){
+function replaceContainer(container, data) {
     container.innerHTML = data;
 }
 
-function showAddBatchForm(container)
-{
-    toggleClass(container, 'hidden');
+function showAddBatchForm(container) {
+    container.classList.toggle('hidden');
     listenCloseButton(container);
     listenSubmitButton();
     moveLabel();
 }
 
-function hideAddBatchForm()
-{
+function hideAddBatchForm() {
     const container = document.querySelector('.container_add_batch_form');
     container.classList.add('hidden');
 }
+
+//TODO implémenter jsQR avec les media d'HTML 5 pour facilité l'ajout d'un lot

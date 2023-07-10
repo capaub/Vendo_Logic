@@ -1,0 +1,94 @@
+@keyframes sidebarLinkHover {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.008);
+  }
+}
+
+@keyframes vibration {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-3px);
+  }
+  50% {
+    transform: translateX(3px);
+  }
+  75% {
+    transform: translateX(-3px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes burgerAnim {
+  0% {
+    opacity: 0;
+    transform: translateX(250px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes displayCustomerInfoAnim {
+  0% {
+    opacity: 0;
+    transform: translateY(-250px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pathAnimation {
+  40% {
+    stroke-dasharray: 22 230;
+  }
+
+  60% {
+    stroke-dashoffset: -65;
+  }
+
+  100% {
+    stroke-dashoffset: -65;
+    stroke-dasharray: 160;
+  }
+}
+
+@keyframes pathAnimation-out {
+  100% {
+    stroke-dashoffset: 0;
+  }
+
+  60% {
+    stroke-dasharray: 22 230;
+  }
+
+  40% {
+    stroke-dashoffset: -65;
+  }
+
+  0% {
+    stroke-dashoffset: -65;
+    stroke-dasharray: 160;
+  }
+}

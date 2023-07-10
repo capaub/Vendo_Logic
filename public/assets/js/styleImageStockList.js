@@ -1,5 +1,3 @@
-
-
 export function StyleImageStockList() {
 
     const stockContainer = document.querySelectorAll('ul.list_stock');
@@ -9,7 +7,7 @@ export function StyleImageStockList() {
         const numberOfInfo = batchInfo.length;
 
         batchList.style.gridTemplateColumns = `repeat(${numberOfInfo}, 1fr)`;
-        const imgDir = "../assets/img/products/";
+        const imgDir = "../public/assets/img/products/";
 
         batchInfo.forEach(info => {
             let imgContainer = info.querySelector('.batchPicture')
@@ -25,8 +23,6 @@ export function StyleImageStockList() {
         })
     })
 }
-
-
 
 export function handleImageSize(parentContainer, backgroundImageURL, selector) {
 
@@ -69,8 +65,6 @@ function styleImagePortrait(element,imageUrl) {
     element.style.backgroundSize = 'auto 100%';
     element.style.backgroundRepeat = 'no-repeat';
     element.style.backgroundPosition = 'center';
-
 }
-
 
 StyleImageStockList()

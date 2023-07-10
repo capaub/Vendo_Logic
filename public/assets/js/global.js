@@ -46,11 +46,6 @@ export function buildSidebarGridTemplateColumns(sidebarGridContainer) {
     }
 }
 
-export function toggleClass(elements, token)
-{
-    elements.classList.toggle(token);
-}
-
 export function moveLabel() {
 
     const inputsText = document.querySelectorAll(

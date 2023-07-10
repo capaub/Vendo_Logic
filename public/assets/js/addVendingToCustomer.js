@@ -1,4 +1,4 @@
-import {toggleClass, moveLabel} from "./global.js";
+import {moveLabel} from "./global.js";
 
 const baseUrl = window.location.origin + window.location.pathname.replace('index.php', 'ajax.php');
 const url = new URL('ajax.php', baseUrl);
@@ -40,7 +40,7 @@ function addVendingToCustomer(event)
             .then(() => {
 
                 const containerAddVending = document.querySelector('.container_add_vending_form');
-                toggleClass(containerAddVending, 'hidden');
+                containerAddVending.classList.toggle('hidden');
             })
     } else {
         const invalidFields = Array.from(formElement.elements).filter(element => !element.validity.valid);
@@ -95,7 +95,7 @@ function listenCloseButton() {
     const container = document.querySelector('.container_add_vending_form');
     close.addEventListener('click', (event) => {
         event.preventDefault();
-        toggleClass(container, 'hidden');
+        container.classList.toggle('hidden');
     });
 }
 

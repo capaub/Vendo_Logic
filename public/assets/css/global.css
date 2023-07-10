@@ -206,7 +206,7 @@ button.close {
 .btnAddCustomer,
 .btn_add_vending,
 .btnBackToCustomers,
-.btnBackToVendingList,
+.btn_back_to_vendingList,
 .btn_back_add_batch_vending_to_vendingList,
 .btn_back_new_vending_to_vendingList {
   display: flex;
@@ -231,7 +231,7 @@ button.close {
 .btnAddCustomer:hover::after,
 .btn_add_vending:hover::after,
 .btnBackToCustomers:hover::after,
-.btnBackToVendingList:hover::after,
+.btn_back_to_vendingList:hover::after,
 .btn_back_add_batch_vending_to_vendingList:hover::after,
 .btn_back_new_vending_to_vendingList:hover::after {
   content: attr(data-text);
@@ -246,7 +246,7 @@ button.close {
 .btnAddCustomer::before,
 .btn_add_vending::before,
 .btnBackToCustomers::before,
-.btnBackToVendingList::before,
+.btn_back_to_vendingList::before,
 .btn_back_add_batch_vending_to_vendingList::before,
 .btn_back_new_vending_to_vendingList::before {
   content: "+";
@@ -257,20 +257,20 @@ button.close {
 .btnAddCustomer:hover::before,
 .btn_add_vending:hover::before,
 .btnBackToCustomers:hover::before,
-.btnBackToVendingList:hover::before,
+.btn_back_to_vendingList:hover::before,
 .btn_back_add_batch_vending_to_vendingList:hover::before,
 .btn_back_new_vending_to_vendingList:hover::before {
   display: none;
 }
 
 .btnBackToCustomers,
-.btnBackToVendingList,
+.btn_back_to_vendingList,
 .btn_back_add_batch_vending_to_vendingList,
 .btn_back_new_vending_to_vendingList {
   background-color: #E53935;
 }
 .btnBackToCustomers:hover::after,
-.btnBackToVendingList:hover::after,
+.btn_back_to_vendingList:hover::after,
 .btn_back_add_batch_vending_to_vendingList:hover::after,
 .btn_back_new_vending_to_vendingList:hover::after {
   content: attr(data-text);
@@ -281,7 +281,7 @@ button.close {
   font-size: 0.6em;
 }
 .btnBackToCustomers::before,
-.btnBackToVendingList::before,
+.btn_back_to_vendingList::before,
 .btn_back_add_batch_vending_to_vendingList::before,
 .btn_back_new_vending_to_vendingList::before {
   content: "x";
@@ -656,7 +656,7 @@ ul {
   }
 }
 .Header_topNav_img {
-  background-image: url("user.svg");
+  background-image: url("../img/user.svg");
   cursor: pointer;
   background-repeat: no-repeat;
   background-position: center;
