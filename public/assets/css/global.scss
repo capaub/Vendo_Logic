@@ -325,6 +325,9 @@ ul {
   border-radius: 0.5em;
   overflow: hidden;
   position: relative;
+  border-top: solid white;
+  border-left: solid white;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
   @media screen and (min-width: 1024px) {
     max-width: 450px;
   }
@@ -367,15 +370,23 @@ ul {
   &_container {
     overflow: hidden;
     padding: 1em;
-    display: flex;
     gap: 1em;
-    @media screen and (max-width: 1024px) {
-      flex-direction: column;
-    }
-
-    &_infos {
+    @media screen and (min-width: 1024px) {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(2, 1fr);
+    }
+    &_vendings {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      gap: $gap;
+      align-items: center;
+    }
+    &_infos {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: $gap;
       width: 100%;
       @media screen and (min-width: 768px) {
         flex-direction: column;
@@ -449,6 +460,8 @@ ul {
 .Customer.alert {
   .Customer_name {
     position: relative;
+    color: white;
+    background-color: rgba(255, 0, 0, 0.71);
   }
 
   .Customer_container {
@@ -457,10 +470,6 @@ ul {
       grid-template-columns: repeat(2, 1fr);
     }
     &_infos {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: $gap;
       @media screen and (max-width: 768px) {
         display: none;
         &.active {
@@ -468,14 +477,6 @@ ul {
           display: flex;
         }
       }
-    }
-
-    &_vendings {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
-      gap: $gap;
-      align-items: center;
     }
   }
 }

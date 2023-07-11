@@ -21,8 +21,6 @@ class VendingController extends AbstractController
     {
         $bAjax = !empty($_POST['context']) ?? false;
 
-
-
         if (!empty($_POST['field_brand'])
             && !empty($_POST['field_model'])
             && !empty($_POST['field_max_tray'])
@@ -53,7 +51,6 @@ class VendingController extends AbstractController
                         'vending' => VendingRepository::findAll()
                     ], $bAjax);
 
-
             } else {
                 $_SESSION['flashes'][] = ['ERREUR' => 'Company inexistant'];
             }
@@ -64,7 +61,6 @@ class VendingController extends AbstractController
                 'vending' => VendingRepository::findAll()
             ], $bAjax);
     }
-
 
     /**
      * @return string

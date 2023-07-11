@@ -83,6 +83,8 @@
 }
 .form_container {
   position: relative;
+  left: 50%;
+  transform: translateX(-50%);
   display: grid;
   background-color: rgba(255, 255, 255, 0.3);
   border-left: solid 1px rgba(255, 255, 255, 0.3);
@@ -153,6 +155,10 @@
   outline-color: white;
   outline-width: medium;
 }
+.form_container .loader {
+  width: 70px;
+}
+
 select:focus {
   border: none;
   background-color: rgba(0, 0, 0, 0.08);
@@ -836,6 +842,9 @@ ul {
   border-radius: 0.5em;
   overflow: hidden;
   position: relative;
+  border-top: solid white;
+  border-left: solid white;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
 }
 @media screen and (min-width: 1024px) {
   .Customer {
@@ -878,17 +887,26 @@ ul {
 .Customer_container {
   overflow: hidden;
   padding: 1em;
-  display: flex;
   gap: 1em;
 }
-@media screen and (max-width: 1024px) {
+@media screen and (min-width: 1024px) {
   .Customer_container {
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
+.Customer_container_vendings {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 5px;
+  align-items: center;
+}
 .Customer_container_infos {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
   width: 100%;
 }
 @media screen and (min-width: 768px) {
@@ -954,18 +972,14 @@ ul {
 
 .Customer.alert .Customer_name {
   position: relative;
+  color: white;
+  background-color: rgba(255, 0, 0, 0.71);
 }
 @media screen and (min-width: 1024px) {
   .Customer.alert .Customer_container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
   }
-}
-.Customer.alert .Customer_container_infos {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
 }
 @media screen and (max-width: 768px) {
   .Customer.alert .Customer_container_infos {
@@ -975,13 +989,6 @@ ul {
     animation: displayCustomerInfoAnim 0.8s ease 0s 1 normal forwards;
     display: flex;
   }
-}
-.Customer.alert .Customer_container_vendings {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 5px;
-  align-items: center;
 }
 
 .Footer {

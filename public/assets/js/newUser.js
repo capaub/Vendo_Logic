@@ -35,9 +35,18 @@ function newUser(formNewUser) {
     formData.append('context', 'newUser');
 
     if (formNewUser.checkValidity()) {
+        const btn = document.querySelector('.newUserSubmit');
+        const loader = document.querySelector('.loader');
+        btn.classList.toggle('hidden');
+        loader.classList.toggle('hidden');
+
         fetch(url.toString(), {method: 'POST', body: formData})
             .then(response => response.text())
-            .then(data => refreshUserList(data))
+            .then(data => {
+                btn.classList.toggle('hidden');
+                loader.classList.toggle('hidden');
+                refreshUserList(data)
+            })
             .then(() => {
                 formNewUser.reset();
                 containerFormNewUser.classList.toggle('hidden')

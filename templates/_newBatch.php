@@ -33,5 +33,6 @@
     </fieldset>
 
     <input type="submit" class="new_batch_submit">
+    <div class="loader hidden"><img src="../public/assets/img/Spinner.svg" alt="animation : patienter"></div>
 
 </form>

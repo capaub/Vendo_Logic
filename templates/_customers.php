@@ -7,9 +7,9 @@
         </h3>
         <div class="Customer_container">
             <?php if (isset($vending[$oCustomer->getId()])) : ?>
-                <div class="Customer_container_vendings <?= $customerStatus[$oCustomer->getId()] ?? 'hidden' ?>">
+                <div class="Customer_container_vendings <?= $customerStatus[$oCustomer->getId()] ?? '' ?>">
                     <?php foreach ($vending[$oCustomer->getId()] as $oVending) : ?>
-                        <div class="Customer_vendings_vending Vending <?= $status[$oVending->getId()] ?? 'hidden'; ?>"
+                        <div class="Customer_vendings_vending Vending <?= $status[$oVending->getId()] ?? ''; ?>"
                              data-vending-id="<?= $oVending->getId() ?>">
                             <img class="Vending_img" src="../public/assets/img/vending/vending.svg"
                                  alt="illustratoin d'un distributeur automatique">

@@ -11,10 +11,10 @@ if (!isset($_SESSION['id'])) {
     $_SESSION['flashes'] = [];
 }
 
-$sPage = $_GET['page'] ?? PAGE_HOME;
+$sPage = $_GET['page'] ?? PAGE_LOGIN;
 
 if (!array_key_exists($sPage, ROUTING)) {
-    $sPage = PAGE_HOME;
+    $sPage = PAGE_CUSTOMERS;
 }
 
 [$sClass, $sFunction] = explode('::', ROUTING[$sPage]);

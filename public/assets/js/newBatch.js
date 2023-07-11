@@ -51,9 +51,18 @@ function newBatch(formAddBatch) {
     formData.append('dlc', dlc);
 
     if (formAddBatch.checkValidity()) {
+        const btn = document.querySelector('.new_batch_submit');
+        const loader = document.querySelector('.loader');
+        btn.classList.toggle('hidden');
+        loader.classList.toggle('hidden');
+
         fetch(url.toString(), {method: 'POST', body: formData})
             .then(response => response.text())
-            .then(data => refreshStockList(data))
+            .then(data => {
+                btn.classList.toggle('hidden');
+                loader.classList.toggle('hidden');
+                refreshStockList(data)
+            })
             .then(() => {
                 const tableHeader = document.querySelector('.grid_container');
                 const lengthHeader = document.querySelectorAll('.colHeader');
