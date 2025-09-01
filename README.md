@@ -4,7 +4,7 @@
 La version actuelle est une **refonte microservices** : https://github.com/capaub/app-vending-project
 
 ## Stack
-PHP X.Y, Composer, MySQL.
+PHP 8.0, Composer, MySQL.
 
 ## Démarrage rapide
 composer install
